@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c322wipnf6i43"]
+
+[ext_resource type="Script" path="res://Assets/Src/Ability/ProduceSunAbility.cs" id="1_73ect"]
+
+[node name="ProduceSunAbility" type="Node" node_paths=PackedStringArray("sunFactory")]
+script = ExtResource("1_73ect")
+sunFactory = NodePath("")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true

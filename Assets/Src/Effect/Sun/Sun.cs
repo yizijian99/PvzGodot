@@ -13,7 +13,6 @@ public partial class Sun : RigidBody2D
 		WireNodes();
 
 		control.GuiInput += OnControlGuiInput;
-
     }
 
     public override void _Process(double delta)
@@ -27,7 +26,7 @@ public partial class Sun : RigidBody2D
         {
             if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left)
             {
-                EventBus.Instance.EmitSignal(EventBus.SignalName.SunPicked, 25);
+                SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunPicked, 25);
                 QueueFree();
             }
         }

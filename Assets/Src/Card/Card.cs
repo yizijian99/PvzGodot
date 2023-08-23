@@ -20,6 +20,9 @@ public partial class Card : TextureRect
     private string cardName;
 
     [Export]
+    public PackedScene plantScene { get; private set; }
+
+    [Export]
     public int cost { get; private set; }
     #endregion
 
@@ -30,9 +33,9 @@ public partial class Card : TextureRect
 
         GuiInput += OnGuiInput;
         timer.Timeout += OnTimerTimeOut;
-        EventBus.Instance.GameTotalSunChanged += OnGameTotalSunChanged;
+        SignalBus.Instance.GameTotalSunChanged += OnGameTotalSunChanged;
 
-        EventBus.Instance.EmitSignal(EventBus.SignalName.CardNodeReady);
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardNodeReady);
     }
 
     public override void _Process(double delta)
@@ -49,7 +52,7 @@ public partial class Card : TextureRect
             {
                 if (!costMask.Visible && cooldownMask.Value == 0)
                 {
-                    EventBus.Instance.EmitSignal(EventBus.SignalName.CardCostSun, this);
+                    SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardSelected, this);
                 }
             }
         }
@@ -66,6 +69,11 @@ public partial class Card : TextureRect
     }
 
     public void Consume()
+    {
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardCostSun, this);
+    }
+
+    public void Cooldown()
     {
         timer.Start();
     }

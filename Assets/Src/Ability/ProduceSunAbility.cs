@@ -2,7 +2,7 @@ using Godot;
 using GodotUtilities;
 
 [Scene]
-public partial class GenerateSunAbility : Node
+public partial class ProduceSunAbility : Node
 {
 
 	#region Export
@@ -32,6 +32,6 @@ public partial class GenerateSunAbility : Node
 
 	private void OnTimerTimeout()
 	{
-		sunFactory.GenerateSun();
+		sunFactory.ProduceSun();
     }
 }

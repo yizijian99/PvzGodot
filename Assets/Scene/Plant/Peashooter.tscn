@@ -1,0 +1,69 @@
+[gd_scene load_steps=16 format=3 uid="uid://ci5rg44obvq3"]
+
+[ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_1xiyk"]
+[ext_resource type="PackedScene" uid="uid://bpglx3wq0ectg" path="res://Assets/Scene/Plant/Plant.tscn" id="1_pajbh"]
+[ext_resource type="Texture2D" uid="uid://cnh7lp2xhdecn" path="res://Assets/Images/Plants/Peashooter/Peashooter_2.png" id="2_jxf8b"]
+[ext_resource type="Texture2D" uid="uid://cwtplx7pn7das" path="res://Assets/Images/Plants/Peashooter/Peashooter_3.png" id="3_matqa"]
+[ext_resource type="Texture2D" uid="uid://cjw6rpbqeyg8n" path="res://Assets/Images/Plants/Peashooter/Peashooter_4.png" id="4_qhurp"]
+[ext_resource type="Texture2D" uid="uid://5yeqvk2opslu" path="res://Assets/Images/Plants/Peashooter/Peashooter_5.png" id="5_w1u4r"]
+[ext_resource type="Texture2D" uid="uid://btoe1esg03si3" path="res://Assets/Images/Plants/Peashooter/Peashooter_6.png" id="6_1ct5g"]
+[ext_resource type="Texture2D" uid="uid://bsypm3eunu3cw" path="res://Assets/Images/Plants/Peashooter/Peashooter_7.png" id="7_mpxen"]
+[ext_resource type="Texture2D" uid="uid://celal7rb3t4ng" path="res://Assets/Images/Plants/Peashooter/Peashooter_8.png" id="8_qg5yt"]
+[ext_resource type="Texture2D" uid="uid://f8nl2adq0p7u" path="res://Assets/Images/Plants/Peashooter/Peashooter_9.png" id="9_75osh"]
+[ext_resource type="Texture2D" uid="uid://cbvglepsacd2j" path="res://Assets/Images/Plants/Peashooter/Peashooter_10.png" id="10_kdf5y"]
+[ext_resource type="Texture2D" uid="uid://brvkis4n12n1k" path="res://Assets/Images/Plants/Peashooter/Peashooter_11.png" id="11_n27u6"]
+[ext_resource type="Texture2D" uid="uid://faqox4l0hjt4" path="res://Assets/Images/Plants/Peashooter/Peashooter_12.png" id="12_xacat"]
+[ext_resource type="Texture2D" uid="uid://bdvo8dbungj7m" path="res://Assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_5y8b4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62lm3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1xiyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jxf8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_matqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qhurp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w1u4r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1ct5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mpxen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qg5yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_75osh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kdf5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n27u6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xacat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5y8b4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Peashooter" instance=ExtResource("1_pajbh")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_62lm3")
+autoplay = "default"

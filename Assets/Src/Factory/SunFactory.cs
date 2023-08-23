@@ -7,6 +7,15 @@ public partial class SunFactory : Area2D
     #region Export
     [Export]
     private Node targetNode;
+
+    [Export]
+    private Vector2 minInitSpeed = Vector2.Zero;
+
+    [Export]
+    private Vector2 maxInitSpeed = Vector2.Zero;
+
+    [Export]
+    private float gravityScale = 0f;
     #endregion
 
     #region Node
@@ -25,7 +34,7 @@ public partial class SunFactory : Area2D
         base._Process(delta);
     }
 
-    public void GenerateSun()
+    public void ProduceSun()
     {
         Rect2 rect = collisionShape2D.Shape.GetRect();
 
@@ -33,8 +42,10 @@ public partial class SunFactory : Area2D
         float x = rng.RandfRange(rect.Position.X, rect.End.X);
         float y = rng.RandfRange(rect.Position.Y, rect.End.Y);
 
-        Node2D sun = GlobalExport.Instance.sun.Instantiate<Node2D>();
+        Sun sun = GlobalExport.Instance.sun.Instantiate<Sun>();
         sun.Position = new Vector2(x, y);
+        sun.ApplyImpulse(new Vector2(rng.RandfRange(minInitSpeed.X, maxInitSpeed.X), rng.RandfRange(minInitSpeed.Y, maxInitSpeed.Y)));
+        sun.GravityScale = gravityScale;
         targetNode.AddChild(sun);
     }
 }

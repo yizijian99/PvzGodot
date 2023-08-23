@@ -15,7 +15,7 @@ public partial class GameManager : Node
             totalSun = value;
             SyncTotalToLabel();
             if (totalSunChanged)
-                EventBus.Instance.EmitSignal(EventBus.SignalName.GameTotalSunChanged, totalSun);
+                SignalBus.Instance.EmitSignal(SignalBus.SignalName.GameTotalSunChanged, totalSun);
         }
     }
 
@@ -23,19 +23,24 @@ public partial class GameManager : Node
     [Export]
     private Label totalSunLabel;
 
+    private Card selectedCard;
+
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
 
-        EventBus.Instance.SunPicked += amount => TotalSun += amount;
-        EventBus.Instance.CardNodeReady += () => EventBus.Instance.EmitSignal(EventBus.SignalName.GameTotalSunChanged, totalSun);
-        EventBus.Instance.CardCostSun += card =>
+        SignalBus.Instance.SunPicked += amount => TotalSun += amount;
+        SignalBus.Instance.CardNodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.GameTotalSunChanged, totalSun);
+        SignalBus.Instance.CardCostSun += card =>
         {
             if (totalSun < card.cost) return;
-            card.Consume();
             TotalSun -= card.cost;
+            selectedCard = null;
+            card.Cooldown();
         };
+        SignalBus.Instance.GroundGridClicked += OnGridClicked;
+        SignalBus.Instance.CardSelected += OnCardSelected;
 
         SyncTotalToLabel();
     }
@@ -52,5 +57,17 @@ public partial class GameManager : Node
             return;
         }
         totalSunLabel.Text = totalSun.ToString();
+    }
+
+    private void OnGridClicked(Grid grid)
+    {
+        if (grid == null) return;
+        if (selectedCard == null) return;
+        grid.Plant(selectedCard);
+    }
+
+    private void OnCardSelected(Card card)
+    {
+        selectedCard = card;
     }
 }

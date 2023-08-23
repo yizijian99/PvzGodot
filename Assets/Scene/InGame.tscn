@@ -1,16 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=13 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
-[ext_resource type="Script" path="res://Assets/Src/Ability/GenerateSunAbility.cs" id="2_063rd"]
+[ext_resource type="PackedScene" uid="uid://c322wipnf6i43" path="res://Assets/Scene/Ability/ProduceSunAbility.tscn" id="2_paexg"]
 [ext_resource type="Texture2D" uid="uid://b4tibj5171cow" path="res://Assets/Images/UI/ChooserBackground.png" id="2_st0wy"]
-[ext_resource type="Script" path="res://Assets/Src/Factory/SunFactory.cs" id="3_epfxs"]
 [ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="3_f38wg"]
 [ext_resource type="PackedScene" uid="uid://cwuu4ap8po0yd" path="res://Assets/Scene/Card/Card.tscn" id="3_qo2fm"]
+[ext_resource type="PackedScene" uid="uid://bfdxd6fghjnsi" path="res://Assets/Scene/Ability/SunFactory.tscn" id="5_27hj0"]
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="5_mr15a"]
+[ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
+[ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
+[ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_neggw"]
-size = Vector2(728, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2dt"]
+size = Vector2(728, 1)
 
 [node name="InGame" type="Node2D"]
 
@@ -18,28 +21,376 @@ size = Vector2(728, 10)
 script = ExtResource("1_u23ik")
 totalSunLabel = NodePath("../UI/Chooser/TotalSun")
 
-[node name="GenerateSunAbility" type="Node" parent="." node_paths=PackedStringArray("sunFactory")]
-script = ExtResource("2_063rd")
-sunFactory = NodePath("SunFactory")
-
-[node name="Timer" type="Timer" parent="GenerateSunAbility"]
-wait_time = 5.0
-autostart = true
-
-[node name="SunFactory" type="Area2D" parent="GenerateSunAbility" node_paths=PackedStringArray("targetNode")]
-position = Vector2(258, 3)
-script = ExtResource("3_epfxs")
-targetNode = NodePath("CollisionShape2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GenerateSunAbility/SunFactory"]
-position = Vector2(138, 83)
-shape = SubResource("RectangleShape2D_neggw")
+[node name="ProduceSunAbility" parent="." node_paths=PackedStringArray("sunFactory") instance=ExtResource("2_paexg")]
+sunFactory = NodePath("../SunFactory")
 
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(-220, 0)
 texture = ExtResource("1_7nc06")
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Grids" type="Control" parent="Ground"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 87.0
+offset_right = 768.0
+offset_bottom = 577.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lanes" type="VBoxContainer" parent="Ground/Grids"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lane1" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+layout_mode = 2
+
+[node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid2" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid3" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid4" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid5" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid6" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid7" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid8" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid9" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Lane2" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+layout_mode = 2
+
+[node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid2" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid3" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid4" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid5" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid6" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid7" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid8" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid9" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Lane3" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+layout_mode = 2
+
+[node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid2" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid3" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid4" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid5" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid6" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid7" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid8" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid9" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Lane4" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+layout_mode = 2
+
+[node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid2" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid3" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid4" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid5" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid6" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid7" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid8" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid9" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Lane5" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+layout_mode = 2
+
+[node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid2" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid3" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid4" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid5" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid6" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid7" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid8" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="Grid9" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
+clip_contents = true
+custom_minimum_size = Vector2(77, 92)
+layout_mode = 2
+script = ExtResource("5_p7bxw")
+ground = NodePath("../../../../OnGround")
+
+[node name="OnGround" type="Node2D" parent="Ground"]
+
+[node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
+position = Vector2(12, 87)
+targetNode = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" parent="SunFactory" index="0"]
+position = Vector2(384, 0)
+shape = SubResource("RectangleShape2D_bj2dt")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -90,16 +441,16 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("3_f38wg")
 cardName = "Peashooter"
+plantScene = ExtResource("5_xquje")
 cost = 100
 
 [node name="CardSunflower" parent="UI/Chooser/CardList" instance=ExtResource("3_qo2fm")]
 layout_mode = 2
 texture = ExtResource("5_mr15a")
 cardName = "Sunflower"
+plantScene = ExtResource("11_uydvw")
 cost = 50
 
-[node name="Timer" parent="UI/Chooser/CardList/CardSunflower" index="0"]
-autostart = true
-
+[editable path="SunFactory"]
 [editable path="UI/Chooser/CardList/CardPeashooter"]
 [editable path="UI/Chooser/CardList/CardSunflower"]

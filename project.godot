@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*res://Assets/Src/Global/EventBus.cs"
+SignalBus="*res://Assets/Src/Global/SignalBus.cs"
 GlobalExport="*res://Assets/Scene/Global/GlobalExport.tscn"
 
 [display]

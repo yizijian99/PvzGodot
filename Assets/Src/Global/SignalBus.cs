@@ -2,9 +2,9 @@ using Godot;
 using GodotUtilities;
 
 [Scene]
-public partial class EventBus : Node
+public partial class SignalBus : Node
 {
-	public static EventBus Instance { get; private set; }
+	public static SignalBus Instance { get; private set; }
 
     #region Signal
     [Signal]
@@ -17,7 +17,13 @@ public partial class EventBus : Node
     public delegate void CardNodeReadyEventHandler();
 
     [Signal]
+    public delegate void CardSelectedEventHandler(Card card);
+
+    [Signal]
     public delegate void CardCostSunEventHandler(Card card);
+
+    [Signal]
+    public delegate void GroundGridClickedEventHandler(Grid grid);
     #endregion
 
     public override void _Ready()
