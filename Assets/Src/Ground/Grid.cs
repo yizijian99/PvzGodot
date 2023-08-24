@@ -33,7 +33,6 @@ public partial class Grid : Control
 
     public void Plant(Card card)
     {
-        GD.Print($"{card.Name} {GlobalPosition}");
         card.Consume();
         Plant plant = card.plantScene.Instantiate<Plant>();
         plant.GlobalPosition = GlobalCenter(); ;

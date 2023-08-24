@@ -9,6 +9,9 @@ public partial class GlobalExport : Node
 	#region Export
 	[Export]
 	public PackedScene sun { get; private set; }
+
+	[Export]
+	public string onGround { get; private set; } = "onGround";
     #endregion
 
     public override void _Ready()

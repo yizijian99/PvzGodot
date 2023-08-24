@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://ci5rg44obvq3"]
+[gd_scene load_steps=21 format=3 uid="uid://ci5rg44obvq3"]
 
 [ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_1xiyk"]
 [ext_resource type="PackedScene" uid="uid://bpglx3wq0ectg" path="res://Assets/Scene/Plant/Plant.tscn" id="1_pajbh"]
 [ext_resource type="Texture2D" uid="uid://cnh7lp2xhdecn" path="res://Assets/Images/Plants/Peashooter/Peashooter_2.png" id="2_jxf8b"]
+[ext_resource type="Script" path="res://Assets/Scene/Plant/Peashooter.cs" id="2_wffed"]
+[ext_resource type="PackedScene" uid="uid://dps2kdwfj01fu" path="res://Assets/Scene/Effect/PeaBullet.tscn" id="3_kg8sl"]
 [ext_resource type="Texture2D" uid="uid://cwtplx7pn7das" path="res://Assets/Images/Plants/Peashooter/Peashooter_3.png" id="3_matqa"]
 [ext_resource type="Texture2D" uid="uid://cjw6rpbqeyg8n" path="res://Assets/Images/Plants/Peashooter/Peashooter_4.png" id="4_qhurp"]
 [ext_resource type="Texture2D" uid="uid://5yeqvk2opslu" path="res://Assets/Images/Plants/Peashooter/Peashooter_5.png" id="5_w1u4r"]
@@ -14,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://brvkis4n12n1k" path="res://Assets/Images/Plants/Peashooter/Peashooter_11.png" id="11_n27u6"]
 [ext_resource type="Texture2D" uid="uid://faqox4l0hjt4" path="res://Assets/Images/Plants/Peashooter/Peashooter_12.png" id="12_xacat"]
 [ext_resource type="Texture2D" uid="uid://bdvo8dbungj7m" path="res://Assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_5y8b4"]
+[ext_resource type="PackedScene" uid="uid://dkbujgbygysn4" path="res://Assets/Scene/Ability/EmitBulletAbility.tscn" id="15_4uw21"]
+[ext_resource type="Script" path="res://Assets/Src/Common/CandidateArea.cs" id="16_qiu2q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_62lm3"]
 animations = [{
@@ -62,8 +66,26 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4e1p"]
+size = Vector2(1, 1)
+
 [node name="Peashooter" instance=ExtResource("1_pajbh")]
+script = ExtResource("2_wffed")
+bulleScene = ExtResource("3_kg8sl")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_62lm3")
 autoplay = "default"
+
+[node name="EmitBulletAbility" parent="." index="1" node_paths=PackedStringArray("emitArea") instance=ExtResource("15_4uw21")]
+emitArea = NodePath("../CandidateArea")
+
+[node name="Timer" parent="EmitBulletAbility" index="0"]
+wait_time = 1.5
+
+[node name="CandidateArea" type="Node2D" parent="." index="2"]
+position = Vector2(30, -18)
+script = ExtResource("16_qiu2q")
+shape = SubResource("RectangleShape2D_n4e1p")
+
+[editable path="EmitBulletAbility"]

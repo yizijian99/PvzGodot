@@ -384,7 +384,7 @@ layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
 
-[node name="OnGround" type="Node2D" parent="Ground"]
+[node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
 
 [node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
 position = Vector2(12, 87)
