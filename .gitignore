@@ -403,3 +403,6 @@ FodyWeavers.xsd
 
 # Visual Studio Community 2022
 /Properties/
+
+# github
+/.github/
