@@ -4,31 +4,51 @@ using GodotUtilities;
 [Scene]
 public partial class Sun : RigidBody2D
 {
-	[Node("Control")]
-	private Control control;
+    [Export]
+    protected int value = 25;
 
-	public override void _Ready()
-	{
-		base._Ready();
-		WireNodes();
+    [Node("Control")]
+    protected Control control;
 
-		control.GuiInput += OnControlGuiInput;
+    public float fallDistanceLimit;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        WireNodes();
+
+        control.GuiInput += OnControlGuiInput;
     }
 
     public override void _Process(double delta)
-	{
-		base._Process(delta);
+    {
+        base._Process(delta);
     }
 
-    private void OnControlGuiInput(InputEvent @event)
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        if (LinearVelocity.Y > 0 && Position.Y >= fallDistanceLimit)
+        {
+            GravityScale = 0;
+            LinearVelocity = Vector2.Zero;
+        }
+    }
+
+    protected void OnControlGuiInput(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButton)
         {
             if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left)
             {
-                SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunPicked, 25);
-                QueueFree();
+                PickUp();
             }
         }
+    }
+
+    protected void PickUp()
+    {
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunPicked, value);
+        QueueFree();
     }
 }

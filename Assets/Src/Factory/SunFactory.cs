@@ -16,6 +16,12 @@ public partial class SunFactory : Area2D
 
     [Export]
     private float gravityScale = 0f;
+
+    [Export]
+    private float minFallDistanceLimit;
+
+    [Export]
+    private float maxFallDistanceLimit;
     #endregion
 
     #region Node
@@ -46,6 +52,7 @@ public partial class SunFactory : Area2D
         sun.Position = new Vector2(x, y);
         sun.ApplyImpulse(new Vector2(rng.RandfRange(minInitSpeed.X, maxInitSpeed.X), rng.RandfRange(minInitSpeed.Y, maxInitSpeed.Y)));
         sun.GravityScale = gravityScale;
+        sun.fallDistanceLimit = rng.RandfRange(minFallDistanceLimit, maxFallDistanceLimit);
         targetNode.AddChild(sun);
     }
 }

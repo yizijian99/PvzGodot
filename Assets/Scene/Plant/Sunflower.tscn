@@ -104,6 +104,8 @@ targetNode = NodePath("CollisionShape2D")
 minInitSpeed = Vector2(-20, -200)
 maxInitSpeed = Vector2(20, -200)
 gravityScale = 0.2
+minFallDistanceLimit = 28.0
+maxFallDistanceLimit = 46.0
 
 [editable path="ProduceSunAbility"]
 [editable path="SunFactory"]
