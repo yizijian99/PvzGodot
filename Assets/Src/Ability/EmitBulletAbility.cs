@@ -4,17 +4,17 @@ using GodotUtilities;
 [Scene]
 public partial class EmitBulletAbility : Node
 {
+    private bool _enable;
     [Export]
-    private bool enable;
-    public bool Enable
+    public bool enable
     {
-        get => enable;
+        get => _enable;
         set
         {
-            enable = value;
+            _enable = value;
             if (timer != null)
             {
-                if (enable)
+                if (_enable)
                     timer.Start();
                 else
                     timer.Stop();
@@ -34,7 +34,7 @@ public partial class EmitBulletAbility : Node
         WireNodes();
 
         timer.Autostart = false;
-        if (enable) timer.Start();
+        if (_enable) timer.Start();
     }
 
     public override void _Process(double delta)
@@ -44,7 +44,7 @@ public partial class EmitBulletAbility : Node
 
     public bool CanEmit()
     {
-        return enable && timer.IsStopped();
+        return _enable && timer.IsStopped();
     }
 
     public void EmitBullet(PackedScene bulletScene)

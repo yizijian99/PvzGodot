@@ -5,7 +5,7 @@ using GodotUtilities;
 public partial class Sun : RigidBody2D
 {
     [Export]
-    protected int value = 25;
+    public int value { get; private set; } = 25;
 
     [Node("Control")]
     protected Control control;
@@ -37,18 +37,15 @@ public partial class Sun : RigidBody2D
 
     protected void OnControlGuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton)
+        if (InputUtils.MouseLeftButtonPressed(@event))
         {
-            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left)
-            {
-                PickUp();
-            }
+            PickUp();
         }
     }
 
     protected void PickUp()
     {
-        SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunPicked, value);
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.Sun_PickUp, value);
         QueueFree();
     }
 }

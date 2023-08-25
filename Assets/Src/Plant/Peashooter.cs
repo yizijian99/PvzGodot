@@ -17,7 +17,7 @@ public partial class Peashooter : Plant
 
         emitBulletAbility.timer.Timeout += OnEmitBulletAbilityReady;
 
-        emitBulletAbility.Enable = true;
+        emitBulletAbility.enable = true;
         emitBulletAbility.SetTargetNode(GetTree().GetFirstNodeInGroup<Node2D>(GlobalExport.Instance.onGround));
     }
 

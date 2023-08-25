@@ -4,18 +4,15 @@ using GodotUtilities;
 [Scene]
 public partial class Card : TextureRect
 {
-    #region Nodes
     [Node("Timer")]
     private Timer timer;
 
     [Node("CostMask")]
     private ColorRect costMask;
 
-    [Node("CooldownMask")]
-    private TextureProgressBar cooldownMask;
-    #endregion
+    [Node("CoolDownMask")]
+    private TextureProgressBar coolDownMask;
 
-    #region Export
     [Export]
     private string cardName;
 
@@ -24,7 +21,6 @@ public partial class Card : TextureRect
 
     [Export]
     public int cost { get; private set; }
-    #endregion
 
     public override void _Ready()
     {
@@ -32,48 +28,31 @@ public partial class Card : TextureRect
         WireNodes();
 
         GuiInput += OnGuiInput;
-        timer.Timeout += OnTimerTimeOut;
-        SignalBus.Instance.GameTotalSunChanged += OnGameTotalSunChanged;
+        SignalBus.Instance.Game_TotalSunsChanged += OnGameTotalSunChanged;
 
-        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardNodeReady);
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.Card_NodeReady);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        cooldownMask.Value = timer.TimeLeft / timer.WaitTime * (cooldownMask.MaxValue - cooldownMask.MinValue);
+        coolDownMask.Value = timer.TimeLeft / timer.WaitTime * (coolDownMask.MaxValue - coolDownMask.MinValue);
     }
 
     private void OnGuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton)
+        if (InputUtils.MouseLeftButtonPressed(@event) && !costMask.Visible && coolDownMask.Value == 0)
         {
-            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left)
-            {
-                if (!costMask.Visible && cooldownMask.Value == 0)
-                {
-                    SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardSelected, this);
-                }
-            }
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.Card_BeClicked, this);
         }
     }
 
-    private void OnTimerTimeOut()
+    private void OnGameTotalSunChanged(int oldValue, int newValue)
     {
-
+        costMask.Visible = newValue < cost;
     }
 
-    private void OnGameTotalSunChanged(int amount)
-    {
-        costMask.Visible = amount < cost;
-    }
-
-    public void Consume()
-    {
-        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardCostSun, this);
-    }
-
-    public void Cooldown()
+    public void CoolDown()
     {
         timer.Start();
     }

@@ -4,7 +4,6 @@ using GodotUtilities;
 [Scene]
 public partial class SunFactory : Area2D
 {
-    #region Export
     [Export]
     private Node targetNode;
 
@@ -22,12 +21,9 @@ public partial class SunFactory : Area2D
 
     [Export]
     private float maxFallDistanceLimit;
-    #endregion
 
-    #region Node
     [Node("CollisionShape2D")]
     private CollisionShape2D collisionShape2D;
-    #endregion
 
     public override void _Ready()
     {

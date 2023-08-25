@@ -400,6 +400,7 @@ FodyWeavers.xsd
 
 # Godot 4+ specific ignores
 .godot/
+*.translation
 
 # Visual Studio Community 2022
 /Properties/

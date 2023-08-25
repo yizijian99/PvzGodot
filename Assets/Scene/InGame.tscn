@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=14 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="5_mr15a"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
 [ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
+[ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="6_c2v15"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2dt"]
@@ -17,9 +18,8 @@ size = Vector2(728, 1)
 
 [node name="InGame" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("totalSunLabel")]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_u23ik")
-totalSunLabel = NodePath("../UI/Chooser/TotalSun")
 
 [node name="ProduceSunAbility" parent="." node_paths=PackedStringArray("sunFactory") instance=ExtResource("2_paexg")]
 sunFactory = NodePath("../SunFactory")
@@ -410,6 +410,7 @@ anchors_preset = 0
 offset_left = 10.0
 offset_right = 1180.0
 offset_bottom = 90.0
+script = ExtResource("6_c2v15")
 
 [node name="Bg" type="TextureRect" parent="UI/Chooser"]
 layout_mode = 1
@@ -417,7 +418,7 @@ offset_right = 522.0
 offset_bottom = 87.0
 texture = ExtResource("2_st0wy")
 
-[node name="TotalSun" type="Label" parent="UI/Chooser"]
+[node name="TotalSuns" type="Label" parent="UI/Chooser"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 60.0

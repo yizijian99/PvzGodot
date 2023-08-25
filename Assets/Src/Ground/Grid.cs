@@ -7,33 +7,29 @@ public partial class Grid : Control
     [Export]
     private Node2D ground;
 
-	public override void _Ready()
-	{
-		base._Ready();
-		WireNodes();
+    public override void _Ready()
+    {
+        base._Ready();
+        WireNodes();
 
         GuiInput += OnGuiInput;
     }
 
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
-	}
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+    }
 
     private void OnGuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton)
+        if (InputUtils.MouseLeftButtonPressed(@event))
         {
-            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left)
-            {
-                SignalBus.Instance.EmitSignal(SignalBus.SignalName.GroundGridClicked, this);
-            }
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.Ground_GridBeClicked, this);
         }
     }
 
     public void Plant(Card card)
     {
-        card.Consume();
         Plant plant = card.plantScene.Instantiate<Plant>();
         plant.GlobalPosition = GlobalCenter(); ;
         ground.AddChild(plant);
