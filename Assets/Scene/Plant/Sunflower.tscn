@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bpglx3wq0ectg" path="res://Assets/Scene/Plant/Plant.tscn" id="1_x6snf"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="2_2rgl2"]
-[ext_resource type="Script" path="res://Assets/Scene/Plant/Sunflower.cs" id="2_rvo7b"]
+[ext_resource type="Script" path="res://Assets/Src/Plant/Sunflower.cs" id="2_rvo7b"]
 [ext_resource type="Texture2D" uid="uid://s1aocsh7ltrf" path="res://Assets/Images/Plants/SunFlower/SunFlower_2.png" id="3_h175h"]
 [ext_resource type="Texture2D" uid="uid://cemgphhpjmuas" path="res://Assets/Images/Plants/SunFlower/SunFlower_3.png" id="4_jeunb"]
 [ext_resource type="Texture2D" uid="uid://5nubxho4vd1b" path="res://Assets/Images/Plants/SunFlower/SunFlower_4.png" id="5_543ky"]
