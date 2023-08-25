@@ -21,6 +21,9 @@ public partial class SignalBus : Node
     [Signal]
     public delegate void Ground_GridBeClickedEventHandler(Grid grid);
 
+    [Signal]
+    public delegate void Plant_DeadEventHandler(Plant plant);
+
     public override void _Ready()
     {
         base._Ready();

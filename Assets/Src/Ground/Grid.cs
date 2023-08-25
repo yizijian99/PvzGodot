@@ -7,12 +7,15 @@ public partial class Grid : Control
     [Export]
     private Node2D ground;
 
+    private Plant plant;
+
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
 
         GuiInput += OnGuiInput;
+        SignalBus.Instance.Plant_Dead += OnPlantDead;
     }
 
     public override void _Process(double delta)
@@ -28,11 +31,23 @@ public partial class Grid : Control
         }
     }
 
-    public void Plant(Card card)
+    private void OnPlantDead(Plant plant)
     {
+        if (this.plant == plant)
+        {
+            this.plant = null;
+        }
+    }
+
+    public bool Plant(Card card)
+    {
+        if (this.plant != null)
+            return false;
         Plant plant = card.plantScene.Instantiate<Plant>();
         plant.GlobalPosition = GlobalCenter(); ;
         ground.AddChild(plant);
+        this.plant = plant;
+        return true;
     }
 
     public Vector2 LocalCenter()

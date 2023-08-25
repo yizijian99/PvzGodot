@@ -47,7 +47,11 @@ public partial class GameManager : Node
             selectedCard = null;
             return;
         }
-        grid.Plant(selectedCard);
+        bool planted = grid.Plant(selectedCard);
+        if (!planted)
+        {
+            return;
+        }
         totalSuns -= selectedCard.cost;
         selectedCard.CoolDown();
         selectedCard = null;
