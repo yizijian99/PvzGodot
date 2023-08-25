@@ -43,7 +43,7 @@ public partial class GameManager : Node
     {
         if (grid == null) return;
         if (selectedCard == null) return;
-        if (selectedCard.cost < _totalSuns)
+        if (selectedCard.cost > totalSuns)
         {
             return;
         }

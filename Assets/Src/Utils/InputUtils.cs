@@ -12,6 +12,11 @@ public class InputUtils
         return @event is InputEventMouseButton mouseButton && mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left;
     }
 
+    public static bool MouseRightButtonPressed(InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseButton && mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Right;
+    }
+
     public static void SetCustomMouseCursor(Texture2D texture)
     {
         if (texture == null)

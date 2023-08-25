@@ -29,6 +29,10 @@ public partial class Grid : Control
         {
             SignalBus.Instance.EmitSignal(SignalBus.SignalName.Ground_GridBeClicked, this);
         }
+        else if (InputUtils.MouseRightButtonPressed(@event))
+        {
+            Dig();
+        }
     }
 
     private void OnPlantDead(Plant plant)
@@ -50,10 +54,21 @@ public partial class Grid : Control
         return true;
     }
 
+    public bool Dig()
+    {
+        if (this.plant == null)
+        {
+            return false;
+        }
+        plant.Dead();
+        return true;
+    }
+
     public Vector2 LocalCenter()
     {
         return Position + Size / 2;
     }
+
     public Vector2 GlobalCenter()
     {
         return GlobalPosition + Size / 2;

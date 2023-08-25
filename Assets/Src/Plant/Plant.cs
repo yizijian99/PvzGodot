@@ -15,7 +15,7 @@ public partial class Plant : Node2D
         base._Process(delta);
     }
 
-    protected void Dead()
+    public void Dead()
     {
         QueueFree();
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.Plant_Dead, this);
