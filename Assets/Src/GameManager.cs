@@ -30,12 +30,13 @@ public partial class GameManager : Node
         SignalBus.Instance.Sun_PickUp += amount => totalSuns += amount;
         SignalBus.Instance.Card_NodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_TotalSunsChanged, _totalSuns, _totalSuns);
         SignalBus.Instance.Ground_GridBeClicked += OnGroundGridBeClicked;
-        SignalBus.Instance.Card_BeClicked += OnBeClicked;
+        SignalBus.Instance.Card_BeClicked += OnCardBeClicked;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+        InputUtils.SetCustomMouseCursor(selectedCard?.preview);
     }
 
     private void OnGroundGridBeClicked(Grid grid)
@@ -44,7 +45,6 @@ public partial class GameManager : Node
         if (selectedCard == null) return;
         if (selectedCard.cost < _totalSuns)
         {
-            selectedCard = null;
             return;
         }
         bool planted = grid.Plant(selectedCard);
@@ -57,8 +57,13 @@ public partial class GameManager : Node
         selectedCard = null;
     }
 
-    private void OnBeClicked(Card card)
+    private void OnCardBeClicked(Card card)
     {
+        if (selectedCard == card)
+        {
+            selectedCard = null;
+            return;
+        }
         selectedCard = card;
     }
 }

@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Globals="*res://Assets/Src/Global/Globals.cs"
 SignalBus="*res://Assets/Src/Global/SignalBus.cs"
 GlobalExport="*res://Assets/Scene/Global/GlobalExport.tscn"
 

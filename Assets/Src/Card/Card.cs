@@ -17,6 +17,9 @@ public partial class Card : TextureRect
     private string cardName;
 
     [Export]
+    public Texture2D preview { get; private set; }
+
+    [Export]
     public PackedScene plantScene { get; private set; }
 
     [Export]

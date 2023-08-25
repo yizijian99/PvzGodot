@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=16 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
 [ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
 [ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="6_c2v15"]
+[ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="10_d4hjd"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
+[ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="13_3v1b5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2dt"]
 size = Vector2(728, 1)
@@ -446,6 +448,7 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("3_f38wg")
 cardName = "Peashooter"
+preview = ExtResource("10_d4hjd")
 plantScene = ExtResource("5_xquje")
 cost = 100
 
@@ -453,6 +456,7 @@ cost = 100
 layout_mode = 2
 texture = ExtResource("5_mr15a")
 cardName = "Sunflower"
+preview = ExtResource("13_3v1b5")
 plantScene = ExtResource("11_uydvw")
 cost = 50
 
