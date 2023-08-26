@@ -13,6 +13,8 @@ public partial class Chooser : Control
         WireNodes();
 
         SignalBus.Instance.Game_TotalSunsChanged += OnGameTotalSunsChanged;
+
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.TotalSunsLabel_NodeReady);
     }
 
     public override void _Process(double delta)

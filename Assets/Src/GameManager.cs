@@ -5,7 +5,7 @@ using GodotUtilities;
 public partial class GameManager : Node
 {
     [Export]
-    private int _totalSuns = 50;
+    private int _totalSuns;
     public int totalSuns
     {
         get => _totalSuns;
@@ -45,6 +45,7 @@ public partial class GameManager : Node
         SignalBus.Instance.Card_NodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_TotalSunsChanged, _totalSuns, _totalSuns);
         SignalBus.Instance.Ground_GridBeClicked += OnGroundGridBeClicked;
         SignalBus.Instance.Card_BeClicked += OnCardBeClicked;
+        SignalBus.Instance.TotalSunsLabel_NodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_TotalSunsChanged, _totalSuns, _totalSuns);
     }
 
     public override void _Process(double delta)

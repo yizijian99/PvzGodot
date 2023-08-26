@@ -16,6 +16,9 @@ public partial class SignalBus : Node
     public delegate void Game_SelectedCardChangedEventHandler(Card oldValue, Card newValeu);
 
     [Signal]
+    public delegate void TotalSunsLabel_NodeReadyEventHandler();
+
+    [Signal]
     public delegate void Card_NodeReadyEventHandler();
 
     [Signal]

@@ -10,14 +10,18 @@ public partial class Peashooter : Plant
     [Node("EmitBulletAbility")]
     private EmitBulletAbility emitBulletAbility;
 
+    [Node("VisualAbility")]
+    private VisualAbility visualAbility;
+
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
 
         emitBulletAbility.timer.Timeout += OnEmitBulletAbilityReady;
+        visualAbility.TargetInView += target => emitBulletAbility.enable = true;
+        visualAbility.TargetOutOfView += () => emitBulletAbility.enable = false;
 
-        emitBulletAbility.enable = true;
         emitBulletAbility.SetTargetNode(GetTree().GetFirstNodeInGroup<Node2D>(GlobalExport.Instance.onGround));
     }
 
