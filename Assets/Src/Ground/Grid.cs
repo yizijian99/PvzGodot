@@ -16,6 +16,14 @@ public partial class Grid : Control
 
         GuiInput += OnGuiInput;
         SignalBus.Instance.Plant_Dead += OnPlantDead;
+        MouseEntered += () =>
+        {
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.Ground_GridMouseEntered, this);
+        };
+        MouseExited += () =>
+        {
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.Ground_GridMouseExited, this);
+        };
     }
 
     public override void _Process(double delta)
@@ -45,7 +53,7 @@ public partial class Grid : Control
 
     public bool Plant(Card card)
     {
-        if (this.plant != null)
+        if (!isAvailable())
             return false;
         Plant plant = card.plantScene.Instantiate<Plant>();
         plant.GlobalPosition = GlobalCenter(); ;
@@ -72,5 +80,10 @@ public partial class Grid : Control
     public Vector2 GlobalCenter()
     {
         return GlobalPosition + Size / 2;
+    }
+
+    public bool isAvailable()
+    {
+        return this.plant == null;
     }
 }

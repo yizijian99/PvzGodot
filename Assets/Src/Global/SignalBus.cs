@@ -13,6 +13,9 @@ public partial class SignalBus : Node
     public delegate void Game_TotalSunsChangedEventHandler(int oldValue, int newValue);
 
     [Signal]
+    public delegate void Game_SelectedCardChangedEventHandler(Card oldValue, Card newValeu);
+
+    [Signal]
     public delegate void Card_NodeReadyEventHandler();
 
     [Signal]
@@ -20,6 +23,12 @@ public partial class SignalBus : Node
 
     [Signal]
     public delegate void Ground_GridBeClickedEventHandler(Grid grid);
+
+    [Signal]
+    public delegate void Ground_GridMouseEnteredEventHandler(Grid grid);
+
+    [Signal]
+    public delegate void Ground_GridMouseExitedEventHandler(Grid grid);
 
     [Signal]
     public delegate void Plant_DeadEventHandler(Plant plant);

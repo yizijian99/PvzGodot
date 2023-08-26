@@ -20,7 +20,21 @@ public partial class GameManager : Node
         }
     }
 
-    private Card selectedCard;
+    private Card _selectedCard;
+    public Card selectedCard
+    {
+        get => _selectedCard;
+        set
+        {
+            Card oldValue = _selectedCard;
+            Card newValue = value;
+            _selectedCard = newValue;
+            if (oldValue != newValue)
+            {
+                SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_SelectedCardChanged, oldValue, newValue);
+            }
+        }
+    }
 
     public override void _Ready()
     {

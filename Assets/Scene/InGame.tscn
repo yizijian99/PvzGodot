@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=17 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4tibj5171cow" path="res://Assets/Images/UI/ChooserBackground.png" id="2_st0wy"]
 [ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="3_f38wg"]
 [ext_resource type="PackedScene" uid="uid://cwuu4ap8po0yd" path="res://Assets/Scene/Card/Card.tscn" id="3_qo2fm"]
+[ext_resource type="Script" path="res://Assets/Src/Ground/Grids.cs" id="4_cvb7b"]
 [ext_resource type="PackedScene" uid="uid://bfdxd6fghjnsi" path="res://Assets/Scene/Ability/SunFactory.tscn" id="5_27hj0"]
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="5_mr15a"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
@@ -47,6 +48,7 @@ offset_right = 768.0
 offset_bottom = 577.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_cvb7b")
 
 [node name="Lanes" type="VBoxContainer" parent="Ground/Grids"]
 layout_mode = 1
@@ -385,6 +387,10 @@ custom_minimum_size = Vector2(77, 92)
 layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
+
+[node name="Preview" type="Sprite2D" parent="Ground/Grids"]
+visible = false
+modulate = Color(1, 1, 1, 0.568627)
 
 [node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
 
