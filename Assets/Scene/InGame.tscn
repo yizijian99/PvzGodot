@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=18 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
 [ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
 [ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="6_c2v15"]
+[ext_resource type="PackedScene" uid="uid://c75hyv0v8rw8n" path="res://Assets/Scene/Zombie/Zombie.tscn" id="6_f214c"]
 [ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="10_d4hjd"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="13_3v1b5"]
@@ -393,6 +394,10 @@ visible = false
 modulate = Color(1, 1, 1, 0.568627)
 
 [node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
+metadata/_edit_lock_ = true
+
+[node name="Zombie" parent="Ground/OnGround" instance=ExtResource("6_f214c")]
+position = Vector2(769, 192)
 
 [node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
 position = Vector2(12, 87)
