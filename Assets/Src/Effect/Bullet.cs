@@ -12,7 +12,7 @@ public partial class Bullet : RigidBody2D, HitHandler
         base._Ready();
         WireNodes();
 
-        visibleOnScreenNotifier.ScreenExited += () => QueueFree();
+        visibleOnScreenNotifier.ScreenExited += Distroy;
     }
 
     public override void _Process(double delta)

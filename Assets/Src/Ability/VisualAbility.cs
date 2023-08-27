@@ -13,7 +13,7 @@ public partial class VisualAbility : Node
     [Export]
     private RayCast2D rayCast2D;
 
-    private GodotObject target;
+    public GodotObject target { get; private set; }
 
     public override void _Ready()
     {

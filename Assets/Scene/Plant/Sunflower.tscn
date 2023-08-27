@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcrxu2qa52s0a"]
+[gd_scene load_steps=26 format=3 uid="uid://bcrxu2qa52s0a"]
 
 [ext_resource type="PackedScene" uid="uid://bpglx3wq0ectg" path="res://Assets/Scene/Plant/Plant.tscn" id="1_x6snf"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="2_2rgl2"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dbo01la8nt6yx" path="res://Assets/Images/Plants/SunFlower/SunFlower_18.png" id="19_vgpfh"]
 [ext_resource type="PackedScene" uid="uid://c322wipnf6i43" path="res://Assets/Scene/Ability/ProduceSunAbility.tscn" id="20_ya1nm"]
 [ext_resource type="PackedScene" uid="uid://bfdxd6fghjnsi" path="res://Assets/Scene/Ability/SunFactory.tscn" id="21_bpjgo"]
+[ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="23_86fbd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_13akc"]
 animations = [{
@@ -85,6 +86,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6j44"]
+size = Vector2(40, 60)
+
 [node name="Sunflower" instance=ExtResource("1_x6snf")]
 script = ExtResource("2_rvo7b")
 
@@ -106,6 +110,20 @@ maxInitSpeed = Vector2(70, -250)
 gravityScale = 1.0
 minFallDistanceLimit = 28.0
 maxFallDistanceLimit = 46.0
+
+[node name="HurtBox" type="Area2D" parent="." index="3" node_paths=PackedStringArray("collisionBoxOwner", "collider")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("23_86fbd")
+collisionBoxOwner = NodePath("..")
+collider = NodePath("CollisionShape2D")
+enable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_p6j44")
+
+[node name="HealthComponent" parent="." index="4"]
+health = 10
 
 [editable path="ProduceSunAbility"]
 [editable path="SunFactory"]

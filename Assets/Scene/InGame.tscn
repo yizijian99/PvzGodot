@@ -397,8 +397,8 @@ modulate = Color(1, 1, 1, 0.568627)
 [node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
 metadata/_edit_lock_ = true
 
-[node name="Zombie" parent="Ground/OnGround" instance=ExtResource("6_f214c")]
-position = Vector2(965, 192)
+[node name="Zombie1" parent="Ground/OnGround" instance=ExtResource("6_f214c")]
+position = Vector2(720, 192)
 
 [node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
 position = Vector2(12, 87)

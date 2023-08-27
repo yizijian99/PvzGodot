@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ci5rg44obvq3"]
+[gd_scene load_steps=24 format=3 uid="uid://ci5rg44obvq3"]
 
 [ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_1xiyk"]
 [ext_resource type="PackedScene" uid="uid://bpglx3wq0ectg" path="res://Assets/Scene/Plant/Plant.tscn" id="1_pajbh"]
@@ -18,7 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bdvo8dbungj7m" path="res://Assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_5y8b4"]
 [ext_resource type="PackedScene" uid="uid://dkbujgbygysn4" path="res://Assets/Scene/Ability/EmitBulletAbility.tscn" id="15_4uw21"]
 [ext_resource type="Script" path="res://Assets/Src/Common/CandidateArea.cs" id="16_qiu2q"]
-[ext_resource type="Script" path="res://Assets/Src/Ability/VisualAbility.cs" id="18_qm1dm"]
+[ext_resource type="PackedScene" uid="uid://cffk27u6j7mxv" path="res://Assets/Src/Ability/VisualAbility.tscn" id="18_0j2dr"]
+[ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="20_c53q7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_62lm3"]
 animations = [{
@@ -70,6 +71,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4e1p"]
 size = Vector2(1, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oantn"]
+size = Vector2(40, 60)
+
 [node name="Peashooter" instance=ExtResource("1_pajbh")]
 script = ExtResource("2_l0pvn")
 
@@ -84,8 +88,7 @@ emitArea = NodePath("../CandidateArea")
 [node name="Timer" parent="EmitBulletAbility" index="0"]
 wait_time = 2.0
 
-[node name="VisualAbility" type="Node" parent="." index="2" node_paths=PackedStringArray("rayCast2D")]
-script = ExtResource("18_qm1dm")
+[node name="VisualAbility" parent="." index="2" node_paths=PackedStringArray("rayCast2D") instance=ExtResource("18_0j2dr")]
 rayCast2D = NodePath("../RayCast2D")
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
@@ -98,5 +101,19 @@ collide_with_bodies = false
 position = Vector2(30, -18)
 script = ExtResource("16_qiu2q")
 shape = SubResource("RectangleShape2D_n4e1p")
+
+[node name="HurtBox" type="Area2D" parent="." index="5" node_paths=PackedStringArray("collisionBoxOwner", "collider")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("20_c53q7")
+collisionBoxOwner = NodePath("..")
+collider = NodePath("CollisionShape2D")
+enable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_oantn")
+
+[node name="HealthComponent" parent="." index="6"]
+health = 10
 
 [editable path="EmitBulletAbility"]

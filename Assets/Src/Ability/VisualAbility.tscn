@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cffk27u6j7mxv"]
+
+[ext_resource type="Script" path="res://Assets/Src/Ability/VisualAbility.cs" id="1_82hhl"]
+
+[node name="VisualAbility" type="Node"]
+script = ExtResource("1_82hhl")

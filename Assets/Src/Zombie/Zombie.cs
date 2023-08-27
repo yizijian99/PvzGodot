@@ -19,6 +19,12 @@ public partial class Zombie : CharacterBody2D, HitHandler
     [Node("VisibleOnScreenNotifier2D")]
     private VisibleOnScreenNotifier2D visibleOnScreenNotifier2D;
 
+    [Node("HealthComponent")]
+    private HealthComponent healthComponent;
+
+    [Node("VisualAbility")]
+    private VisualAbility visualAbility;
+
     public override void _Ready()
     {
         base._Ready();
@@ -26,8 +32,21 @@ public partial class Zombie : CharacterBody2D, HitHandler
 
         visibleOnScreenNotifier2D.ScreenEntered += () => hurtBox.enable = true;
         visibleOnScreenNotifier2D.ScreenExited += () => hurtBox.enable = false;
+        healthComponent.ZeroHealth += () => QueueFree();
+        visualAbility.TargetInView += target =>
+        {
+            if (target is HurtBox hurtBox && hurtBox?.GetCollisionBoxOwner() is Plant)
+            {
+                animationPlayer.Play("Eat");
+            }
+        };
+        visualAbility.TargetOutOfView += () =>
+        {
+            animationPlayer.Play("Move1");
+        };
 
         hurtBox.enable = visibleOnScreenNotifier2D.IsOnScreen();
+        animationPlayer.Play("Move1");
     }
 
     public override void _Process(double delta)
@@ -44,16 +63,30 @@ public partial class Zombie : CharacterBody2D, HitHandler
 
     public HitRequest buildHitRequest()
     {
-        return null;
+        HitRequest request = new HitRequest();
+        request.damage = 1;
+        return request;
     }
 
     public void DoHitRequest(HitRequest request, HitResponse response)
     {
-        GD.Print($"The zombie has received {request.damage} damage");
+        healthComponent.health -= request.damage;
+        GD.Print($"The zombie has received {request.damage} damage. remaining health: {healthComponent.health}");
     }
 
     public void DoHitResponse(HitResponse response)
     {
 
+    }
+
+    public void TakeABite()
+    {
+        GodotObject target = visualAbility.target;
+        if (target == null)
+            return;
+        if (target is HurtBox hurtBox)
+        {
+            hurtBox?.GetCollisionBoxOwner()?.DoHitRequest(buildHitRequest(), new HitResponse());
+        }
     }
 }
