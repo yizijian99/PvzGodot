@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c75hyv0v8rw8n"]
+[gd_scene load_steps=61 format=3 uid="uid://c75hyv0v8rw8n"]
 
 [ext_resource type="Texture2D" uid="uid://dr86olfh1q76t" path="res://Assets/Images/Zombies/Zombie/Move1/Zombie2_1.png" id="1_3ao14"]
 [ext_resource type="Script" path="res://Assets/Src/Zombie/Zombie.cs" id="1_c6e5p"]
@@ -54,6 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://c36e1s3a6xi3x" path="res://Assets/Images/Zombies/Zombie/Move2/Zombie_20.png" id="51_ttv7l"]
 [ext_resource type="Texture2D" uid="uid://ycs7nmic5eg5" path="res://Assets/Images/Zombies/Zombie/Move2/Zombie_21.png" id="52_uglst"]
 [ext_resource type="Texture2D" uid="uid://ceewrtxekrakr" path="res://Assets/Images/Zombies/Zombie/Move2/Zombie_22.png" id="53_bwdyr"]
+[ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="55_t2n55"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_58pae"]
 animations = [{
@@ -321,10 +322,18 @@ libraries = {
 "": SubResource("AnimationLibrary_rtjkm")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(13, 13)
-shape = SubResource("RectangleShape2D_cmshg")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(13, 13)
+position = Vector2(18, 13)
 rect = Rect2(-13, -53, 28, 106)
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("collisionBoxOwner", "collider")]
+position = Vector2(18, 13)
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("55_t2n55")
+collisionBoxOwner = NodePath("..")
+collider = NodePath("CollisionShape2D")
+enable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_cmshg")

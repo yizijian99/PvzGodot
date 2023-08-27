@@ -2,7 +2,7 @@ using Godot;
 using GodotUtilities;
 
 [Scene]
-public partial class Zombie : CharacterBody2D
+public partial class Zombie : CharacterBody2D, HitHandler
 {
     [Export]
     private Vector2 moveVelocity = Vector2.Zero;
@@ -13,8 +13,8 @@ public partial class Zombie : CharacterBody2D
     [Node("AnimationPlayer")]
     private AnimationPlayer animationPlayer;
 
-    [Node("CollisionShape2D")]
-    private CollisionShape2D collisionShape2D;
+    [Node("HurtBox")]
+    private HurtBox hurtBox;
 
     [Node("VisibleOnScreenNotifier2D")]
     private VisibleOnScreenNotifier2D visibleOnScreenNotifier2D;
@@ -24,10 +24,10 @@ public partial class Zombie : CharacterBody2D
         base._Ready();
         WireNodes();
 
-        visibleOnScreenNotifier2D.ScreenEntered += () => collisionShape2D.Disabled = false;
-        visibleOnScreenNotifier2D.ScreenExited += () => collisionShape2D.Disabled = true;
+        visibleOnScreenNotifier2D.ScreenEntered += () => hurtBox.enable = true;
+        visibleOnScreenNotifier2D.ScreenExited += () => hurtBox.enable = false;
 
-        collisionShape2D.Disabled = !visibleOnScreenNotifier2D.IsOnScreen();
+        hurtBox.enable = visibleOnScreenNotifier2D.IsOnScreen();
     }
 
     public override void _Process(double delta)
@@ -40,5 +40,20 @@ public partial class Zombie : CharacterBody2D
     {
         base._PhysicsProcess(delta);
         MoveAndSlide();
+    }
+
+    public HitRequest buildHitRequest()
+    {
+        return null;
+    }
+
+    public void DoHitRequest(HitRequest request, HitResponse response)
+    {
+        GD.Print($"The zombie has received {request.damage} damage");
+    }
+
+    public void DoHitResponse(HitResponse response)
+    {
+
     }
 }

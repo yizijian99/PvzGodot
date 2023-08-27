@@ -4,9 +4,6 @@ using GodotUtilities;
 [Scene]
 public partial class Peashooter : Plant
 {
-    [Export]
-    private PackedScene bulleScene;
-
     [Node("EmitBulletAbility")]
     private EmitBulletAbility emitBulletAbility;
 
@@ -32,6 +29,6 @@ public partial class Peashooter : Plant
 
     private void OnEmitBulletAbilityReady()
     {
-        emitBulletAbility.EmitBullet(bulleScene);
+        emitBulletAbility.EmitBullet();
     }
 }

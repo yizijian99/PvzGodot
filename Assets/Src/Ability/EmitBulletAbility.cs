@@ -15,12 +15,18 @@ public partial class EmitBulletAbility : Node
             if (timer != null)
             {
                 if (_enable)
+                {
+                    EmitBullet();
                     timer.Start();
+                }
                 else
                     timer.Stop();
             }
         }
     }
+
+    [Export]
+    private PackedScene bulletScene;
 
     [Export]
     private CandidateArea emitArea;
@@ -47,7 +53,7 @@ public partial class EmitBulletAbility : Node
         return _enable && timer.IsStopped();
     }
 
-    public void EmitBullet(PackedScene bulletScene)
+    public void EmitBullet()
     {
         Bullet bullet = bulletScene.InstantiateOrNull<Bullet>();
         if (bullet == null)

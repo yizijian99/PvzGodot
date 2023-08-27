@@ -72,17 +72,17 @@ size = Vector2(1, 1)
 
 [node name="Peashooter" instance=ExtResource("1_pajbh")]
 script = ExtResource("2_l0pvn")
-bulleScene = ExtResource("3_kg8sl")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_62lm3")
 autoplay = "default"
 
 [node name="EmitBulletAbility" parent="." index="1" node_paths=PackedStringArray("emitArea") instance=ExtResource("15_4uw21")]
+bulletScene = ExtResource("3_kg8sl")
 emitArea = NodePath("../CandidateArea")
 
 [node name="Timer" parent="EmitBulletAbility" index="0"]
-wait_time = 1.5
+wait_time = 2.0
 
 [node name="VisualAbility" type="Node" parent="." index="2" node_paths=PackedStringArray("rayCast2D")]
 script = ExtResource("18_qm1dm")
@@ -90,6 +90,9 @@ rayCast2D = NodePath("../RayCast2D")
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
 target_position = Vector2(800, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="CandidateArea" type="Node2D" parent="." index="4"]
 position = Vector2(30, -18)
