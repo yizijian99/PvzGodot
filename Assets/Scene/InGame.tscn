@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="3_f38wg"]
 [ext_resource type="PackedScene" uid="uid://cwuu4ap8po0yd" path="res://Assets/Scene/Card/Card.tscn" id="3_qo2fm"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grids.cs" id="4_cvb7b"]
+[ext_resource type="Script" path="res://Assets/Src/Ground/Lane.cs" id="5_7pywt"]
 [ext_resource type="PackedScene" uid="uid://bfdxd6fghjnsi" path="res://Assets/Scene/Ability/SunFactory.tscn" id="5_27hj0"]
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="5_mr15a"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
 [ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
 [ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="6_c2v15"]
-[ext_resource type="PackedScene" uid="uid://c75hyv0v8rw8n" path="res://Assets/Scene/Zombie/Zombie.tscn" id="6_f214c"]
 [ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="10_d4hjd"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="13_3v1b5"]
@@ -60,8 +60,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Lane1" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+[node name="Lane1" type="HBoxContainer" parent="Ground/Grids/Lanes" node_paths=PackedStringArray("ground")]
 layout_mode = 2
+script = ExtResource("5_7pywt")
+offsetPosition = Vector2(200, -20)
+ground = NodePath("../../../OnGround")
 
 [node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane1" node_paths=PackedStringArray("ground")]
 clip_contents = true
@@ -126,8 +129,11 @@ layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
 
-[node name="Lane2" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+[node name="Lane2" type="HBoxContainer" parent="Ground/Grids/Lanes" node_paths=PackedStringArray("ground")]
 layout_mode = 2
+script = ExtResource("5_7pywt")
+offsetPosition = Vector2(200, -20)
+ground = NodePath("../../../OnGround")
 
 [node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane2" node_paths=PackedStringArray("ground")]
 clip_contents = true
@@ -192,8 +198,11 @@ layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
 
-[node name="Lane3" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+[node name="Lane3" type="HBoxContainer" parent="Ground/Grids/Lanes" node_paths=PackedStringArray("ground")]
 layout_mode = 2
+script = ExtResource("5_7pywt")
+offsetPosition = Vector2(200, -20)
+ground = NodePath("../../../OnGround")
 
 [node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane3" node_paths=PackedStringArray("ground")]
 clip_contents = true
@@ -258,8 +267,11 @@ layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
 
-[node name="Lane4" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+[node name="Lane4" type="HBoxContainer" parent="Ground/Grids/Lanes" node_paths=PackedStringArray("ground")]
 layout_mode = 2
+script = ExtResource("5_7pywt")
+offsetPosition = Vector2(200, -20)
+ground = NodePath("../../../OnGround")
 
 [node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane4" node_paths=PackedStringArray("ground")]
 clip_contents = true
@@ -324,8 +336,11 @@ layout_mode = 2
 script = ExtResource("5_p7bxw")
 ground = NodePath("../../../../OnGround")
 
-[node name="Lane5" type="HBoxContainer" parent="Ground/Grids/Lanes"]
+[node name="Lane5" type="HBoxContainer" parent="Ground/Grids/Lanes" node_paths=PackedStringArray("ground")]
 layout_mode = 2
+script = ExtResource("5_7pywt")
+offsetPosition = Vector2(200, -20)
+ground = NodePath("../../../OnGround")
 
 [node name="Grid1" type="Control" parent="Ground/Grids/Lanes/Lane5" node_paths=PackedStringArray("ground")]
 clip_contents = true
@@ -396,9 +411,6 @@ modulate = Color(1, 1, 1, 0.568627)
 
 [node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
 metadata/_edit_lock_ = true
-
-[node name="Zombie1" parent="Ground/OnGround" instance=ExtResource("6_f214c")]
-position = Vector2(720, 192)
 
 [node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
 position = Vector2(12, 87)

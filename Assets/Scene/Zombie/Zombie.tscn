@@ -319,6 +319,64 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_y17vx"]
+resource_name = "Eat"
+length = 2.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Eat"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 20]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:moveVelocity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"TakeABite"
+}, {
+"args": [],
+"method": &"TakeABite"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_e7hrv"]
 resource_name = "Move1"
 length = 3.1
@@ -401,64 +459,6 @@ tracks/2/keys = {
 "values": [Vector2(0, 0), Vector2(28, 0), Vector2(0, 0), Vector2(28, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_y17vx"]
-resource_name = "Eat"
-length = 2.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Eat"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 20]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:moveVelocity")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.7, 1.8),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"TakeABite"
-}, {
-"args": [],
-"method": &"TakeABite"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtjkm"]
 _data = {
 "Eat": SubResource("Animation_y17vx"),
@@ -472,10 +472,12 @@ size = Vector2(28, 107)
 [node name="Zombie" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_c6e5p")
+moveVelocity = Vector2(28, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-19, -58)
 sprite_frames = SubResource("SpriteFrames_58pae")
-animation = &"Eat"
+animation = &"Move1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -483,7 +485,7 @@ libraries = {
 }
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(18, 13)
+position = Vector2(0, -50)
 rect = Rect2(-13, -53, 28, 106)
 
 [node name="HealthComponent" parent="." instance=ExtResource("76_7nq5p")]
@@ -493,7 +495,7 @@ health = 70
 rayCast2D = NodePath("../HurtBox/RayCast2D")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("collisionBoxOwner", "collider")]
-position = Vector2(18, 13)
+position = Vector2(0, -50)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("55_t2n55")
@@ -505,8 +507,8 @@ enable = true
 shape = SubResource("RectangleShape2D_cmshg")
 
 [node name="RayCast2D" type="RayCast2D" parent="HurtBox"]
-position = Vector2(15, 50)
-target_position = Vector2(-40, 1)
+position = Vector2(14, 40)
+target_position = Vector2(-40, 0)
 collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false

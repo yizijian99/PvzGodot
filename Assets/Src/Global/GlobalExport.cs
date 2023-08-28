@@ -10,6 +10,9 @@ public partial class GlobalExport : Node
     public PackedScene sun { get; private set; }
 
     [Export]
+    public PackedScene zombie { get; private set; }
+
+    [Export]
     public string onGround { get; private set; } = "onGround";
 
     public override void _Ready()
