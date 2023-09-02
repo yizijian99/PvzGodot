@@ -77,7 +77,7 @@
 [ext_resource type="Texture2D" uid="uid://ceewrtxekrakr" path="res://Assets/Images/Zombies/Zombie/Move2/Zombie_22.png" id="53_bwdyr"]
 [ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="55_t2n55"]
 [ext_resource type="PackedScene" uid="uid://d25anc2v6ygk5" path="res://Assets/Scene/Component/HealthComponent.tscn" id="76_7nq5p"]
-[ext_resource type="PackedScene" uid="uid://cffk27u6j7mxv" path="res://Assets/Src/Ability/VisualAbility.tscn" id="78_rx1by"]
+[ext_resource type="PackedScene" uid="uid://cffk27u6j7mxv" path="res://Assets/Scene/Ability/VisualAbility.tscn" id="78_rx1by"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_58pae"]
 animations = [{

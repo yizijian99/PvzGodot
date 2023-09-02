@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bdvo8dbungj7m" path="res://Assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_5y8b4"]
 [ext_resource type="PackedScene" uid="uid://dkbujgbygysn4" path="res://Assets/Scene/Ability/EmitBulletAbility.tscn" id="15_4uw21"]
 [ext_resource type="Script" path="res://Assets/Src/Common/CandidateArea.cs" id="16_qiu2q"]
-[ext_resource type="PackedScene" uid="uid://cffk27u6j7mxv" path="res://Assets/Src/Ability/VisualAbility.tscn" id="18_0j2dr"]
+[ext_resource type="PackedScene" uid="uid://cffk27u6j7mxv" path="res://Assets/Scene/Ability/VisualAbility.tscn" id="18_0j2dr"]
 [ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="20_c53q7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_62lm3"]
