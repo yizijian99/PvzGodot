@@ -71,7 +71,6 @@ public partial class Zombie : CharacterBody2D, HitHandler
     public void DoHitRequest(HitRequest request, HitResponse response)
     {
         healthComponent.health -= request.damage;
-        GD.Print($"The zombie has received {request.damage} damage. remaining health: {healthComponent.health}");
     }
 
     public void DoHitResponse(HitResponse response)

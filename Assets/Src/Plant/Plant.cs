@@ -34,7 +34,6 @@ public partial class Plant : Node2D, HitHandler
     public virtual void DoHitRequest(HitRequest request, HitResponse response)
     {
         healthComponent.health -= request.damage;
-        GD.Print($"plant's health: {healthComponent.health}");
     }
 
     public virtual void DoHitResponse(HitResponse response)

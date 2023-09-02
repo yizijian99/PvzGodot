@@ -2,30 +2,20 @@ using Godot;
 using GodotUtilities;
 
 [Scene]
-public partial class Lane : Control
+public partial class Lane : Control, IPosition
 {
     [Export]
-    public Corner relativeCorner = Corner.RightBottom;
+    public Corner relativeCorner { get; private set; } = Corner.RightBottom;
 
     [Export]
-    public Vector2 offsetPosition = Vector2.Zero;
-
-    [Export]
-    public Node2D ground;
-
-    private Timer timer = new Timer();
+    public Vector2 offsetPosition { get; private set; } = Vector2.Zero;
 
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
 
-        timer.WaitTime = 3f;
-        timer.OneShot = false;
-        timer.Autostart = true;
-
-        AddChild(timer);
-        timer.Timeout += SpawnZombie;
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.ZombieProducePositionReady, this);
     }
 
     public override void _Process(double delta)
@@ -33,14 +23,7 @@ public partial class Lane : Control
         base._Process(delta);
     }
 
-    public void SpawnZombie()
-    {
-        Zombie zombie = GlobalExport.Instance.zombie.Instantiate<Zombie>();
-        ground.AddChild(zombie);
-        zombie.GlobalPosition = GetRelativeCornerPosition();
-    }
-
-    public Vector2 GetRelativeCornerPosition()
+    public Vector2 GetPosition()
     {
         Rect2 rect = GetGlobalRect();
         Vector2 cornerPosition = Vector2.Zero;

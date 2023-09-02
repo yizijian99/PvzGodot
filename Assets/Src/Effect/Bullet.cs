@@ -42,7 +42,6 @@ public partial class Bullet : RigidBody2D, HitHandler
 
     public void Distroy()
     {
-        GD.Print("bullet destroyed");
         QueueFree();
     }
 }

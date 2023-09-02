@@ -36,6 +36,9 @@ public partial class SignalBus : Node
     [Signal]
     public delegate void Plant_DeadEventHandler(Plant plant);
 
+    [Signal]
+    public delegate void ZombieProducePositionReadyEventHandler(GodotObject gdObj);
+
     public override void _Ready()
     {
         base._Ready();
