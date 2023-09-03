@@ -1,0 +1,198 @@
+[gd_scene load_steps=27 format=3 uid="uid://bnkyc4krstst5"]
+
+[ext_resource type="Texture2D" uid="uid://tdnk23gxe652" path="res://Assets/Images/UI/MainMenu.png" id="1_ed7vl"]
+[ext_resource type="Texture2D" uid="uid://dpm12q31mxoiv" path="res://Assets/Images/UI/SelectorScreenAdventure_32.png" id="2_h34g2"]
+[ext_resource type="Texture2D" uid="uid://bc3pn4tc5nnse" path="res://Assets/Images/UI/SelectorScreenSurvival_32.png" id="3_5exnm"]
+[ext_resource type="Texture2D" uid="uid://mbxvj6x0775r" path="res://Assets/Images/UI/SelectorScreenChallenges_32.png" id="4_1s6ct"]
+[ext_resource type="Theme" uid="uid://rfd6phhv0rv4" path="res://Assets/Scene/UI/MainMenuButtonTheme.tres" id="5_bavug"]
+[ext_resource type="Texture2D" uid="uid://basyw35o20006" path="res://Assets/Images/UI/SelectorScreen_WoodSign1_32.png" id="6_jav4k"]
+[ext_resource type="Script" path="res://Assets/Src/UI/MainMenuManager.cs" id="7_bfej3"]
+[ext_resource type="PackedScene" uid="uid://dunpouac3gyhi" path="res://Assets/Scene/MainGame.tscn" id="8_4pn5d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mow1"]
+atlas = ExtResource("2_h34g2")
+region = Rect2(0, 0, 330, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oioca"]
+atlas = ExtResource("2_h34g2")
+region = Rect2(-2, 145, 333, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcmlo"]
+atlas = ExtResource("2_h34g2")
+region = Rect2(0, 145, 330, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfi1w"]
+atlas = ExtResource("3_5exnm")
+region = Rect2(1, 2, 312, 130)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urbxj"]
+atlas = ExtResource("3_5exnm")
+region = Rect2(-1, 135, 312, 130)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tiog"]
+atlas = ExtResource("3_5exnm")
+region = Rect2(1, 135, 312, 130)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg5i5"]
+atlas = ExtResource("3_5exnm")
+region = Rect2(1, 2, 312, 130)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_257ha"]
+atlas = ExtResource("4_1s6ct")
+region = Rect2(0, 0, 288, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tbk7"]
+atlas = ExtResource("4_1s6ct")
+region = Rect2(-2, 124, 284, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y13jp"]
+atlas = ExtResource("4_1s6ct")
+region = Rect2(0, 124, 284, 120)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_41bxl"]
+load_path = "res://.godot/imported/SelectorScreen_WoodSign2_32.png-b439d5788f33987f7a7862778170c2c7.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb8p8"]
+atlas = SubResource("CompressedTexture2D_41bxl")
+region = Rect2(0, 0, 292, 68)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cfs0x"]
+load_path = "res://.godot/imported/SelectorScreen_WoodSign2_32.png-b439d5788f33987f7a7862778170c2c7.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akx60"]
+atlas = SubResource("CompressedTexture2D_cfs0x")
+region = Rect2(0, 0, 292, 68)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gtk2n"]
+load_path = "res://.godot/imported/SelectorScreen_WoodSign2_32.png-b439d5788f33987f7a7862778170c2c7.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneky"]
+atlas = SubResource("CompressedTexture2D_gtk2n")
+region = Rect2(0, 72, 286, 68)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bowrd"]
+load_path = "res://.godot/imported/SelectorScreen_WoodSign2_32.png-b439d5788f33987f7a7862778170c2c7.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr4jr"]
+atlas = SubResource("CompressedTexture2D_bowrd")
+region = Rect2(0, 0, 292, 68)
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+scale = Vector2(0.888889, 1)
+texture = ExtResource("1_ed7vl")
+centered = false
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Adventure" type="TextureButton" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -393.0
+offset_top = 62.0
+offset_right = -57.0
+offset_bottom = 207.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_5mow1")
+texture_pressed = SubResource("AtlasTexture_oioca")
+texture_hover = SubResource("AtlasTexture_kcmlo")
+texture_disabled = SubResource("AtlasTexture_5mow1")
+
+[node name="MiniGame" type="TextureButton" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -393.0
+offset_top = 170.0
+offset_right = -81.0
+offset_bottom = 300.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_jfi1w")
+texture_pressed = SubResource("AtlasTexture_urbxj")
+texture_hover = SubResource("AtlasTexture_6tiog")
+texture_disabled = SubResource("AtlasTexture_hg5i5")
+
+[node name="Puzzle" type="TextureButton" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -388.0
+offset_top = 255.0
+offset_right = -100.0
+offset_bottom = 379.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_257ha")
+texture_pressed = SubResource("AtlasTexture_0tbk7")
+texture_hover = SubResource("AtlasTexture_y13jp")
+texture_disabled = SubResource("AtlasTexture_257ha")
+
+[node name="Options" type="Button" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -128.0
+offset_right = -165.0
+offset_bottom = -68.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("5_bavug")
+text = "设置"
+
+[node name="Help" type="Button" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -105.0
+offset_right = -96.0
+offset_bottom = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("5_bavug")
+text = "帮助"
+
+[node name="Quit" type="Button" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -109.0
+offset_right = -25.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("5_bavug")
+text = "退出"
+
+[node name="Welcome" type="TextureRect" parent="UI"]
+offset_left = 25.0
+offset_right = 318.0
+offset_bottom = 150.0
+texture = ExtResource("6_jav4k")
+
+[node name="ChangeUsername" type="TextureButton" parent="UI"]
+offset_left = 30.0
+offset_top = 139.0
+offset_right = 322.0
+offset_bottom = 211.0
+texture_normal = SubResource("AtlasTexture_vb8p8")
+texture_pressed = SubResource("AtlasTexture_akx60")
+texture_hover = SubResource("AtlasTexture_bneky")
+texture_disabled = SubResource("AtlasTexture_rr4jr")
+
+[node name="MainMenuManager" type="Node" parent="." node_paths=PackedStringArray("adventureBtn", "quitBtn")]
+script = ExtResource("7_bfej3")
+adventureBtn = NodePath("../UI/Adventure")
+quitBtn = NodePath("../UI/Quit")
+adventureScene = ExtResource("8_4pn5d")

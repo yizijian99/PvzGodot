@@ -40,7 +40,7 @@ public partial class Zombie : CharacterBody2D, HitHandler
                 if (hurtBox?.GetCollisionBoxOwner() is Plant)
                 {
                     animationPlayer.Play("Eat");
-                } else if (hurtBox?.GetCollisionBoxOwner() is GameManager)
+                } else if (hurtBox?.GetCollisionBoxOwner() is MainGameManager)
                 {
                     TakeABite();
                 }
