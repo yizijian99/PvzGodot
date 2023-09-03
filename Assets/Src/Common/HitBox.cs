@@ -7,7 +7,7 @@ using GodotUtilities;
 public partial class HitBox : Area2D, CollisionBox
 {
     [Export]
-    public Node2D collisionBoxOwner;
+    public Node collisionBoxOwner;
 
     [Export]
     public CollisionShape2D collider;

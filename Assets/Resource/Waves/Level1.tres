@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ZombieWaves" load_steps=8 format=3 uid="uid://ch1046fr53sc5"]
+
+[ext_resource type="Script" path="res://Assets/Src/Resource/ZombieWaves.cs" id="1_tx7cp"]
+[ext_resource type="Script" path="res://Assets/Src/Resource/ZombieWave.cs" id="2_grtqr"]
+
+[sub_resource type="Resource" id="Resource_616he"]
+script = ExtResource("2_grtqr")
+delay = 10.0
+zombieCount = 1
+
+[sub_resource type="Resource" id="Resource_yq82k"]
+script = ExtResource("2_grtqr")
+delay = 10.0
+zombieCount = 2
+
+[sub_resource type="Resource" id="Resource_hc45f"]
+script = ExtResource("2_grtqr")
+delay = 10.0
+zombieCount = 2
+
+[sub_resource type="Resource" id="Resource_q0u48"]
+script = ExtResource("2_grtqr")
+delay = 10.0
+zombieCount = 2
+
+[sub_resource type="Resource" id="Resource_wqneo"]
+script = ExtResource("2_grtqr")
+delay = 10.0
+zombieCount = 3
+
+[resource]
+script = ExtResource("1_tx7cp")
+waves = Array[Object]([SubResource("Resource_616he"), SubResource("Resource_yq82k"), SubResource("Resource_hc45f"), SubResource("Resource_q0u48"), SubResource("Resource_wqneo")])

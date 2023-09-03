@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=22 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_7nc06"]
 [ext_resource type="Script" path="res://Assets/Src/GameManager.cs" id="1_u23ik"]
@@ -7,50 +7,24 @@
 [ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="3_f38wg"]
 [ext_resource type="Script" path="res://Assets/Src/Ability/ProduceZombieAbility.cs" id="3_l8nkj"]
 [ext_resource type="PackedScene" uid="uid://cwuu4ap8po0yd" path="res://Assets/Scene/Card/Card.tscn" id="3_qo2fm"]
-[ext_resource type="Script" path="res://Assets/Src/Resource/ZombieWaves.cs" id="4_4o64l"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grids.cs" id="4_cvb7b"]
+[ext_resource type="Resource" uid="uid://ch1046fr53sc5" path="res://Assets/Resource/Waves/Level1.tres" id="4_h2006"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Lane.cs" id="5_7pywt"]
 [ext_resource type="PackedScene" uid="uid://bfdxd6fghjnsi" path="res://Assets/Scene/Ability/SunFactory.tscn" id="5_27hj0"]
-[ext_resource type="Script" path="res://Assets/Src/Resource/ZombieWave.cs" id="5_mq7sk"]
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="5_mr15a"]
 [ext_resource type="Script" path="res://Assets/Src/Ground/Grid.cs" id="5_p7bxw"]
 [ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="5_xquje"]
 [ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="6_c2v15"]
+[ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="10_4sonw"]
 [ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="10_d4hjd"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="11_uydvw"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="13_3v1b5"]
 
-[sub_resource type="Resource" id="Resource_616he"]
-script = ExtResource("5_mq7sk")
-delay = 10.0
-zombieCount = 1
-
-[sub_resource type="Resource" id="Resource_yq82k"]
-script = ExtResource("5_mq7sk")
-delay = 10.0
-zombieCount = 2
-
-[sub_resource type="Resource" id="Resource_hc45f"]
-script = ExtResource("5_mq7sk")
-delay = 10.0
-zombieCount = 2
-
-[sub_resource type="Resource" id="Resource_q0u48"]
-script = ExtResource("5_mq7sk")
-delay = 10.0
-zombieCount = 2
-
-[sub_resource type="Resource" id="Resource_wqneo"]
-script = ExtResource("5_mq7sk")
-delay = 10.0
-zombieCount = 3
-
-[sub_resource type="Resource" id="Resource_88b1e"]
-script = ExtResource("4_4o64l")
-waves = Array[Object]([SubResource("Resource_616he"), SubResource("Resource_yq82k"), SubResource("Resource_hc45f"), SubResource("Resource_q0u48"), SubResource("Resource_wqneo")])
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2dt"]
 size = Vector2(728, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvuny"]
+size = Vector2(32, 604)
 
 [node name="InGame" type="Node2D"]
 
@@ -64,7 +38,7 @@ sunFactory = NodePath("../SunFactory")
 [node name="ProduceZombieAbility" type="Node" parent="." node_paths=PackedStringArray("ground")]
 script = ExtResource("3_l8nkj")
 ground = NodePath("../Ground/OnGround")
-waves = SubResource("Resource_88b1e")
+waves = ExtResource("4_h2006")
 
 [node name="Timer" type="Timer" parent="ProduceZombieAbility"]
 one_shot = true
@@ -445,6 +419,7 @@ visible = false
 modulate = Color(1, 1, 1, 0.568627)
 
 [node name="OnGround" type="Node2D" parent="Ground" groups=["onGround"]]
+y_sort_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="SunFactory" parent="." node_paths=PackedStringArray("targetNode") instance=ExtResource("5_27hj0")]
@@ -456,6 +431,18 @@ maxFallDistanceLimit = 460.0
 [node name="CollisionShape2D" parent="SunFactory" index="0"]
 position = Vector2(384, 0)
 shape = SubResource("RectangleShape2D_bj2dt")
+
+[node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("collisionBoxOwner", "collider")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("10_4sonw")
+collisionBoxOwner = NodePath("../GameManager")
+collider = NodePath("CollisionShape2D")
+enable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(-88, 301)
+shape = SubResource("RectangleShape2D_uvuny")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

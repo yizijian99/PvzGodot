@@ -35,9 +35,15 @@ public partial class Zombie : CharacterBody2D, HitHandler
         healthComponent.ZeroHealth += () => QueueFree();
         visualAbility.TargetInView += target =>
         {
-            if (target is HurtBox hurtBox && hurtBox?.GetCollisionBoxOwner() is Plant)
+            if (target is HurtBox hurtBox)
             {
-                animationPlayer.Play("Eat");
+                if (hurtBox?.GetCollisionBoxOwner() is Plant)
+                {
+                    animationPlayer.Play("Eat");
+                } else if (hurtBox?.GetCollisionBoxOwner() is GameManager)
+                {
+                    TakeABite();
+                }
             }
         };
         visualAbility.TargetOutOfView += () =>

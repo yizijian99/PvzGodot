@@ -39,3 +39,4 @@ naming/scene_name_casing=1
 2d_physics/layer_2="Plant"
 2d_physics/layer_3="Zombie"
 2d_physics/layer_4="Bullet"
+2d_physics/layer_5="Door"

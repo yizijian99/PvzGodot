@@ -471,6 +471,8 @@ size = Vector2(28, 107)
 
 [node name="Zombie" type="CharacterBody2D"]
 z_index = 10
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_c6e5p")
 moveVelocity = Vector2(28, 0)
 
@@ -509,6 +511,6 @@ shape = SubResource("RectangleShape2D_cmshg")
 [node name="RayCast2D" type="RayCast2D" parent="HurtBox"]
 position = Vector2(14, 40)
 target_position = Vector2(-40, 0)
-collision_mask = 2
+collision_mask = 18
 collide_with_areas = true
 collide_with_bodies = false

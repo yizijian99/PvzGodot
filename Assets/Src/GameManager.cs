@@ -2,7 +2,7 @@ using Godot;
 using GodotUtilities;
 
 [Scene]
-public partial class GameManager : Node
+public partial class GameManager : Node, HitHandler
 {
     [Export]
     private int _totalSuns;
@@ -80,5 +80,24 @@ public partial class GameManager : Node
             return;
         }
         selectedCard = card;
+    }
+
+    public HitRequest buildHitRequest()
+    {
+        return null;
+    }
+
+    public void DoHitRequest(HitRequest request, HitResponse response)
+    {
+        if (request != null)
+        {
+            // game over
+            GetTree().Quit();
+        }
+    }
+
+    public void DoHitResponse(HitResponse response)
+    {
+
     }
 }
