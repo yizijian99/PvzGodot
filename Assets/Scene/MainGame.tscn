@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=26 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Script" path="res://Assets/Src/MainGameManager.cs" id="1_wq1q3"]
 [ext_resource type="PackedScene" uid="uid://c322wipnf6i43" path="res://Assets/Scene/Ability/ProduceSunAbility.tscn" id="2_ew6c3"]
@@ -19,6 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="17_ka6xn"]
 [ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="18_ry1xr"]
 [ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="19_7u61r"]
+[ext_resource type="Script" path="res://Assets/Src/Common/StageReminder.cs" id="20_054vm"]
+[ext_resource type="Texture2D" uid="uid://boojjk6dqcxrj" path="res://Assets/Images/UI/StartReady.png" id="21_8yyht"]
+[ext_resource type="Texture2D" uid="uid://c1gmj42b78fqu" path="res://Assets/Images/UI/StartSet.png" id="22_0j7ce"]
+[ext_resource type="Texture2D" uid="uid://dilgnebwbrgme" path="res://Assets/Images/UI/StartPlant.png" id="23_s41ia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2dt"]
 size = Vector2(728, 1)
@@ -28,11 +32,12 @@ size = Vector2(32, 604)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("preparationStageCamera2D", "inGameStageCamera2D")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("preparationStageCamera2D", "inGameStageCamera2D", "stageReminder")]
 script = ExtResource("1_wq1q3")
 _totalSuns = 100
 preparationStageCamera2D = NodePath("../PreparationStageCamera2D")
 inGameStageCamera2D = NodePath("../InGameStageCamera2D")
+stageReminder = NodePath("../UI/StageReminder")
 
 [node name="ProduceSunAbility" parent="." node_paths=PackedStringArray("sunFactory") instance=ExtResource("2_ew6c3")]
 sunFactory = NodePath("../SunFactory")
@@ -500,6 +505,19 @@ cardName = "Sunflower"
 preview = ExtResource("18_ry1xr")
 plantScene = ExtResource("19_7u61r")
 cost = 50
+
+[node name="StageReminder" type="TextureRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_054vm")
+startReady = ExtResource("21_8yyht")
+startSet = ExtResource("22_0j7ce")
+startPlant = ExtResource("23_s41ia")
 
 [node name="PreparationStageCamera2D" type="Camera2D" parent="."]
 position = Vector2(780, 300)

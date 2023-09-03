@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using GodotUtilities;
 
@@ -21,9 +22,11 @@ public partial class CameraTransition : Node
         camera2D.Enabled = false;
     }
 
-    public void TransitionCamera2D(Camera2D from, Camera2D to, float duration = 1f)
+    public async void TransitionCamera2D(Camera2D from, Camera2D to, float duration = 1f, Action action = null)
     {
         if (transitioning) return;
+
+        transitioning = true;
 
         // 开启全局摄像机
         camera2D.Enabled = true;
@@ -39,26 +42,29 @@ public partial class CameraTransition : Node
         // 设置全局摄像机为当前摄像机
         camera2D.MakeCurrent();
 
-        transitioning = true;
-
         // 创建补间动画
         Tween tween = CreateTween();
         // 移动全局摄像机到目标摄像机的位置
         tween.SetTrans(Tween.TransitionType.Cubic);
         tween.SetEase(Tween.EaseType.InOut);
+        tween.SetParallel();
         tween.TweenProperty(camera2D, "global_transform", to.GlobalTransform, duration);
         tween.TweenProperty(camera2D, "zoom", to.Zoom, duration);
-        tween.TweenProperty(camera2D, "offset", to.Offset, duration);
+        Tweener tweener = tween.TweenProperty(camera2D, "offset", to.Offset, duration);
         // 等待补间动画完成
-        tween.TweenCallback(Callable.From(() =>
+        await ToSignal(tweener, Tweener.SignalName.Finished);
+
+        // 设置目标摄像机为当前摄像机
+        to.MakeCurrent();
+
+        // 关闭全局摄像机
+        camera2D.Enabled = false;
+
+        transitioning = false;
+
+        if (action != null)
         {
-            // 设置目标摄像机为当前摄像机
-            to.MakeCurrent();
-
-            transitioning = false;
-
-            // 关闭全局摄像机
-            camera2D.Enabled = false;
-        }));
+            action.Invoke();
+        }
     }
 }
