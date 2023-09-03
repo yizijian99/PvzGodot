@@ -5,7 +5,7 @@ using GodotUtilities;
 public partial class CameraTransition : Node
 {
     [Node("Camera2D")]
-    private Camera2D camera2D;  // È«¾ÖÉãÏñ»ú
+    private Camera2D camera2D;  // å…¨å±€æ‘„åƒæœº
 
     public static CameraTransition Instance { get; private set; }
 
@@ -17,7 +17,7 @@ public partial class CameraTransition : Node
         WireNodes();
         Instance = this;
 
-        // ¹Ø±ÕÈ«¾ÖÉãÏñ»ú£¬·ÀÖ¹²»ĞèÒªÉãÏñ»úµÄ³¡¾°ÊÜµ½È«¾ÖÉãÏñ»úµÄÓ°Ïì
+        // å…³é—­å…¨å±€æ‘„åƒæœºï¼Œé˜²æ­¢ä¸éœ€è¦æ‘„åƒæœºçš„åœºæ™¯å—åˆ°å…¨å±€æ‘„åƒæœºçš„å½±å“
         camera2D.Enabled = false;
     }
 
@@ -25,39 +25,39 @@ public partial class CameraTransition : Node
     {
         if (transitioning) return;
 
-        // ¿ªÆôÈ«¾ÖÉãÏñ»ú
+        // å¼€å¯å…¨å±€æ‘„åƒæœº
         camera2D.Enabled = true;
 
-        // ¸´ÖÆÆğÊ¼ÉãÏñ»úµÄÊôĞÔ
+        // å¤åˆ¶èµ·å§‹æ‘„åƒæœºçš„å±æ€§
         camera2D.Zoom = from.Zoom;
         camera2D.Offset = from.Offset;
         camera2D.LightMask = from.LightMask;
 
-        // ½«È«¾ÖÉãÏñ»úÒÆ¶¯µ½ÆğÊ¼ÉãÏñ»úµÄÎ»ÖÃ
+        // å°†å…¨å±€æ‘„åƒæœºç§»åŠ¨åˆ°èµ·å§‹æ‘„åƒæœºçš„ä½ç½®
         camera2D.GlobalTransform = from.GlobalTransform;
 
-        // ÉèÖÃÈ«¾ÖÉãÏñ»úÎªµ±Ç°ÉãÏñ»ú
+        // è®¾ç½®å…¨å±€æ‘„åƒæœºä¸ºå½“å‰æ‘„åƒæœº
         camera2D.MakeCurrent();
 
         transitioning = true;
 
-        // ´´½¨²¹¼ä¶¯»­
+        // åˆ›å»ºè¡¥é—´åŠ¨ç”»
         Tween tween = CreateTween();
-        // ÒÆ¶¯È«¾ÖÉãÏñ»úµ½Ä¿±êÉãÏñ»úµÄÎ»ÖÃ
+        // ç§»åŠ¨å…¨å±€æ‘„åƒæœºåˆ°ç›®æ ‡æ‘„åƒæœºçš„ä½ç½®
         tween.SetTrans(Tween.TransitionType.Cubic);
         tween.SetEase(Tween.EaseType.InOut);
         tween.TweenProperty(camera2D, "global_transform", to.GlobalTransform, duration);
         tween.TweenProperty(camera2D, "zoom", to.Zoom, duration);
         tween.TweenProperty(camera2D, "offset", to.Offset, duration);
-        // µÈ´ı²¹¼ä¶¯»­Íê³É
+        // ç­‰å¾…è¡¥é—´åŠ¨ç”»å®Œæˆ
         tween.TweenCallback(Callable.From(() =>
         {
-            // ÉèÖÃÄ¿±êÉãÏñ»úÎªµ±Ç°ÉãÏñ»ú
+            // è®¾ç½®ç›®æ ‡æ‘„åƒæœºä¸ºå½“å‰æ‘„åƒæœº
             to.MakeCurrent();
 
             transitioning = false;
 
-            // ¹Ø±ÕÈ«¾ÖÉãÏñ»ú
+            // å…³é—­å…¨å±€æ‘„åƒæœº
             camera2D.Enabled = false;
         }));
     }
