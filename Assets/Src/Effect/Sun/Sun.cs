@@ -7,8 +7,16 @@ public partial class Sun : RigidBody2D
     [Export]
     public int value { get; private set; } = 25;
 
+    [Export]
+    public float surviveTime { get; private set; }
+
     [Node("Control")]
     protected Control control;
+
+    [Node("Timer")]
+    protected Timer timer;
+
+    private bool land = false;
 
     public float fallDistanceLimit;
 
@@ -18,6 +26,7 @@ public partial class Sun : RigidBody2D
         WireNodes();
 
         control.GuiInput += OnControlGuiInput;
+        timer.Timeout += () => QueueFree();
     }
 
     public override void _Process(double delta)
@@ -28,10 +37,16 @@ public partial class Sun : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if (LinearVelocity.Y > 0 && Position.Y >= fallDistanceLimit)
+        if (!land && LinearVelocity.Y > 0 && Position.Y >= fallDistanceLimit)
         {
+            land = true;
             GravityScale = 0;
             LinearVelocity = Vector2.Zero;
+            if (surviveTime > 0)
+            {
+                timer.WaitTime = surviveTime;
+                timer.Start();
+            }
         }
     }
 
