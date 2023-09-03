@@ -36,6 +36,12 @@ public partial class MainGameManager : Node, HitHandler
         }
     }
 
+    [Export]
+    private Camera2D preparationStageCamera2D;
+
+    [Export]
+    private Camera2D inGameStageCamera2D;
+
     public override void _Ready()
     {
         base._Ready();
@@ -46,6 +52,9 @@ public partial class MainGameManager : Node, HitHandler
         SignalBus.Instance.Ground_GridBeClicked += OnGroundGridBeClicked;
         SignalBus.Instance.Card_BeClicked += OnCardBeClicked;
         SignalBus.Instance.TotalSunsLabel_NodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_TotalSunsChanged, _totalSuns, _totalSuns);
+
+        preparationStageCamera2D.MakeCurrent();
+        CameraTransition.Instance.TransitionCamera2D(preparationStageCamera2D, inGameStageCamera2D, 2f);
     }
 
     public override void _Process(double delta)

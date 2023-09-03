@@ -28,9 +28,11 @@ size = Vector2(32, 604)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="."]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("preparationStageCamera2D", "inGameStageCamera2D")]
 script = ExtResource("1_wq1q3")
 _totalSuns = 100
+preparationStageCamera2D = NodePath("../PreparationStageCamera2D")
+inGameStageCamera2D = NodePath("../InGameStageCamera2D")
 
 [node name="ProduceSunAbility" parent="." node_paths=PackedStringArray("sunFactory") instance=ExtResource("2_ew6c3")]
 sunFactory = NodePath("../SunFactory")
@@ -444,16 +446,10 @@ enable = true
 position = Vector2(-88, 301)
 shape = SubResource("RectangleShape2D_uvuny")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Chooser" type="Control" parent="UI"]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 0
 offset_left = 10.0
 offset_right = 1180.0
@@ -504,6 +500,12 @@ cardName = "Sunflower"
 preview = ExtResource("18_ry1xr")
 plantScene = ExtResource("19_7u61r")
 cost = 50
+
+[node name="PreparationStageCamera2D" type="Camera2D" parent="."]
+position = Vector2(780, 300)
+
+[node name="InGameStageCamera2D" type="Camera2D" parent="."]
+position = Vector2(400, 300)
 
 [editable path="SunFactory"]
 [editable path="UI/Chooser/CardList/CardPeashooter"]
