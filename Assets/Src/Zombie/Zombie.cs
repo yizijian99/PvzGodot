@@ -42,7 +42,8 @@ public partial class Zombie : CharacterBody2D, HitHandler
                     animationPlayer.Play("Eat");
                 } else if (hurtBox?.GetCollisionBoxOwner() is MainGameManager)
                 {
-                    TakeABite();
+                    // TakeABite();
+                    QueueFree();
                 }
             }
         };

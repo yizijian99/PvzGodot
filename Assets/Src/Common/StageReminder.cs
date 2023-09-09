@@ -1,17 +1,13 @@
 using Godot;
+using Godot.Collections;
 using GodotUtilities;
 
 [Scene]
 public partial class StageReminder : TextureRect
 {
-    [Export]
-    private Texture2D startReady;
 
     [Export]
-    private Texture2D startSet;
-
-    [Export]
-    private Texture2D startPlant;
+    private Array<Texture2D> texture2DList;
 
     public override void _Ready()
     {
@@ -24,16 +20,17 @@ public partial class StageReminder : TextureRect
         base._Process(delta);
     }
 
-    public void PlayStartAnimation()
+    public async void PlayStartAnimation()
     {
         Tween tween = CreateTween();
-        tween.TweenInterval(0.5);
-        tween.TweenCallback(Callable.From(() => this.Texture = startReady));
-        tween.TweenInterval(0.5);
-        tween.TweenCallback(Callable.From(() => this.Texture = startSet));
-        tween.TweenInterval(0.5);
-        tween.TweenCallback(Callable.From(() => this.Texture = startPlant));
+        foreach (Texture2D item in texture2DList)
+        {
+            tween.TweenInterval(0.5);
+            tween.TweenCallback(Callable.From(() => this.Texture = item));
+        }
         tween.TweenInterval(0.5);
         tween.TweenCallback(Callable.From(() => this.Texture = null));
+        await ToSignal(tween, Tween.SignalName.Finished);
+        ScreenRect.Instance.Disable();
     }
 }

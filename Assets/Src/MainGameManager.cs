@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using GodotUtilities;
 
@@ -37,6 +38,9 @@ public partial class MainGameManager : Node, HitHandler
     }
 
     [Export]
+    private Camera2D startStageCamera2D;
+
+    [Export]
     private Camera2D preparationStageCamera2D;
 
     [Export]
@@ -44,6 +48,15 @@ public partial class MainGameManager : Node, HitHandler
 
     [Export]
     private StageReminder stageReminder;
+
+    [Export]
+    private Chooser chooser;
+
+    [Export]
+    private Control cardSelector;
+
+    [Export]
+    private BaseButton letsRockButton;
 
     public override void _Ready()
     {
@@ -55,9 +68,20 @@ public partial class MainGameManager : Node, HitHandler
         SignalBus.Instance.Ground_GridBeClicked += OnGroundGridBeClicked;
         SignalBus.Instance.Card_BeClicked += OnCardBeClicked;
         SignalBus.Instance.TotalSunsLabel_NodeReady += () => SignalBus.Instance.EmitSignal(SignalBus.SignalName.Game_TotalSunsChanged, _totalSuns, _totalSuns);
+        letsRockButton.Pressed += OnLetsRockButtonPressed;
 
-        preparationStageCamera2D.MakeCurrent();
-        CameraTransition.Instance.TransitionCamera2D(preparationStageCamera2D, inGameStageCamera2D, 2f, () => stageReminder.PlayStartAnimation());
+        ScreenRect.Instance.Enable();
+        startStageCamera2D.MakeCurrent();
+        CameraTransition.Instance.TransitionCamera2D(startStageCamera2D, preparationStageCamera2D, 2.5f, async () =>
+        {
+            double duration = 0.2;
+            Tween tween = CreateTween();
+            tween.SetParallel();
+            tween.TweenProperty(chooser, (string)Node2D.PropertyName.Position, new Vector2(chooser.Position.X, 0), duration);
+            tween.TweenProperty(cardSelector, (string)Node2D.PropertyName.Position, new Vector2(cardSelector.Position.X, 90), duration);
+            await ToSignal(tween, Tween.SignalName.Finished);
+            ScreenRect.Instance.Disable();
+        });
     }
 
     public override void _Process(double delta)
@@ -94,6 +118,11 @@ public partial class MainGameManager : Node, HitHandler
         selectedCard = card;
     }
 
+    private void OnLetsRockButtonPressed()
+    {
+        LetsRock();
+    }
+
     public HitRequest buildHitRequest()
     {
         return null;
@@ -104,12 +133,25 @@ public partial class MainGameManager : Node, HitHandler
         if (request != null)
         {
             // game over
-            GetTree().Quit();
+            // GetTree().Quit();
         }
     }
 
     public void DoHitResponse(HitResponse response)
     {
 
+    }
+
+    private async void LetsRock()
+    {
+        ScreenRect.Instance.Enable();
+        double duration = 0.2;
+        Tween tween = CreateTween();
+        tween.TweenProperty(cardSelector, (string)Node2D.PropertyName.Position, new Vector2(cardSelector.Position.X, 600), duration);
+        await ToSignal(tween, Tween.SignalName.Finished);
+        CameraTransition.Instance.TransitionCamera2D(preparationStageCamera2D, inGameStageCamera2D, 2f, () =>
+        {
+            stageReminder.PlayStartAnimation();
+        });
     }
 }

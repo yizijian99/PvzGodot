@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dunpouac3gyhi"]
+[gd_scene load_steps=21 format=3 uid="uid://dunpouac3gyhi"]
 
 [ext_resource type="Script" path="res://Assets/Src/MainGameManager.cs" id="1_wq1q3"]
 [ext_resource type="PackedScene" uid="uid://c322wipnf6i43" path="res://Assets/Scene/Ability/ProduceSunAbility.tscn" id="2_ew6c3"]
@@ -12,13 +12,8 @@
 [ext_resource type="Script" path="res://Assets/Src/Common/HurtBox.cs" id="10_l461f"]
 [ext_resource type="Script" path="res://Assets/Src/UI/Chooser.cs" id="11_u80hx"]
 [ext_resource type="Texture2D" uid="uid://b4tibj5171cow" path="res://Assets/Images/UI/ChooserBackground.png" id="12_dhfdk"]
-[ext_resource type="PackedScene" uid="uid://cwuu4ap8po0yd" path="res://Assets/Scene/Card/Card.tscn" id="13_mkj71"]
-[ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="14_ke0je"]
-[ext_resource type="Texture2D" uid="uid://chajmi6fodgds" path="res://Assets/Images/Plants/Peashooter/Peashooter_1.png" id="15_wcbbl"]
-[ext_resource type="PackedScene" uid="uid://ci5rg44obvq3" path="res://Assets/Scene/Plant/Peashooter.tscn" id="16_5nwrv"]
-[ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="17_ka6xn"]
-[ext_resource type="Texture2D" uid="uid://5o827w525q82" path="res://Assets/Images/Plants/SunFlower/SunFlower_1.png" id="18_ry1xr"]
-[ext_resource type="PackedScene" uid="uid://bcrxu2qa52s0a" path="res://Assets/Scene/Plant/Sunflower.tscn" id="19_7u61r"]
+[ext_resource type="Texture2D" uid="uid://btm4qboiw2ais" path="res://Assets/Images/UI/card_select_dialog.png" id="13_5p75k"]
+[ext_resource type="Texture2D" uid="uid://ml82m76ofus0" path="res://Assets/Images/UI/StartButton.png" id="14_dqd1s"]
 [ext_resource type="Script" path="res://Assets/Src/Common/StageReminder.cs" id="20_054vm"]
 [ext_resource type="Texture2D" uid="uid://boojjk6dqcxrj" path="res://Assets/Images/UI/StartReady.png" id="21_8yyht"]
 [ext_resource type="Texture2D" uid="uid://c1gmj42b78fqu" path="res://Assets/Images/UI/StartSet.png" id="22_0j7ce"]
@@ -32,12 +27,16 @@ size = Vector2(32, 604)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("preparationStageCamera2D", "inGameStageCamera2D", "stageReminder")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("startStageCamera2D", "preparationStageCamera2D", "inGameStageCamera2D", "stageReminder", "chooser", "cardSelector", "letsRockButton")]
 script = ExtResource("1_wq1q3")
 _totalSuns = 100
+startStageCamera2D = NodePath("../StartStageCamera2D")
 preparationStageCamera2D = NodePath("../PreparationStageCamera2D")
 inGameStageCamera2D = NodePath("../InGameStageCamera2D")
 stageReminder = NodePath("../UI/StageReminder")
+chooser = NodePath("../UI/Chooser")
+cardSelector = NodePath("../UI/CardSelector")
+letsRockButton = NodePath("../UI/CardSelector/LetsRockButton")
 
 [node name="ProduceSunAbility" parent="." node_paths=PackedStringArray("sunFactory") instance=ExtResource("2_ew6c3")]
 sunFactory = NodePath("../SunFactory")
@@ -448,7 +447,7 @@ collider = NodePath("CollisionShape2D")
 enable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(-88, 301)
+position = Vector2(-118, 301)
 shape = SubResource("RectangleShape2D_uvuny")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -456,9 +455,9 @@ shape = SubResource("RectangleShape2D_uvuny")
 [node name="Chooser" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 10.0
-offset_right = 1180.0
-offset_bottom = 90.0
+offset_top = -95.0
+offset_right = 1170.0
+offset_bottom = -5.0
 script = ExtResource("11_u80hx")
 
 [node name="Bg" type="TextureRect" parent="UI/Chooser"]
@@ -490,21 +489,48 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CardPeashooter" parent="UI/Chooser/CardList" instance=ExtResource("13_mkj71")]
-layout_mode = 2
-texture = ExtResource("14_ke0je")
-cardName = "Peashooter"
-preview = ExtResource("15_wcbbl")
-plantScene = ExtResource("16_5nwrv")
-cost = 100
+[node name="CardSelector" type="Control" parent="UI"]
+custom_minimum_size = Vector2(465, 554)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 465.0
+offset_bottom = 554.0
+grow_vertical = 0
 
-[node name="CardSunflower" parent="UI/Chooser/CardList" instance=ExtResource("13_mkj71")]
-layout_mode = 2
-texture = ExtResource("17_ka6xn")
-cardName = "Sunflower"
-preview = ExtResource("18_ry1xr")
-plantScene = ExtResource("19_7u61r")
-cost = 50
+[node name="Bg" type="TextureRect" parent="UI/CardSelector"]
+layout_mode = 1
+offset_right = 465.0
+offset_bottom = 554.0
+texture = ExtResource("13_5p75k")
+
+[node name="CardList" type="HBoxContainer" parent="UI/CardSelector"]
+custom_minimum_size = Vector2(428, 490)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 18.0
+offset_top = 44.0
+offset_right = 446.0
+offset_bottom = 534.0
+grow_horizontal = 2
+
+[node name="LetsRockButton" type="TextureButton" parent="UI/CardSelector"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 470.0
+offset_right = 77.0
+offset_bottom = 510.0
+grow_horizontal = 2
+texture_normal = ExtResource("14_dqd1s")
+texture_pressed = ExtResource("14_dqd1s")
+texture_hover = ExtResource("14_dqd1s")
+texture_disabled = ExtResource("14_dqd1s")
 
 [node name="StageReminder" type="TextureRect" parent="UI"]
 anchors_preset = 8
@@ -515,9 +541,10 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("20_054vm")
-startReady = ExtResource("21_8yyht")
-startSet = ExtResource("22_0j7ce")
-startPlant = ExtResource("23_s41ia")
+texture2DList = Array[Texture2D]([ExtResource("21_8yyht"), ExtResource("22_0j7ce"), ExtResource("23_s41ia")])
+
+[node name="StartStageCamera2D" type="Camera2D" parent="."]
+position = Vector2(180, 300)
 
 [node name="PreparationStageCamera2D" type="Camera2D" parent="."]
 position = Vector2(780, 300)
@@ -526,5 +553,3 @@ position = Vector2(780, 300)
 position = Vector2(400, 300)
 
 [editable path="SunFactory"]
-[editable path="UI/Chooser/CardList/CardPeashooter"]
-[editable path="UI/Chooser/CardList/CardSunflower"]

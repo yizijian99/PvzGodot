@@ -62,9 +62,6 @@ public partial class CameraTransition : Node
 
         transitioning = false;
 
-        if (action != null)
-        {
-            action.Invoke();
-        }
+        action?.Invoke();
     }
 }
