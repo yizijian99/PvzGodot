@@ -13,20 +13,27 @@ public partial class CardBar : TextureRect
 
     public int MaxCapacity { get; private set; } = 8;
 
+    private int length;
+
+    public int Length => length;
+
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
+
+        hBoxContainer.ChildEnteredTree += OnHBoxContainerChildEnteredTree;
+        GetLength();
     }
 
-    public int Length()
+    private void GetLength()
     {
-        return hBoxContainer.GetChildrenOfType<BaseCard>().Count();
+        length = hBoxContainer.GetChildrenOfType<BaseCard>().Count();
     }
 
     public bool Add(BaseCard card)
     {
-        if (Length() >= MaxCapacity)
+        if (Length >= MaxCapacity)
         {
             return false;
         }
@@ -37,6 +44,24 @@ public partial class CardBar : TextureRect
 
     public void Remove(BaseCard card)
     {
+        card.TreeExited += GetLength;
         hBoxContainer.RemoveChild(card);
+        card.QueueFree();
+    }
+
+    public void OnHBoxContainerChildEnteredTree(Node node)
+    {
+        if (node is BaseCard)
+        {
+            GetLength();
+        }
+    }
+
+    public void EnterCombatStage()
+    {
+        foreach (BaseCard card in hBoxContainer.GetChildrenOfType<BaseCard>())
+        {
+            card.State = BaseCard.CardState.Combat;
+        }
     }
 }

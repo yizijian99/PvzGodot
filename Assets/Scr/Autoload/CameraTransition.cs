@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Threading.Tasks;
+using Godot;
 using GodotUtilities;
 
 namespace Pvz.Assets.Scr.Autoload;
@@ -23,7 +24,7 @@ public partial class CameraTransition : Node
         globalCamera2D.Enabled = false;
     }
 
-    public async void TransitionCamera2D(Camera2D camera, Node2D to, double duration = 1)
+    public async Task TransitionCamera2D(Camera2D camera, Node2D to, double duration = 1)
     {
         if (transitioning) return;
 

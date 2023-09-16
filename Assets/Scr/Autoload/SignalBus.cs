@@ -21,4 +21,7 @@ public partial class SignalBus : Node
 
 	[Signal]
 	public delegate void CardToCandidateEventHandler(BaseCard card);
+
+	[Signal]
+	public delegate void MainGameStartedEventHandler();
 }

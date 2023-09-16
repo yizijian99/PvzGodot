@@ -58,6 +58,7 @@ public partial class BaseCard : TextureButton
     {
         Default,
         Candidate,
-        ReadyToCombat
+        ReadyToCombat,
+        Combat
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
+using Godot.Collections;
 using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
@@ -28,6 +30,12 @@ public sealed partial class MainGameManager : Node
     private Marker2D preparationCameraMarker;
 
     [Export]
+    private Marker2D cardBarMarker;
+
+    [Export]
+    private Marker2D cardPoolMarker;
+
+    [Export]
     private CanvasLayer hud;
 
     [Export]
@@ -35,6 +43,15 @@ public sealed partial class MainGameManager : Node
 
     [Export]
     private CardPool cardPool;
+
+    [Export]
+    private BaseButton letsRockButton;
+
+    [Export]
+    private TextureRect reminder;
+
+    [Export]
+    private Array<Texture> combatStageRemindTextures;
 
     private readonly Queue<Action> nextFrameActionQueue = new();
 
@@ -46,6 +63,7 @@ public sealed partial class MainGameManager : Node
         sceneRoot.Ready += EnterPreparationStage;
         SignalBus.Instance.CardToCombat += OnCardToCombat;
         SignalBus.Instance.CardToCandidate += OnCardToCandidate;
+        letsRockButton.Pressed += LetsRock;
 
         camera2D.GlobalPosition = startCameraMarker.GlobalPosition;
     }
@@ -57,16 +75,41 @@ public sealed partial class MainGameManager : Node
         {
             nextFrameActionQueue.Dequeue()?.Invoke();
         }
+
+        UpdateLetsRockButton();
     }
 
-    private void EnterPreparationStage()
+    private async void EnterPreparationStage()
     {
-        CameraTransition.Instance.TransitionCamera2D(camera2D, preparationCameraMarker, 2.5);
+        await CameraTransition.Instance.TransitionCamera2D(camera2D, preparationCameraMarker, 2.5);
+        await CardControlAnimation();
+    }
+
+    private async Task EnterCombatStage()
+    {
+        cardBar.EnterCombatStage();
+        await CardControlAnimation();
+        await CameraTransition.Instance.TransitionCamera2D(camera2D, combatCameraMarker, 1.5);
+    }
+
+    private async Task CardControlAnimation()
+    {
+        double duration = 0.15;
+        Vector2 cardBarMarkerGlobalPosition = cardBarMarker.GlobalPosition;
+        Vector2 cardPoolMarkerGlobalPosition = cardPoolMarker.GlobalPosition;
+        cardPoolMarker.GlobalPosition = cardPool.GlobalPosition;
+        Tween tween = CreateTween();
+        tween.SetParallel();
+        tween.TweenProperty(cardBar, Node2D.PropertyName.GlobalPosition.ToString(), cardBarMarkerGlobalPosition,
+            duration);
+        tween.TweenProperty(cardPool, Node2D.PropertyName.GlobalPosition.ToString(), cardPoolMarkerGlobalPosition,
+            duration);
+        await ToSignal(tween, Tween.SignalName.Finished);
     }
 
     private void OnCardToCombat(BaseCard card)
     {
-        if (cardBar.Length() >= cardBar.MaxCapacity)
+        if (cardBar.Length >= cardBar.MaxCapacity)
         {
             return;
         }
@@ -90,14 +133,14 @@ public sealed partial class MainGameManager : Node
 
     private void OnCardToCandidate(BaseCard card)
     {
-        BaseCard first = cardPool.GetAllCard()
+        BaseCard first = cardPool.GetAll()
             .First(v => v.SceneFilePath == card.SceneFilePath);
         card.Modulate = new Color(card.Modulate, 0);
         card.State = BaseCard.CardState.Default;
         CardTransitionAnimation(card, first, 0.2, () =>
         {
             first.Disabled = false;
-            card.QueueFreeDeferred();
+            cardBar.Remove(card);
         });
     }
 
@@ -117,9 +160,32 @@ public sealed partial class MainGameManager : Node
             tween.TweenCallback(Callable.From(() =>
             {
                 sprite2D.Visible = false;
-                sprite2D.QueueFreeDeferred();
+                sprite2D.QueueFree();
                 action?.Invoke();
             }));
         });
+    }
+
+    public void UpdateLetsRockButton()
+    {
+        letsRockButton.Disabled = cardBar.Length < cardBar.MaxCapacity;
+        letsRockButton.Modulate = new Color(letsRockButton.Modulate, letsRockButton.Disabled ? 0.7f : 1);
+    }
+
+    public async void LetsRock()
+    {
+        await EnterCombatStage();
+
+        double interval = 0.5;
+        Tween tween = CreateTween();
+        foreach (Texture texture in combatStageRemindTextures)
+        {
+            tween.TweenProperty(reminder, TextureRect.PropertyName.Texture.ToString(), texture, 0);
+            tween.TweenInterval(interval);
+        }
+        await ToSignal(tween, Tween.SignalName.Finished);
+        reminder.Texture = null;
+
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.MainGameStarted);
     }
 }

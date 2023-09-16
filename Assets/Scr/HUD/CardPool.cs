@@ -55,7 +55,7 @@ public partial class CardPool : TextureRect
         }
     }
 
-    public IEnumerable<BaseCard> GetAllCard()
+    public IEnumerable<BaseCard> GetAll()
     {
         return rows.GetChildren()
             .Where(node => node is HBoxContainer)

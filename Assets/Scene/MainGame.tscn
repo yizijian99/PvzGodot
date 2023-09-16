@@ -1,25 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://denrqt4hbuhlu"]
+[gd_scene load_steps=11 format=3 uid="uid://denrqt4hbuhlu"]
 
 [ext_resource type="Script" path="res://Assets/Scr/Manager/MainGameManager.cs" id="1_s5lx5"]
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_xhw7m"]
+[ext_resource type="Texture2D" uid="uid://boojjk6dqcxrj" path="res://Assets/Images/UI/StartReady.png" id="2_3a34j"]
 [ext_resource type="Texture2D" uid="uid://b4tibj5171cow" path="res://Assets/Images/UI/ChooserBackground.png" id="3_4vqlg"]
+[ext_resource type="Texture2D" uid="uid://c1gmj42b78fqu" path="res://Assets/Images/UI/StartSet.png" id="3_emgty"]
 [ext_resource type="Texture2D" uid="uid://btm4qboiw2ais" path="res://Assets/Images/UI/card_select_dialog.png" id="4_05j60"]
+[ext_resource type="Texture2D" uid="uid://dilgnebwbrgme" path="res://Assets/Images/UI/StartPlant.png" id="4_iggx3"]
 [ext_resource type="Script" path="res://Assets/Scr/HUD/CardBar.cs" id="4_oqfo6"]
 [ext_resource type="Texture2D" uid="uid://ml82m76ofus0" path="res://Assets/Images/UI/StartButton.png" id="5_1lxt8"]
 [ext_resource type="Script" path="res://Assets/Scr/HUD/CardPool.cs" id="6_7m7nd"]
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "hud", "cardBar", "cardPool")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "letsRockButton", "reminder")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
 startCameraMarker = NodePath("../StartCameraMarker")
 combatCameraMarker = NodePath("../CombatCameraMarker")
 preparationCameraMarker = NodePath("../PreparationCameraMarker")
+cardBarMarker = NodePath("../CardBarMarker")
+cardPoolMarker = NodePath("../CardPoolMarker")
 hud = NodePath("../HUD")
 cardBar = NodePath("../HUD/CardBar")
 cardPool = NodePath("../HUD/CardPool")
+letsRockButton = NodePath("../HUD/CardPool/LetsRock")
+reminder = NodePath("../HUD/Reminder")
+combatStageRemindTextures = Array[Texture]([ExtResource("2_3a34j"), ExtResource("3_emgty"), ExtResource("4_iggx3")])
 
 [node name="Bg" type="Sprite2D" parent="."]
 texture = ExtResource("1_xhw7m")
@@ -36,11 +44,16 @@ position = Vector2(620, 300)
 [node name="PreparationCameraMarker" type="Marker2D" parent="."]
 position = Vector2(1000, 300)
 
+[node name="CardBarMarker" type="Marker2D" parent="."]
+
+[node name="CardPoolMarker" type="Marker2D" parent="."]
+position = Vector2(0, 87)
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="CardBar" type="TextureRect" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -87.0
+offset_right = 522.0
 texture = ExtResource("3_4vqlg")
 script = ExtResource("4_oqfo6")
 
@@ -52,9 +65,9 @@ offset_right = 130.0
 offset_bottom = 78.0
 
 [node name="CardPool" type="TextureRect" parent="HUD"]
-offset_top = 87.0
+offset_top = 600.0
 offset_right = 465.0
-offset_bottom = 641.0
+offset_bottom = 1154.0
 scale = Vector2(1, 0.93)
 texture = ExtResource("4_05j60")
 script = ExtResource("6_7m7nd")
@@ -82,3 +95,16 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("5_1lxt8")
+
+[node name="Reminder" type="TextureRect" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
