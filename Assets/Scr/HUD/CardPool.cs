@@ -49,7 +49,6 @@ public partial class CardPool : TextureRect
             rows.AddChild(row);
             foreach (BaseCard card in list)
             {
-                card.State = BaseCard.CardState.Candidate;
                 row.AddChild(card);
             }
         }

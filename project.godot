@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalBus="*res://Assets/Scr/Autoload/SignalBus.cs"
 CameraTransition="*res://Assets/Scene/Autoload/CameraTransition.tscn"
+SceneTransitionMask="*res://Assets/Scene/Autoload/SceneTransitionMask.tscn"
 
 [display]
 

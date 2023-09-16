@@ -81,15 +81,23 @@ public sealed partial class MainGameManager : Node
 
     private async void EnterPreparationStage()
     {
+        SceneTransitionMask.Instance.Enable();
+        
         await CameraTransition.Instance.TransitionCamera2D(camera2D, preparationCameraMarker, 2.5);
         await CardControlAnimation();
+        
+        SceneTransitionMask.Instance.Disable();
     }
 
     private async Task EnterCombatStage()
     {
+        SceneTransitionMask.Instance.Enable();
+        
         cardBar.EnterCombatStage();
         await CardControlAnimation();
         await CameraTransition.Instance.TransitionCamera2D(camera2D, combatCameraMarker, 1.5);
+        
+        SceneTransitionMask.Instance.Disable();
     }
 
     private async Task CardControlAnimation()
@@ -105,6 +113,10 @@ public sealed partial class MainGameManager : Node
         tween.TweenProperty(cardPool, Node2D.PropertyName.GlobalPosition.ToString(), cardPoolMarkerGlobalPosition,
             duration);
         await ToSignal(tween, Tween.SignalName.Finished);
+        foreach (BaseCard card in cardPool.GetAll())
+        {
+            card.State = BaseCard.CardState.Candidate;
+        }
     }
 
     private void OnCardToCombat(BaseCard card)
@@ -176,6 +188,8 @@ public sealed partial class MainGameManager : Node
     {
         await EnterCombatStage();
 
+        SceneTransitionMask.Instance.Enable();
+        
         double interval = 0.5;
         Tween tween = CreateTween();
         foreach (Texture texture in combatStageRemindTextures)
@@ -185,6 +199,8 @@ public sealed partial class MainGameManager : Node
         }
         await ToSignal(tween, Tween.SignalName.Finished);
         reminder.Texture = null;
+        
+        SceneTransitionMask.Instance.Disable();
 
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.MainGameStarted);
     }
