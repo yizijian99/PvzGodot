@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://denrqt4hbuhlu"]
+[gd_scene load_steps=8 format=3 uid="uid://denrqt4hbuhlu"]
 
 [ext_resource type="Script" path="res://Assets/Scr/Manager/MainGameManager.cs" id="1_s5lx5"]
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_xhw7m"]
@@ -6,18 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://btm4qboiw2ais" path="res://Assets/Images/UI/card_select_dialog.png" id="4_05j60"]
 [ext_resource type="Script" path="res://Assets/Scr/HUD/CardBar.cs" id="4_oqfo6"]
 [ext_resource type="Texture2D" uid="uid://ml82m76ofus0" path="res://Assets/Images/UI/StartButton.png" id="5_1lxt8"]
-[ext_resource type="PackedScene" uid="uid://bralm5h28qmmp" path="res://Assets/Scene/Card/CardSquash.tscn" id="7_unxjv"]
-[ext_resource type="PackedScene" uid="uid://nobdfafhjgn6" path="res://Assets/Scene/Card/CardWallnut.tscn" id="8_e55be"]
-[ext_resource type="PackedScene" uid="uid://brmvpgbub5ews" path="res://Assets/Scene/Card/CardSnowpea.tscn" id="9_banir"]
-[ext_resource type="PackedScene" uid="uid://db4ygyd8oahq8" path="res://Assets/Scene/Card/CardChomper.tscn" id="10_s6xmk"]
-[ext_resource type="PackedScene" uid="uid://jutbib6m1ig4" path="res://Assets/Scene/Card/CardJalapeno.tscn" id="11_8yx4v"]
-[ext_resource type="PackedScene" uid="uid://cj1nlh3f3ah4u" path="res://Assets/Scene/Card/CardRepeater.tscn" id="12_jwg10"]
-[ext_resource type="PackedScene" uid="uid://bnpnagulfgcrt" path="res://Assets/Scene/Card/CardIceshroom.tscn" id="13_6usre"]
-[ext_resource type="PackedScene" uid="uid://dt2xly0e5gsed" path="res://Assets/Scene/Card/CardSpikeweed.tscn" id="14_2qmn4"]
+[ext_resource type="Script" path="res://Assets/Scr/HUD/CardPool.cs" id="6_7m7nd"]
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "hud", "cardBar", "cardPoolContainer")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "hud", "cardBar", "cardPool")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
@@ -26,7 +19,7 @@ combatCameraMarker = NodePath("../CombatCameraMarker")
 preparationCameraMarker = NodePath("../PreparationCameraMarker")
 hud = NodePath("../HUD")
 cardBar = NodePath("../HUD/CardBar")
-cardPoolContainer = NodePath("../HUD/CardPool/HBoxContainer")
+cardPool = NodePath("../HUD/CardPool")
 
 [node name="Bg" type="Sprite2D" parent="."]
 texture = ExtResource("1_xhw7m")
@@ -64,6 +57,16 @@ offset_right = 465.0
 offset_bottom = 641.0
 scale = Vector2(1, 0.93)
 texture = ExtResource("4_05j60")
+script = ExtResource("6_7m7nd")
+cardSceneDir = "res://Assets/Scene/Card"
+excludeCardScene = "res://Assets/Scene/Card/Card.tscn"
+
+[node name="Rows" type="VBoxContainer" parent="HUD/CardPool"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 40.0
+offset_right = 18.0
+offset_bottom = 40.0
 
 [node name="LetsRock" type="TextureButton" parent="HUD/CardPool"]
 layout_mode = 1
@@ -79,42 +82,3 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("5_1lxt8")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CardPool"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 40.0
-offset_right = 446.0
-offset_bottom = 110.0
-
-[node name="CardSquash" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("7_unxjv")]
-layout_mode = 2
-State = 1
-
-[node name="CardWallnut" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("8_e55be")]
-layout_mode = 2
-State = 1
-
-[node name="CardSnowpea" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("9_banir")]
-layout_mode = 2
-State = 1
-
-[node name="CardChomper" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("10_s6xmk")]
-layout_mode = 2
-State = 1
-
-[node name="CardJalapeno" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("11_8yx4v")]
-layout_mode = 2
-State = 1
-
-[node name="CardRepeater" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("12_jwg10")]
-layout_mode = 2
-State = 1
-
-[node name="CardIceshroom" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("13_6usre")]
-layout_mode = 2
-State = 1
-
-[node name="CardSpikeweed" parent="HUD/CardPool/HBoxContainer" instance=ExtResource("14_2qmn4")]
-layout_mode = 2
-State = 1

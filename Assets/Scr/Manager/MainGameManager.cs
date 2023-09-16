@@ -34,7 +34,7 @@ public sealed partial class MainGameManager : Node
     private CardBar cardBar;
 
     [Export]
-    private Control cardPoolContainer;
+    private CardPool cardPool;
 
     private readonly Queue<Action> nextFrameActionQueue = new();
 
@@ -90,9 +90,10 @@ public sealed partial class MainGameManager : Node
 
     private void OnCardToCandidate(BaseCard card)
     {
-        BaseCard first = cardPoolContainer.GetChildrenOfType<BaseCard>()
+        BaseCard first = cardPool.GetAllCard()
             .First(v => v.SceneFilePath == card.SceneFilePath);
         card.Modulate = new Color(card.Modulate, 0);
+        card.State = BaseCard.CardState.Default;
         CardTransitionAnimation(card, first, 0.2, () =>
         {
             first.Disabled = false;
