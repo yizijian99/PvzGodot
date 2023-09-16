@@ -22,7 +22,7 @@ public partial class CardBar : TextureRect
         base._Ready();
         WireNodes();
 
-        hBoxContainer.ChildEnteredTree += OnHBoxContainerChildEnteredTree;
+        hBoxContainer.ChildOrderChanged += GetLength;
         GetLength();
     }
 
@@ -44,17 +44,8 @@ public partial class CardBar : TextureRect
 
     public void Remove(BaseCard card)
     {
-        card.TreeExited += GetLength;
         hBoxContainer.RemoveChild(card);
         card.QueueFree();
-    }
-
-    public void OnHBoxContainerChildEnteredTree(Node node)
-    {
-        if (node is BaseCard)
-        {
-            GetLength();
-        }
     }
 
     public void EnterCombatStage()
