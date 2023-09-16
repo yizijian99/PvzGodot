@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://djw6pdkc6t6v2"]
-
-[ext_resource type="Script" path="res://Assets/Src/Global/GlobalExport.cs" id="1_uvit8"]
-[ext_resource type="PackedScene" uid="uid://djy1t42px1ngb" path="res://Assets/Scene/Effect/Sun/Sun.tscn" id="2_p7iak"]
-
-[node name="GlobalExport" type="Node"]
-script = ExtResource("1_uvit8")
-sun = ExtResource("2_p7iak")
