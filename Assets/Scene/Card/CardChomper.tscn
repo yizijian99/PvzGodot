@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://db4ygyd8oahq8"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_mw7c4"]
+[ext_resource type="Texture2D" uid="uid://85y2cnbrdt67" path="res://Assets/Images/Card/card_chomper.png" id="2_jk5jx"]
+
+[node name="CardChomper" instance=ExtResource("1_mw7c4")]
+texture_normal = ExtResource("2_jk5jx")

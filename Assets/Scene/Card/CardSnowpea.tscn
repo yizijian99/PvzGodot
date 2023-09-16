@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://brmvpgbub5ews"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_olsrb"]
+[ext_resource type="Texture2D" uid="uid://csfq733thajjx" path="res://Assets/Images/Card/card_snowpea.png" id="2_ncw5f"]
+
+[node name="CardSnowpea" instance=ExtResource("1_olsrb")]
+texture_normal = ExtResource("2_ncw5f")

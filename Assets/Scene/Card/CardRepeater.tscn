@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj1nlh3f3ah4u"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_1kmm3"]
+[ext_resource type="Texture2D" uid="uid://c4qejlcqugnln" path="res://Assets/Images/Card/card_repeaterpea.png" id="2_xn8cp"]
+
+[node name="CardRepeater" instance=ExtResource("1_1kmm3")]
+texture_normal = ExtResource("2_xn8cp")

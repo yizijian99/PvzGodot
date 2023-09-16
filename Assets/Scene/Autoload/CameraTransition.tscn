@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpyxv0n6vka1a"]
+
+[ext_resource type="Script" path="res://Assets/Scr/Autoload/CameraTransition.cs" id="1_ego38"]
+
+[node name="CameraTransition" type="Node"]
+script = ExtResource("1_ego38")
+
+[node name="Camera2D" type="Camera2D" parent="."]

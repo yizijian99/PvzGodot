@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://geq7sbhjypjp"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_i5pyo"]
+[ext_resource type="Texture2D" uid="uid://fa5kni0kbdqm" path="res://Assets/Images/Card/card_sunflower.png" id="2_yss0s"]
+
+[node name="CardSunflower" instance=ExtResource("1_i5pyo")]
+texture_normal = ExtResource("2_yss0s")

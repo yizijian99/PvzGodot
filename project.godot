@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Pvz"
-run/main_scene="res://Assets/Scene/InGame.tscn"
+run/main_scene="res://Assets/Scene/MainGame.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*res://Assets/Src/Global/EventBus.cs"
-GlobalExport="*res://Assets/Scene/Global/GlobalExport.tscn"
+SignalBus="*res://Assets/Scr/Autoload/SignalBus.cs"
+CameraTransition="*res://Assets/Scene/Autoload/CameraTransition.tscn"
 
 [display]
 

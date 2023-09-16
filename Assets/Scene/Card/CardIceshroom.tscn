@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnpnagulfgcrt"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_7lk6v"]
+[ext_resource type="Texture2D" uid="uid://ccc0ppn8juas3" path="res://Assets/Images/Card/card_iceshroom.png" id="2_s8f3w"]
+
+[node name="CardIceshroom" instance=ExtResource("1_7lk6v")]
+texture_normal = ExtResource("2_s8f3w")

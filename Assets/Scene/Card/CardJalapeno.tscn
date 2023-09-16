@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://jutbib6m1ig4"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_2advn"]
+[ext_resource type="Texture2D" uid="uid://cd77s7lxowei8" path="res://Assets/Images/Card/card_jalapeno.png" id="2_mpie8"]
+
+[node name="CardJalapeno" instance=ExtResource("1_2advn")]
+texture_normal = ExtResource("2_mpie8")

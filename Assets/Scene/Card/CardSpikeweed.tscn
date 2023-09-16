@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt2xly0e5gsed"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_8v1oi"]
+[ext_resource type="Texture2D" uid="uid://dks2xccruti80" path="res://Assets/Images/Card/card_spikeweed.png" id="2_plah5"]
+
+[node name="CardSpikeweed" instance=ExtResource("1_8v1oi")]
+texture_normal = ExtResource("2_plah5")

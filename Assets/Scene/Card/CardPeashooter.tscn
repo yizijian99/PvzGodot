@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://06y3yggyqe6j"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_h0r4o"]
+[ext_resource type="Texture2D" uid="uid://bx4fqe75rb4r3" path="res://Assets/Images/Card/card_peashooter.png" id="2_that6"]
+
+[node name="CardPeashooter" instance=ExtResource("1_h0r4o")]
+texture_normal = ExtResource("2_that6")

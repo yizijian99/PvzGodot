@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt2i76wvncp55"]
+
+[ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_h8hx8"]
+[ext_resource type="Texture2D" uid="uid://dmrd00tfsjwud" path="res://Assets/Images/Card/card_potatomine.png" id="2_hv4mc"]
+
+[node name="CardPotatomine" instance=ExtResource("1_h8hx8")]
+texture_normal = ExtResource("2_hv4mc")
