@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj1nlh3f3ah4u"]
+[gd_scene load_steps=4 format=3 uid="uid://cj1nlh3f3ah4u"]
 
 [ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_1kmm3"]
 [ext_resource type="Texture2D" uid="uid://c4qejlcqugnln" path="res://Assets/Images/Card/card_repeaterpea.png" id="2_xn8cp"]
+[ext_resource type="Texture2D" uid="uid://cufhubk5o5ygn" path="res://Assets/Images/Plants/Repeater/Repeater_1.png" id="3_bmrb0"]
 
 [node name="CardRepeater" instance=ExtResource("1_1kmm3")]
 texture_normal = ExtResource("2_xn8cp")
+Texture = ExtResource("3_bmrb0")
 CoolDownTime = 7.5
 Cost = 200

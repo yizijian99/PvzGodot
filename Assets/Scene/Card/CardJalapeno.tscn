@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://jutbib6m1ig4"]
+[gd_scene load_steps=4 format=3 uid="uid://jutbib6m1ig4"]
 
 [ext_resource type="PackedScene" uid="uid://byhq2ktt2owj5" path="res://Assets/Scene/Card/Card.tscn" id="1_2advn"]
 [ext_resource type="Texture2D" uid="uid://cd77s7lxowei8" path="res://Assets/Images/Card/card_jalapeno.png" id="2_mpie8"]
+[ext_resource type="Texture2D" uid="uid://d171etiaaspd4" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_1.png" id="3_atwga"]
 
 [node name="CardJalapeno" instance=ExtResource("1_2advn")]
 texture_normal = ExtResource("2_mpie8")
+Texture = ExtResource("3_atwga")
 CoolDownTime = 50.0
 Cost = 125

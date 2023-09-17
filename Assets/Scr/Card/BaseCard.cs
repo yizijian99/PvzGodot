@@ -7,6 +7,9 @@ namespace Pvz.Assets.Scr.Card;
 [Scene]
 public partial class BaseCard : TextureButton
 {
+    [Export]
+    public Texture2D Texture { get; protected set; }
+
     private CardState state;
 
     [Export]
@@ -35,11 +38,11 @@ public partial class BaseCard : TextureButton
     }
 
     [Export]
-    public float CoolDownTime { get; private set; }
+    public float CoolDownTime { get; protected set; }
 
     [Export]
-    public bool NeedToWait { get; private set; } = true;
-    
+    public bool NeedToWait { get; protected set; } = true;
+
     [Export]
     public int Cost { get; protected set; }
 
@@ -66,7 +69,8 @@ public partial class BaseCard : TextureButton
         base._Process(delta);
         if (State == CardState.Combat)
         {
-            CoolDownMask.Value = CoolDownMask.MinValue + (CoolDownMask.MaxValue - CoolDownMask.MinValue) * (Timer.TimeLeft / Timer.WaitTime);
+            CoolDownMask.Value = CoolDownMask.MinValue +
+                                 (CoolDownMask.MaxValue - CoolDownMask.MinValue) * (Timer.TimeLeft / Timer.WaitTime);
         }
     }
 
@@ -79,6 +83,9 @@ public partial class BaseCard : TextureButton
                 break;
             case CardState.ReadyToCombat:
                 ToCandidate();
+                break;
+            case CardState.Combat:
+                ReadyToPlant();
                 break;
         }
     }
@@ -101,6 +108,11 @@ public partial class BaseCard : TextureButton
     public void ToCandidate()
     {
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardToCandidate, this);
+    }
+
+    public void ReadyToPlant()
+    {
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardReadyToPlant, this);
     }
 
     public new bool Disabled

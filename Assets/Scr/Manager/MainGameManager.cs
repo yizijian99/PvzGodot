@@ -58,9 +58,14 @@ public sealed partial class MainGameManager : Node
     private Marker2D sunCollectorMarker;
 
     [Export]
+    private Sprite2D plantCursor;
+
+    [Export]
     private Array<Texture> combatStageRemindTextures;
     
     private int sunCount = 50;
+
+    private BaseCard selectedCard;
 
     [Export]
     public int SunCount
@@ -86,6 +91,7 @@ public sealed partial class MainGameManager : Node
         SignalBus.Instance.CardToCandidate += OnCardToCandidate;
         letsRockButton.Pressed += LetsRock;
         SignalBus.Instance.SunPicked += OnSunPicked;
+        SignalBus.Instance.CardReadyToPlant += OnCardReadyToPlant;
 
         camera2D.GlobalPosition = startCameraMarker.GlobalPosition;
         sunCounter.Text = SunCount.ToString();
@@ -100,6 +106,7 @@ public sealed partial class MainGameManager : Node
         }
 
         UpdateLetsRockButton();
+        plantCursor.GlobalPosition = GetViewport().GetMousePosition();
     }
 
     private async void EnterPreparationStage()
@@ -169,7 +176,7 @@ public sealed partial class MainGameManager : Node
     {
         BaseCard first = cardPool.GetAll()
             .First(v => v.SceneFilePath == card.SceneFilePath);
-        card.Modulate = new Color(card.Modulate, 0);
+        card.Visible = false;
         card.State = BaseCard.CardState.Default;
         CardTransitionAnimation(card, first, 0.2, () =>
         {
@@ -198,6 +205,20 @@ public sealed partial class MainGameManager : Node
                 action?.Invoke();
             }));
         });
+    }
+
+    private void OnCardReadyToPlant(BaseCard card)
+    {
+        if (selectedCard == null)
+        {
+            selectedCard = card;
+            plantCursor.Texture = card?.Texture;
+        }
+        else
+        {
+            selectedCard = null;
+            plantCursor.Texture = null;
+        }
     }
 
     public void UpdateLetsRockButton()
