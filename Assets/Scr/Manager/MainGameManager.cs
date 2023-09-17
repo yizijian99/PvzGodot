@@ -70,6 +70,7 @@ public sealed partial class MainGameManager : Node
         {
             sunCount = value;
             sunCounter.Text = sunCount.ToString();
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunCountChanged, sunCount);
         }
     }
 
@@ -115,7 +116,6 @@ public sealed partial class MainGameManager : Node
     {
         SceneTransitionMask.Instance.Enable();
 
-        cardBar.EnterCombatStage();
         await CardControlAnimation();
         await CameraTransition.Instance.TransitionCamera2D(camera2D, combatCameraMarker, 1.5);
 
@@ -226,6 +226,7 @@ public sealed partial class MainGameManager : Node
         SceneTransitionMask.Instance.Disable();
 
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.MainGameStarted);
+        SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunCountChanged, sunCount);
     }
 
     private void OnSunPicked(Sun sun)

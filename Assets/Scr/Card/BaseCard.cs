@@ -7,11 +7,50 @@ namespace Pvz.Assets.Scr.Card;
 [Scene]
 public partial class BaseCard : TextureButton
 {
-    [Node("DisableMask")]
-    private ColorRect disableMask;
+    private CardState state;
 
     [Export]
-    public CardState State { get; set; } = CardState.Default;
+    public CardState State
+    {
+        get => state;
+        set
+        {
+            CardState oldState = state;
+            state = value;
+            if (oldState != state)
+            {
+                switch (state)
+                {
+                    case CardState.Combat:
+                        if (NeedToWait && CoolDownTime > 0)
+                        {
+                            Timer.WaitTime = CoolDownTime;
+                            Timer.Start();
+                        }
+
+                        break;
+                }
+            }
+        }
+    }
+
+    [Export]
+    public float CoolDownTime { get; private set; }
+
+    [Export]
+    public bool NeedToWait { get; private set; } = true;
+    
+    [Export]
+    public int Cost { get; protected set; }
+
+    [Node("DisableMask")]
+    protected ColorRect DisableMask;
+
+    [Node("CoolDownMask")]
+    protected TextureProgressBar CoolDownMask;
+
+    [Node("Timer")]
+    protected Timer Timer;
 
     public override void _Ready()
     {
@@ -19,6 +58,16 @@ public partial class BaseCard : TextureButton
         WireNodes();
 
         Pressed += OnCardPressed;
+        SignalBus.Instance.SunCountChanged += OnSunCountChanged;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (State == CardState.Combat)
+        {
+            CoolDownMask.Value = CoolDownMask.MinValue + (CoolDownMask.MaxValue - CoolDownMask.MinValue) * (Timer.TimeLeft / Timer.WaitTime);
+        }
     }
 
     protected virtual void OnCardPressed()
@@ -30,6 +79,16 @@ public partial class BaseCard : TextureButton
                 break;
             case CardState.ReadyToCombat:
                 ToCandidate();
+                break;
+        }
+    }
+
+    private void OnSunCountChanged(int value)
+    {
+        switch (State)
+        {
+            case CardState.Combat:
+                DisableMask.Visible = value < Cost;
                 break;
         }
     }
@@ -50,7 +109,7 @@ public partial class BaseCard : TextureButton
         set
         {
             base.Disabled = value;
-            disableMask.Visible = value;
+            DisableMask.Visible = value;
         }
     }
 

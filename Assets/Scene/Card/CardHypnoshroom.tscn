@@ -5,3 +5,5 @@
 
 [node name="CardHypnoshroom" instance=ExtResource("1_0y6r8")]
 texture_normal = ExtResource("2_adr2u")
+CoolDownTime = 20.0
+Cost = 75

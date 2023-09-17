@@ -5,3 +5,5 @@
 
 [node name="CardPuffshiroom" instance=ExtResource("1_ai5aw")]
 texture_normal = ExtResource("2_7k1jf")
+CoolDownTime = 7.5
+NeedToWait = false

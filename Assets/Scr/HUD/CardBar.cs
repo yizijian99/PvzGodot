@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using GodotUtilities;
+using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
 
 namespace Pvz.Assets.Scr.HUD;
@@ -23,6 +24,8 @@ public partial class CardBar : TextureRect
         WireNodes();
 
         hBoxContainer.ChildOrderChanged += GetLength;
+        SignalBus.Instance.MainGameStarted += EnterCombatStage;
+        
         GetLength();
     }
 

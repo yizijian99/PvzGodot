@@ -5,3 +5,5 @@
 
 [node name="CardSpikeweed" instance=ExtResource("1_8v1oi")]
 texture_normal = ExtResource("2_plah5")
+CoolDownTime = 7.5
+Cost = 100

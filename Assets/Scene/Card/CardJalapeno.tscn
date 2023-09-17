@@ -5,3 +5,5 @@
 
 [node name="CardJalapeno" instance=ExtResource("1_2advn")]
 texture_normal = ExtResource("2_mpie8")
+CoolDownTime = 50.0
+Cost = 125

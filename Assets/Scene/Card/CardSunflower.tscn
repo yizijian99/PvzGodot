@@ -5,3 +5,6 @@
 
 [node name="CardSunflower" instance=ExtResource("1_i5pyo")]
 texture_normal = ExtResource("2_yss0s")
+CoolDownTime = 7.5
+NeedToWait = false
+Cost = 50

@@ -5,3 +5,5 @@
 
 [node name="CardSnowpea" instance=ExtResource("1_olsrb")]
 texture_normal = ExtResource("2_ncw5f")
+CoolDownTime = 7.5
+Cost = 175

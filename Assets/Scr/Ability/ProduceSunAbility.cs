@@ -58,9 +58,9 @@ public partial class ProduceSunAbility : Node
 
         Rect2 rect2 = sunOutlet.Shape.GetRect();
         RandomNumberGenerator rng = new();
-        float randomX = rng.RandfRange(rect2.Position.X, rect2.Size.X);
-        float randomY = rng.RandfRange(rect2.Position.Y, rect2.Size.Y);
-        Vector2 randomGlobalPosition = sunOutlet.ToGlobal(new Vector2(randomX, randomY));
+        float randomX = sunOutlet.GlobalPosition.X - rect2.Size.X / 2 + rng.RandfRange(0, rect2.Size.X);
+        float randomY = sunOutlet.GlobalPosition.Y - rect2.Size.Y / 2 + rng.RandfRange(0, rect2.Size.Y);
+        Vector2 randomGlobalPosition = new(randomX, randomY);
 
         sun.GlobalPosition = randomGlobalPosition;
         ground.AddChild(sun);

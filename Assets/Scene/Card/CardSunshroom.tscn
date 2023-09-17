@@ -5,3 +5,6 @@
 
 [node name="CardSunshroom" instance=ExtResource("1_0pr1l")]
 texture_normal = ExtResource("2_ybe4o")
+CoolDownTime = 7.5
+NeedToWait = false
+Cost = 25

@@ -5,3 +5,5 @@
 
 [node name="CardSquash" instance=ExtResource("1_xecm0")]
 texture_normal = ExtResource("2_eolxf")
+CoolDownTime = 30.0
+Cost = 50

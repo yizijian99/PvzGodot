@@ -5,3 +5,5 @@
 
 [node name="CardScaredyshroom" instance=ExtResource("1_56vi1")]
 texture_normal = ExtResource("2_2wmon")
+CoolDownTime = 7.5
+Cost = 25

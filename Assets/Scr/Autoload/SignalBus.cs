@@ -28,4 +28,7 @@ public partial class SignalBus : Node
 
 	[Signal]
 	public delegate void SunPickedEventHandler(Sun sun);
+
+	[Signal]
+	public delegate void SunCountChangedEventHandler(int value);
 }
