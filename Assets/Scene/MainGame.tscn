@@ -17,7 +17,7 @@ size = Vector2(660, 1)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor", "gridContainer")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
@@ -34,6 +34,7 @@ letsRockButton = NodePath("../HUD/CardPool/LetsRock")
 reminder = NodePath("../HUD/Reminder")
 sunCollectorMarker = NodePath("../HUD/CardBar/SunCollectorMarker")
 plantCursor = NodePath("../HUD/PlantCursor")
+gridContainer = NodePath("../GridLayer/GridContainer")
 combatStageRemindTextures = Array[Texture]([ExtResource("2_3a34j"), ExtResource("3_emgty"), ExtResource("4_iggx3")])
 
 [node name="ProduceSunAbility" type="Node" parent="." node_paths=PackedStringArray("sunOutlet", "ground")]
@@ -56,6 +57,17 @@ shape = SubResource("RectangleShape2D_nesm3")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Grond" type="Node2D" parent="."]
+
+[node name="GridLayer" type="CanvasLayer" parent="."]
+layer = -10
+follow_viewport_enabled = true
+
+[node name="GridContainer" type="GridContainer" parent="GridLayer"]
+offset_left = 255.0
+offset_top = 87.0
+offset_right = 255.0
+offset_bottom = 87.0
+columns = 9
 
 [node name="StartCameraMarker" type="Marker2D" parent="."]
 position = Vector2(400, 300)

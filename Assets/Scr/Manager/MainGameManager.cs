@@ -61,6 +61,9 @@ public sealed partial class MainGameManager : Node
     private Sprite2D plantCursor;
 
     [Export]
+    private GridContainer gridContainer;
+
+    [Export]
     private Array<Texture> combatStageRemindTextures;
     
     private int sunCount = 50;
@@ -95,6 +98,7 @@ public sealed partial class MainGameManager : Node
 
         camera2D.GlobalPosition = startCameraMarker.GlobalPosition;
         sunCounter.Text = SunCount.ToString();
+        InitializeGridContainer();
     }
 
     public override void _Process(double delta)
@@ -264,5 +268,26 @@ public sealed partial class MainGameManager : Node
             sun.Visible = false;
             sun.QueueFreeDeferred();
         }));
+    }
+
+    private void InitializeGridContainer()
+    {
+        int count = 9 * 5;
+        Vector2 gridSize = new(77, 90);
+        for (int i = 0; i < count; i++)
+        {
+            Control grid = new();
+            grid.CustomMinimumSize = gridSize;
+            grid.GuiInput += @event =>
+            {
+                if (@event is InputEventMouseButton mouseButton
+                    && mouseButton.Pressed
+                    && mouseButton.ButtonIndex == MouseButton.Left)
+                {
+                    GD.Print($"grid was clicked. position {grid.Position}");
+                }
+            };
+            gridContainer.AddChildDeferred(grid);
+        }
     }
 }

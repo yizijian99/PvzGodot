@@ -4,6 +4,7 @@ using Pvz.Assets.Scr.Autoload;
 
 namespace Pvz.Assets.Scr.Effect;
 
+[Tool]
 [Scene]
 public partial class Sun : RigidBody2D
 {
@@ -13,11 +14,45 @@ public partial class Sun : RigidBody2D
     [Export]
     public int SunValue { get; set; } = 50;
 
+    [Export]
+    public bool UpdateControl
+    {
+        get => false;
+        set
+        {
+            Vector2? size = collisionShape2D?.Shape?.GetRect().Size;
+            if (control != null)
+            {
+                if (size != null)
+                {
+                    control.Size = (Vector2)size;
+                    control.Position = Vector2.Zero - new Vector2(control.Size.X / 2, control.Size.Y / 2);
+                }
+                else
+                {
+                    control.Size = Vector2.Zero;
+                    control.Position = Vector2.Zero;
+                }
+
+                if (value)
+                {
+                    GD.Print("update control transform.");
+                }
+            }
+        }
+    }
+
     [Node("Timer")]
     private Timer timer;
 
     [Node("AnimatedSprite2D")]
     private AnimatedSprite2D animatedSprite2D;
+
+    [Node("CollisionShape2D")]
+    private CollisionShape2D collisionShape2D;
+
+    [Node("Control")]
+    private Control control;
 
     public float FinalY { get; set; }
 
@@ -29,7 +64,7 @@ public partial class Sun : RigidBody2D
         WireNodes();
 
         timer.Timeout += QueueFree;
-        InputEvent += OnInputEvent;
+        control.GuiInput += OnControlGuiInputEvent;
 
         RandomFinalY();
     }
@@ -51,7 +86,7 @@ public partial class Sun : RigidBody2D
         }
     }
 
-    private void OnInputEvent(Node viewport, InputEvent @event, long shapeidx)
+    private void OnControlGuiInputEvent(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButton
             && mouseButton.Pressed

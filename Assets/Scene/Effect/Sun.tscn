@@ -102,8 +102,8 @@ animations = [{
 radius = 40.0
 
 [node name="Sun" type="RigidBody2D"]
+collision_layer = 0
 collision_mask = 0
-input_pickable = true
 gravity_scale = 0.0
 linear_velocity = Vector2(0, 25)
 linear_damp_mode = 1
@@ -119,3 +119,12 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xb4rl")
+
+[node name="Control" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
