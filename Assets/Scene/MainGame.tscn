@@ -110,12 +110,13 @@ script = ExtResource("6_7m7nd")
 cardSceneDir = "res://Assets/Scene/Card"
 excludeCardScene = "res://Assets/Scene/Card/Card.tscn"
 
-[node name="Rows" type="VBoxContainer" parent="HUD/CardPool"]
+[node name="GridContainer" type="GridContainer" parent="HUD/CardPool"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 40.0
 offset_right = 18.0
 offset_bottom = 40.0
+columns = 8
 
 [node name="LetsRock" type="TextureButton" parent="HUD/CardPool"]
 layout_mode = 1

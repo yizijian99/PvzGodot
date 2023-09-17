@@ -15,8 +15,8 @@ public partial class CardPool : TextureRect
     [Export(PropertyHint.File, "*.tscn")]
     private string excludeCardScene;
 
-    [Node("Rows")]
-    private VBoxContainer rows;
+    [Node("GridContainer")]
+    private GridContainer gridContainer;
 
     private List<string> cardScenePathList = new();
 
@@ -37,28 +37,20 @@ public partial class CardPool : TextureRect
             .Distinct()
             .ToList();
 
-        foreach (List<BaseCard> list in cardScenePathList
+        foreach (BaseCard card in cardScenePathList
                      .Select(path => ResourceLoader.Load<PackedScene>(path)?.InstantiateOrNull<BaseCard>())
                      .Where(card => card != null)
-                     .Select((n, index) => new { n, index })
-                     .GroupBy(x => x.index / 8)
-                     .Select(g => g.Select(x => x.n).ToList())
                      .ToList())
         {
-            HBoxContainer row = new();
-            rows.AddChild(row);
-            foreach (BaseCard card in list)
-            {
-                row.AddChild(card);
-            }
+            gridContainer.AddChild(card);
         }
     }
 
     public IEnumerable<BaseCard> GetAll()
     {
-        return rows.GetChildren()
-            .Where(node => node is HBoxContainer)
-            .SelectMany(box => box.GetChildren().Where(node => node is BaseCard).Cast<BaseCard>().ToList())
+        return gridContainer.GetChildren()
+            .Where(node => node is BaseCard)
+            .Cast<BaseCard>()
             .ToList();
     }
 }
