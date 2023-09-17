@@ -15,7 +15,7 @@ public partial class CardPool : TextureRect
     [Export(PropertyHint.File, "*.tscn")]
     private string excludeCardScene;
 
-    [Node("Row")]
+    [Node("Rows")]
     private VBoxContainer rows;
 
     private List<string> cardScenePathList = new();

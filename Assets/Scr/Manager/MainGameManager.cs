@@ -7,6 +7,7 @@ using Godot.Collections;
 using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
+using Pvz.Assets.Scr.Effect;
 using Pvz.Assets.Scr.HUD;
 
 namespace Pvz.Assets.Scr.Manager;
@@ -45,13 +46,32 @@ public sealed partial class MainGameManager : Node
     private CardPool cardPool;
 
     [Export]
+    private Label sunCounter;
+
+    [Export]
     private BaseButton letsRockButton;
 
     [Export]
     private TextureRect reminder;
 
     [Export]
+    private Marker2D sunCollectorMarker;
+
+    [Export]
     private Array<Texture> combatStageRemindTextures;
+    
+    private int sunCount = 50;
+
+    [Export]
+    public int SunCount
+    {
+        get => sunCount;
+        set
+        {
+            sunCount = value;
+            sunCounter.Text = sunCount.ToString();
+        }
+    }
 
     private readonly Queue<Action> nextFrameActionQueue = new();
 
@@ -64,8 +84,10 @@ public sealed partial class MainGameManager : Node
         SignalBus.Instance.CardToCombat += OnCardToCombat;
         SignalBus.Instance.CardToCandidate += OnCardToCandidate;
         letsRockButton.Pressed += LetsRock;
+        SignalBus.Instance.SunPicked += OnSunPicked;
 
         camera2D.GlobalPosition = startCameraMarker.GlobalPosition;
+        sunCounter.Text = SunCount.ToString();
     }
 
     public override void _Process(double delta)
@@ -82,21 +104,21 @@ public sealed partial class MainGameManager : Node
     private async void EnterPreparationStage()
     {
         SceneTransitionMask.Instance.Enable();
-        
+
         await CameraTransition.Instance.TransitionCamera2D(camera2D, preparationCameraMarker, 2.5);
         await CardControlAnimation();
-        
+
         SceneTransitionMask.Instance.Disable();
     }
 
     private async Task EnterCombatStage()
     {
         SceneTransitionMask.Instance.Enable();
-        
+
         cardBar.EnterCombatStage();
         await CardControlAnimation();
         await CameraTransition.Instance.TransitionCamera2D(camera2D, combatCameraMarker, 1.5);
-        
+
         SceneTransitionMask.Instance.Disable();
     }
 
@@ -189,7 +211,7 @@ public sealed partial class MainGameManager : Node
         await EnterCombatStage();
 
         SceneTransitionMask.Instance.Enable();
-        
+
         double interval = 0.5;
         Tween tween = CreateTween();
         foreach (Texture texture in combatStageRemindTextures)
@@ -197,11 +219,28 @@ public sealed partial class MainGameManager : Node
             tween.TweenProperty(reminder, TextureRect.PropertyName.Texture.ToString(), texture, 0);
             tween.TweenInterval(interval);
         }
+
         await ToSignal(tween, Tween.SignalName.Finished);
         reminder.Texture = null;
-        
+
         SceneTransitionMask.Instance.Disable();
 
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.MainGameStarted);
+    }
+
+    private void OnSunPicked(Sun sun)
+    {
+        sun.GetParent().RemoveChild(sun);
+        hud.AddChild(sun);
+        Tween tween = CreateTween();
+        tween.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+        tween.TweenProperty(sun, Node2D.PropertyName.GlobalPosition.ToString(), sunCollectorMarker.GlobalPosition, 0.5)
+            .From(sun.GlobalPosition - (GetViewport().GetCamera2D().GlobalPosition - GetViewport().GetCamera2D().GetViewportRect().GetCenter()));
+        tween.TweenCallback(Callable.From(() =>
+        {
+            SunCount += sun.SunValue;
+            sun.Visible = false;
+            sun.QueueFreeDeferred();
+        }));
     }
 }

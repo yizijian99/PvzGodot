@@ -1,6 +1,7 @@
 using Godot;
 using GodotUtilities;
 using Pvz.Assets.Scr.Card;
+using Pvz.Assets.Scr.Effect;
 
 namespace Pvz.Assets.Scr.Autoload;
 
@@ -24,4 +25,7 @@ public partial class SignalBus : Node
 
 	[Signal]
 	public delegate void MainGameStartedEventHandler();
+
+	[Signal]
+	public delegate void SunPickedEventHandler(Sun sun);
 }

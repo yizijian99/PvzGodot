@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://denrqt4hbuhlu"]
+[gd_scene load_steps=13 format=3 uid="uid://denrqt4hbuhlu"]
 
 [ext_resource type="Script" path="res://Assets/Scr/Manager/MainGameManager.cs" id="1_s5lx5"]
 [ext_resource type="Texture2D" uid="uid://hbpe4j6yte5c" path="res://Assets/Images/Background/background1.jpg" id="1_xhw7m"]
@@ -9,11 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://dilgnebwbrgme" path="res://Assets/Images/UI/StartPlant.png" id="4_iggx3"]
 [ext_resource type="Script" path="res://Assets/Scr/HUD/CardBar.cs" id="4_oqfo6"]
 [ext_resource type="Texture2D" uid="uid://ml82m76ofus0" path="res://Assets/Images/UI/StartButton.png" id="5_1lxt8"]
+[ext_resource type="Script" path="res://Assets/Scr/Ability/ProduceSunAbility.cs" id="5_rxt52"]
 [ext_resource type="Script" path="res://Assets/Scr/HUD/CardPool.cs" id="6_7m7nd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nesm3"]
+size = Vector2(660, 1)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "letsRockButton", "reminder")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
@@ -25,15 +29,32 @@ cardPoolMarker = NodePath("../CardPoolMarker")
 hud = NodePath("../HUD")
 cardBar = NodePath("../HUD/CardBar")
 cardPool = NodePath("../HUD/CardPool")
+sunCounter = NodePath("../HUD/CardBar/SunCounter")
 letsRockButton = NodePath("../HUD/CardPool/LetsRock")
 reminder = NodePath("../HUD/Reminder")
+sunCollectorMarker = NodePath("../HUD/CardBar/SunCollectorMarker")
 combatStageRemindTextures = Array[Texture]([ExtResource("2_3a34j"), ExtResource("3_emgty"), ExtResource("4_iggx3")])
+
+[node name="ProduceSunAbility" type="Node" parent="." node_paths=PackedStringArray("sunOutlet", "ground")]
+script = ExtResource("5_rxt52")
+defaultSunScenePath = "res://Assets/Scene/Effect/Sun.tscn"
+sunOutlet = NodePath("../SunOutlet")
+ground = NodePath("../Grond")
+
+[node name="Timer" type="Timer" parent="ProduceSunAbility"]
+wait_time = 5.0
 
 [node name="Bg" type="Sprite2D" parent="."]
 texture = ExtResource("1_xhw7m")
 centered = false
 
+[node name="SunOutlet" type="CollisionShape2D" parent="."]
+position = Vector2(615, 87)
+shape = SubResource("RectangleShape2D_nesm3")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Grond" type="Node2D" parent="."]
 
 [node name="StartCameraMarker" type="Marker2D" parent="."]
 position = Vector2(400, 300)
@@ -63,6 +84,20 @@ offset_left = 80.0
 offset_top = 8.0
 offset_right = 130.0
 offset_bottom = 78.0
+
+[node name="SunCounter" type="Label" parent="HUD/CardBar"]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 60.0
+offset_right = 67.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 1
+
+[node name="SunCollectorMarker" type="Marker2D" parent="HUD/CardBar"]
+position = Vector2(40, 34)
 
 [node name="CardPool" type="TextureRect" parent="HUD"]
 offset_top = 600.0
@@ -102,9 +137,5 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
