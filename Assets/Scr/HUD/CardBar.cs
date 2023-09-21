@@ -1,15 +1,12 @@
 using System.Linq;
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
 
 namespace Pvz.Assets.Scr.HUD;
 
-[Scene]
 public partial class CardBar : TextureRect
 {
-    [Node("HBoxContainer")]
     private HBoxContainer hBoxContainer;
 
     public int MaxCapacity { get; private set; } = 8;
@@ -21,7 +18,7 @@ public partial class CardBar : TextureRect
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
+        hBoxContainer = GetNode<HBoxContainer>("HBoxContainer");
 
         hBoxContainer.ChildOrderChanged += GetLength;
         SignalBus.Instance.MainGameStarted += EnterCombatStage;
@@ -31,7 +28,7 @@ public partial class CardBar : TextureRect
 
     private void GetLength()
     {
-        length = hBoxContainer.GetChildrenOfType<BaseCard>().Count();
+        length = hBoxContainer.GetChildren().Count(node => node is BaseCard);
     }
 
     public bool Add(BaseCard card)
@@ -53,7 +50,7 @@ public partial class CardBar : TextureRect
 
     public void EnterCombatStage()
     {
-        foreach (BaseCard card in hBoxContainer.GetChildrenOfType<BaseCard>())
+        foreach (BaseCard card in hBoxContainer.GetChildren().Where(node => node is BaseCard).Cast<BaseCard>())
         {
             card.State = BaseCard.CardState.Combat;
         }

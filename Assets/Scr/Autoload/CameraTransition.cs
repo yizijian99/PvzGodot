@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Godot;
-using GodotUtilities;
 
 namespace Pvz.Assets.Scr.Autoload;
 
-[Scene]
 public partial class CameraTransition : Node
 {
-    [Node("Camera2D")]
     private Camera2D globalCamera2D; // 全局摄像机
 
     public static CameraTransition Instance { get; private set; }
@@ -17,8 +14,8 @@ public partial class CameraTransition : Node
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
         Instance = this;
+        globalCamera2D = GetNode<Camera2D>("Camera2D");
 
         // 关闭全局摄像机，防止不需要摄像机的场景受到全局摄像机的影响
         globalCamera2D.Enabled = false;

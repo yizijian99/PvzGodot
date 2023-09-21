@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
-using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
 using Pvz.Assets.Scr.Effect;
@@ -12,7 +11,6 @@ using Pvz.Assets.Scr.HUD;
 
 namespace Pvz.Assets.Scr.Manager;
 
-[Scene]
 public sealed partial class MainGameManager : Node
 {
     [Export]
@@ -87,7 +85,6 @@ public sealed partial class MainGameManager : Node
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
 
         sceneRoot.Ready += EnterPreparationStage;
         SignalBus.Instance.CardToCombat += OnCardToCombat;
@@ -266,7 +263,7 @@ public sealed partial class MainGameManager : Node
         {
             SunCount += sun.SunValue;
             sun.Visible = false;
-            sun.QueueFreeDeferred();
+            sun.QueueFree();
         }));
     }
 
@@ -287,7 +284,7 @@ public sealed partial class MainGameManager : Node
                     GD.Print($"grid was clicked. position {grid.Position}");
                 }
             };
-            gridContainer.AddChildDeferred(grid);
+            gridContainer.AddChild(grid);
         }
     }
 }

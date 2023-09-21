@@ -1,10 +1,8 @@
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 
 namespace Pvz.Assets.Scr.Ability;
 
-[Scene]
 public partial class ProduceSunAbility : Node
 {
     [Export(PropertyHint.File, "*.tscn")]
@@ -16,13 +14,12 @@ public partial class ProduceSunAbility : Node
     [Export]
     private Node2D ground;
 
-    [Node("Timer")]
     private Timer timer;
 
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
+        timer = GetNode<Timer>("Timer");
 
         timer.Timeout += OnTimerTimeout;
         SignalBus.Instance.MainGameStarted += Start;

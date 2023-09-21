@@ -1,11 +1,9 @@
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Card;
 using Pvz.Assets.Scr.Effect;
 
 namespace Pvz.Assets.Scr.Autoload;
 
-[Scene]
 public partial class SignalBus : Node
 {
 	public static SignalBus Instance { get; private set; }
@@ -13,7 +11,6 @@ public partial class SignalBus : Node
 	public override void _Ready()
 	{
 		base._Ready();
-		WireNodes();
 		Instance = this;
 	}
 

@@ -1,10 +1,8 @@
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 
 namespace Pvz.Assets.Scr.Card;
 
-[Scene]
 public partial class BaseCard : TextureButton
 {
     [Export]
@@ -46,19 +44,18 @@ public partial class BaseCard : TextureButton
     [Export]
     public int Cost { get; protected set; }
 
-    [Node("DisableMask")]
     protected ColorRect DisableMask;
 
-    [Node("CoolDownMask")]
     protected TextureProgressBar CoolDownMask;
 
-    [Node("Timer")]
     protected Timer Timer;
 
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
+        DisableMask = GetNode<ColorRect>("DisableMask");  
+        CoolDownMask = GetNode<TextureProgressBar>("CoolDownMask");  
+        Timer = GetNode<Timer>("Timer");  
 
         Pressed += OnCardPressed;
         SignalBus.Instance.SunCountChanged += OnSunCountChanged;

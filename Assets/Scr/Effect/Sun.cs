@@ -1,11 +1,9 @@
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Autoload;
 
 namespace Pvz.Assets.Scr.Effect;
 
 [Tool]
-[Scene]
 public partial class Sun : RigidBody2D
 {
     [Export]
@@ -42,16 +40,12 @@ public partial class Sun : RigidBody2D
         }
     }
 
-    [Node("Timer")]
     private Timer timer;
 
-    [Node("AnimatedSprite2D")]
     private AnimatedSprite2D animatedSprite2D;
 
-    [Node("CollisionShape2D")]
     private CollisionShape2D collisionShape2D;
 
-    [Node("Control")]
     private Control control;
 
     public float FinalY { get; set; }
@@ -61,7 +55,10 @@ public partial class Sun : RigidBody2D
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
+        timer = GetNode<Timer>("Timer");
+        animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+        control = GetNode<Control>("Control");
 
         timer.Timeout += QueueFree;
         control.GuiInput += OnControlGuiInputEvent;

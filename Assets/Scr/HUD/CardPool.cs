@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using GodotUtilities;
 using Pvz.Assets.Scr.Card;
 
 namespace Pvz.Assets.Scr.HUD;
 
-[Scene]
 public partial class CardPool : TextureRect
 {
     [Export(PropertyHint.Dir)]
@@ -15,7 +13,6 @@ public partial class CardPool : TextureRect
     [Export(PropertyHint.File, "*.tscn")]
     private string excludeCardScene;
 
-    [Node("GridContainer")]
     private GridContainer gridContainer;
 
     private List<string> cardScenePathList = new();
@@ -23,7 +20,7 @@ public partial class CardPool : TextureRect
     public override void _Ready()
     {
         base._Ready();
-        WireNodes();
+        gridContainer = GetNode<GridContainer>("GridContainer");
 
         InitializePool();
     }
