@@ -98,7 +98,7 @@ public partial class Sun : RigidBody2D
 
     public void Pick()
     {
-        InputPickable = false;
+        control.MouseFilter = Control.MouseFilterEnum.Ignore;
         LinearVelocity = Vector2.Zero;
         SignalBus.Instance.EmitSignal(SignalBus.SignalName.SunPicked, this);
     }
