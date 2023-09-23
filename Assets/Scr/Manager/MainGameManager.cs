@@ -238,7 +238,10 @@ public sealed partial class MainGameManager : Node
 
     private void OnCardReadyToPlant(BaseCard card)
     {
-        SelectedCard = card;
+        if (card.Cost <= SunCount)
+        {
+            SelectedCard = card;
+        }
     }
 
     public void UpdateLetsRockButton()
@@ -300,21 +303,26 @@ public sealed partial class MainGameManager : Node
                 continue;
             }
             grid.CustomMinimumSize = gridSize;
-            grid.GuiInput += @event =>
-            {
-                if (@event is InputEventMouseButton mouseButton
-                    && mouseButton.Pressed
-                    && mouseButton.ButtonIndex == MouseButton.Left)
-                {
-                    string entityScenePath = selectedCard?.EntityScenePath;
-                    bool putted = grid.Put(entityScenePath, ground);
-                    if (putted)
-                    {
-                        SelectedCard = null;
-                    }
-                }
-            };
+            grid.GuiInput += @event => OnGridGuiInput(grid, @event);
             gridContainer.AddChildDeferred(grid);
+        }
+    }
+
+    private void OnGridGuiInput(Grid grid, InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseButton
+            && mouseButton.Pressed
+            && mouseButton.ButtonIndex == MouseButton.Left)
+        {
+            if (SelectedCard == null || SelectedCard.Cost > SunCount) return;
+            string entityScenePath = selectedCard.EntityScenePath;
+            bool putted = grid.Place(entityScenePath, ground);
+            if (putted)
+            {
+                SunCount -= SelectedCard.Cost;
+                SelectedCard.CoolDown();
+                SelectedCard = null;
+            }
         }
     }
 }

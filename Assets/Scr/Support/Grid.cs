@@ -17,15 +17,15 @@ public partial class Grid : Control
         WireNodes();
     }
 
-    public bool Put(string entityScenePath, Node parent = null)
+    public bool Place(string scenePath, Node parent = null)
     {
-        if (string.IsNullOrEmpty(entityScenePath)
+        if (string.IsNullOrEmpty(scenePath)
             || Entity != null)
         {
             return false;
         }
 
-        Node2D entity = ResourceLoader.Load<PackedScene>(entityScenePath)?.InstantiateOrNull<Node2D>();
+        Node2D entity = ResourceLoader.Load<PackedScene>(scenePath)?.InstantiateOrNull<Node2D>();
         if (entity == null)
         {
             return false;

@@ -25,10 +25,13 @@ public partial class BaseCard : TextureButton
                 switch (state)
                 {
                     case CardState.Combat:
-                        if (NeedToWait && CoolDownTime > 0)
+                        if (CoolDownTime > 0)
                         {
                             Timer.WaitTime = CoolDownTime;
-                            Timer.Start();
+                            if (NeedToWait)
+                            {
+                                Timer.Start();
+                            }
                         }
 
                         break;
@@ -45,7 +48,7 @@ public partial class BaseCard : TextureButton
 
     [Export]
     public int Cost { get; protected set; }
-    
+
     [Export(PropertyHint.File, "*.tscn")]
     public string EntityScenePath { get; protected set; }
 
@@ -115,7 +118,15 @@ public partial class BaseCard : TextureButton
 
     public void ReadyToPlant()
     {
-        SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardReadyToPlant, this);
+        if (Timer.IsStopped())
+        {
+            SignalBus.Instance.EmitSignal(SignalBus.SignalName.CardReadyToPlant, this);
+        }
+    }
+
+    public void CoolDown()
+    {
+        Timer.Start();
     }
 
     public new bool Disabled
