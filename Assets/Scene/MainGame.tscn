@@ -17,7 +17,7 @@ size = Vector2(660, 1)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor", "gridContainer")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor", "gridContainer", "ground")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
@@ -35,7 +35,9 @@ reminder = NodePath("../HUD/Reminder")
 sunCollectorMarker = NodePath("../HUD/CardBar/SunCollectorMarker")
 plantCursor = NodePath("../HUD/PlantCursor")
 gridContainer = NodePath("../GridLayer/GridContainer")
+ground = NodePath("../Grond")
 combatStageRemindTextures = Array[Texture]([ExtResource("2_3a34j"), ExtResource("3_emgty"), ExtResource("4_iggx3")])
+gridScenePath = "res://Assets/Scene/Support/Grid.tscn"
 
 [node name="ProduceSunAbility" type="Node" parent="." node_paths=PackedStringArray("sunOutlet", "ground")]
 script = ExtResource("5_rxt52")

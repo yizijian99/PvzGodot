@@ -9,6 +9,7 @@ using Pvz.Assets.Scr.Autoload;
 using Pvz.Assets.Scr.Card;
 using Pvz.Assets.Scr.Effect;
 using Pvz.Assets.Scr.HUD;
+using Pvz.Assets.Scr.Support;
 
 namespace Pvz.Assets.Scr.Manager;
 
@@ -64,11 +65,35 @@ public sealed partial class MainGameManager : Node
     private GridContainer gridContainer;
 
     [Export]
+    private Node2D ground;
+
+    [Export]
     private Array<Texture> combatStageRemindTextures;
-    
+
+    [Export(PropertyHint.File, "*.tscn")]
+    private string gridScenePath;
+
     private int sunCount = 50;
 
     private BaseCard selectedCard;
+
+    public BaseCard SelectedCard
+    {
+        get => selectedCard;
+        private set
+        {
+            if (selectedCard == null)
+            {
+                selectedCard = value;
+                plantCursor.Texture = value?.Texture;
+            }
+            else
+            {
+                selectedCard = null;
+                plantCursor.Texture = null;
+            }
+        }
+    }
 
     [Export]
     public int SunCount
@@ -213,16 +238,7 @@ public sealed partial class MainGameManager : Node
 
     private void OnCardReadyToPlant(BaseCard card)
     {
-        if (selectedCard == null)
-        {
-            selectedCard = card;
-            plantCursor.Texture = card?.Texture;
-        }
-        else
-        {
-            selectedCard = null;
-            plantCursor.Texture = null;
-        }
+        SelectedCard = card;
     }
 
     public void UpdateLetsRockButton()
@@ -261,7 +277,8 @@ public sealed partial class MainGameManager : Node
         Tween tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
         tween.TweenProperty(sun, Node2D.PropertyName.GlobalPosition.ToString(), sunCollectorMarker.GlobalPosition, 0.5)
-            .From(sun.GlobalPosition - (GetViewport().GetCamera2D().GlobalPosition - GetViewport().GetCamera2D().GetViewportRect().GetCenter()));
+            .From(sun.GlobalPosition - (GetViewport().GetCamera2D().GlobalPosition -
+                                        GetViewport().GetCamera2D().GetViewportRect().GetCenter()));
         tween.TweenCallback(Callable.From(() =>
         {
             SunCount += sun.SunValue;
@@ -276,7 +293,12 @@ public sealed partial class MainGameManager : Node
         Vector2 gridSize = new(77, 90);
         for (int i = 0; i < count; i++)
         {
-            Control grid = new();
+            Grid grid = ResourceLoader.Load<PackedScene>(gridScenePath)?.InstantiateOrNull<Grid>();
+            if (grid == null)
+            {
+                GD.PushWarning($"load grid scene error. path: {gridScenePath}");
+                continue;
+            }
             grid.CustomMinimumSize = gridSize;
             grid.GuiInput += @event =>
             {
@@ -284,7 +306,12 @@ public sealed partial class MainGameManager : Node
                     && mouseButton.Pressed
                     && mouseButton.ButtonIndex == MouseButton.Left)
                 {
-                    GD.Print($"grid was clicked. position {grid.Position}");
+                    string entityScenePath = selectedCard?.EntityScenePath;
+                    bool putted = grid.Put(entityScenePath, ground);
+                    if (putted)
+                    {
+                        SelectedCard = null;
+                    }
                 }
             };
             gridContainer.AddChildDeferred(grid);

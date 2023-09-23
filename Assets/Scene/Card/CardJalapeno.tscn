@@ -9,3 +9,4 @@ texture_normal = ExtResource("2_mpie8")
 Texture = ExtResource("3_atwga")
 CoolDownTime = 50.0
 Cost = 125
+EntityScenePath = "res://Assets/Scene/Plant/PlantJalapeno.tscn"

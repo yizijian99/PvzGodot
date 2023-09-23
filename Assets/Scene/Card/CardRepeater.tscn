@@ -9,3 +9,4 @@ texture_normal = ExtResource("2_xn8cp")
 Texture = ExtResource("3_bmrb0")
 CoolDownTime = 7.5
 Cost = 200
+EntityScenePath = "res://Assets/Scene/Plant/PlantRepeater.tscn"

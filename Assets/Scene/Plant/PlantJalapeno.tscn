@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0td60vbxdmcf"]
+
+[ext_resource type="PackedScene" uid="uid://bpxt6rquy0qkc" path="res://Assets/Scene/Plant/Plant.tscn" id="1_2vr87"]
+[ext_resource type="Texture2D" uid="uid://d171etiaaspd4" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_1.png" id="2_e6xrw"]
+[ext_resource type="Texture2D" uid="uid://dgllnt1tc35b5" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_2.png" id="3_l0nw6"]
+[ext_resource type="Texture2D" uid="uid://5spv6o8tetk7" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_3.png" id="4_1ckfd"]
+[ext_resource type="Texture2D" uid="uid://rhf665ey8cg8" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_4.png" id="5_qg20w"]
+[ext_resource type="Texture2D" uid="uid://dc4wt8ifwupyv" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_5.png" id="6_45buk"]
+[ext_resource type="Texture2D" uid="uid://c85axesuyn8sa" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_6.png" id="7_fv3q2"]
+[ext_resource type="Texture2D" uid="uid://vg5re3qvbj4d" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_7.png" id="8_av4uh"]
+[ext_resource type="Texture2D" uid="uid://ck8s7q0t8c3mm" path="res://Assets/Images/Plants/Jalapeno/Jalapeno_8.png" id="9_0f5sp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0v4h5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e6xrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l0nw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1ckfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qg20w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_45buk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fv3q2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_av4uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0f5sp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="PlantJalapeno" instance=ExtResource("1_2vr87")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_0v4h5")
+autoplay = "default"
+frame_progress = 0.24412

@@ -10,3 +10,4 @@ Texture = ExtResource("3_36swp")
 CoolDownTime = 7.5
 NeedToWait = false
 Cost = 50
+EntityScenePath = "res://Assets/Scene/Plant/PlantSunflower.tscn"

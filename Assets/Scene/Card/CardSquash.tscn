@@ -9,3 +9,4 @@ texture_normal = ExtResource("2_eolxf")
 Texture = ExtResource("3_7wtdw")
 CoolDownTime = 30.0
 Cost = 50
+EntityScenePath = "res://Assets/Scene/Plant/PlantSquash.tscn"

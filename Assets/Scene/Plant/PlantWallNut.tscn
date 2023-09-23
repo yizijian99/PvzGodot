@@ -1,0 +1,82 @@
+[gd_scene load_steps=19 format=3 uid="uid://bi2hxh7qq1gue"]
+
+[ext_resource type="PackedScene" uid="uid://bpxt6rquy0qkc" path="res://Assets/Scene/Plant/Plant.tscn" id="1_glcgg"]
+[ext_resource type="Texture2D" uid="uid://bi3gu8arvwkok" path="res://Assets/Images/Plants/WallNut/WallNut_1.png" id="2_gj073"]
+[ext_resource type="Texture2D" uid="uid://vojaucs70uvd" path="res://Assets/Images/Plants/WallNut/WallNut_2.png" id="3_h426t"]
+[ext_resource type="Texture2D" uid="uid://crs1m7hm06rgn" path="res://Assets/Images/Plants/WallNut/WallNut_3.png" id="4_etkat"]
+[ext_resource type="Texture2D" uid="uid://im6f7wh4xnvf" path="res://Assets/Images/Plants/WallNut/WallNut_4.png" id="5_tmp5i"]
+[ext_resource type="Texture2D" uid="uid://dneift6c4ow76" path="res://Assets/Images/Plants/WallNut/WallNut_5.png" id="6_krijv"]
+[ext_resource type="Texture2D" uid="uid://dnns5akhomy5c" path="res://Assets/Images/Plants/WallNut/WallNut_6.png" id="7_tteuu"]
+[ext_resource type="Texture2D" uid="uid://doujmwgyqdj7j" path="res://Assets/Images/Plants/WallNut/WallNut_7.png" id="8_obv05"]
+[ext_resource type="Texture2D" uid="uid://c4hb8bmy7mdnm" path="res://Assets/Images/Plants/WallNut/WallNut_8.png" id="9_ai1hm"]
+[ext_resource type="Texture2D" uid="uid://ccdwnl5dmvuon" path="res://Assets/Images/Plants/WallNut/WallNut_9.png" id="10_suxkh"]
+[ext_resource type="Texture2D" uid="uid://6vilv76cxmoh" path="res://Assets/Images/Plants/WallNut/WallNut_10.png" id="11_mat3e"]
+[ext_resource type="Texture2D" uid="uid://fsdet0ttqix0" path="res://Assets/Images/Plants/WallNut/WallNut_11.png" id="12_qbgpx"]
+[ext_resource type="Texture2D" uid="uid://mr3rvw4bpi11" path="res://Assets/Images/Plants/WallNut/WallNut_12.png" id="13_dwoi2"]
+[ext_resource type="Texture2D" uid="uid://wu7pqcp6p25e" path="res://Assets/Images/Plants/WallNut/WallNut_13.png" id="14_neast"]
+[ext_resource type="Texture2D" uid="uid://d30qm015atcht" path="res://Assets/Images/Plants/WallNut/WallNut_14.png" id="15_5j4ji"]
+[ext_resource type="Texture2D" uid="uid://bm5myt86yt55i" path="res://Assets/Images/Plants/WallNut/WallNut_15.png" id="16_luk6h"]
+[ext_resource type="Texture2D" uid="uid://dcrtiequ4w83k" path="res://Assets/Images/Plants/WallNut/WallNut_16.png" id="17_ampa0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3s4ta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gj073")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h426t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_etkat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tmp5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_krijv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tteuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_obv05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ai1hm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_suxkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mat3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qbgpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_dwoi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_neast")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5j4ji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_luk6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ampa0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="PlantWallNut" instance=ExtResource("1_glcgg")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_3s4ta")
+autoplay = "default"
+frame_progress = 0.35286

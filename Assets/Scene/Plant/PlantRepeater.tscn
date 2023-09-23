@@ -1,0 +1,78 @@
+[gd_scene load_steps=18 format=3 uid="uid://buhbths4cclw2"]
+
+[ext_resource type="PackedScene" uid="uid://bpxt6rquy0qkc" path="res://Assets/Scene/Plant/Plant.tscn" id="1_bv3ug"]
+[ext_resource type="Texture2D" uid="uid://cufhubk5o5ygn" path="res://Assets/Images/Plants/Repeater/Repeater_1.png" id="2_k21jw"]
+[ext_resource type="Texture2D" uid="uid://lta81poiduk2" path="res://Assets/Images/Plants/Repeater/Repeater_2.png" id="3_pl10y"]
+[ext_resource type="Texture2D" uid="uid://bb4ptjrjnsjc0" path="res://Assets/Images/Plants/Repeater/Repeater_3.png" id="4_t684o"]
+[ext_resource type="Texture2D" uid="uid://dqlxb2cwo3ptt" path="res://Assets/Images/Plants/Repeater/Repeater_4.png" id="5_75na7"]
+[ext_resource type="Texture2D" uid="uid://2ss2f8clxy17" path="res://Assets/Images/Plants/Repeater/Repeater_5.png" id="6_hmdr5"]
+[ext_resource type="Texture2D" uid="uid://cr1tgbrfqgqad" path="res://Assets/Images/Plants/Repeater/Repeater_6.png" id="7_dwy2i"]
+[ext_resource type="Texture2D" uid="uid://dube2b4lut1bh" path="res://Assets/Images/Plants/Repeater/Repeater_7.png" id="8_4n7j5"]
+[ext_resource type="Texture2D" uid="uid://bhkvf7771o775" path="res://Assets/Images/Plants/Repeater/Repeater_8.png" id="9_68v0r"]
+[ext_resource type="Texture2D" uid="uid://cwe4666okti08" path="res://Assets/Images/Plants/Repeater/Repeater_9.png" id="10_3hogp"]
+[ext_resource type="Texture2D" uid="uid://dnxv6ed0k3v11" path="res://Assets/Images/Plants/Repeater/Repeater_10.png" id="11_04y0l"]
+[ext_resource type="Texture2D" uid="uid://c7wxoulg1p0a" path="res://Assets/Images/Plants/Repeater/Repeater_11.png" id="12_yl3uy"]
+[ext_resource type="Texture2D" uid="uid://bqie7tuox77ki" path="res://Assets/Images/Plants/Repeater/Repeater_12.png" id="13_x8wvf"]
+[ext_resource type="Texture2D" uid="uid://bf4oe72umapdg" path="res://Assets/Images/Plants/Repeater/Repeater_13.png" id="14_ddto5"]
+[ext_resource type="Texture2D" uid="uid://d1nx44ixat0i0" path="res://Assets/Images/Plants/Repeater/Repeater_14.png" id="15_pq4s4"]
+[ext_resource type="Texture2D" uid="uid://3q0b8hfojxvv" path="res://Assets/Images/Plants/Repeater/Repeater_15.png" id="16_56mbx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tnfrb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k21jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pl10y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t684o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_75na7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hmdr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dwy2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4n7j5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_68v0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3hogp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_04y0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_yl3uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x8wvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ddto5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pq4s4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_56mbx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="PlantRepeater" instance=ExtResource("1_bv3ug")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_tnfrb")
+autoplay = "default"
+frame_progress = 0.729312

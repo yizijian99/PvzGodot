@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://dt1ej5p4gu6bc"]
+
+[ext_resource type="PackedScene" uid="uid://bpxt6rquy0qkc" path="res://Assets/Scene/Plant/Plant.tscn" id="1_yap76"]
+[ext_resource type="Texture2D" uid="uid://dypvu5mc2tx8o" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_1.png" id="2_utsqt"]
+[ext_resource type="Texture2D" uid="uid://c61swdgh7ib7d" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_2.png" id="3_q4lmr"]
+[ext_resource type="Texture2D" uid="uid://chcevhsolay80" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_3.png" id="4_lrkpl"]
+[ext_resource type="Texture2D" uid="uid://dgt0onwr7sg7b" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_4.png" id="5_eswe4"]
+[ext_resource type="Texture2D" uid="uid://t4j13nof0ng6" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_5.png" id="6_uuhtk"]
+[ext_resource type="Texture2D" uid="uid://c2nohgx43617v" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_6.png" id="7_xf008"]
+[ext_resource type="Texture2D" uid="uid://btpiou11fo6jn" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_7.png" id="8_0rjpc"]
+[ext_resource type="Texture2D" uid="uid://c1d5ll6ah2d10" path="res://Assets/Images/Plants/PotatoMine/PotatoMine_8.png" id="9_g700f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2q38s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_utsqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q4lmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lrkpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eswe4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uuhtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xf008")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0rjpc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g700f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlantPotatoMine" instance=ExtResource("1_yap76")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_2q38s")
+autoplay = "default"
+frame_progress = 0.364884

@@ -9,3 +9,4 @@ texture_normal = ExtResource("2_ncw5f")
 Texture = ExtResource("3_60tqj")
 CoolDownTime = 7.5
 Cost = 175
+EntityScenePath = "res://Assets/Scene/Plant/PlantSnowpea.tscn"

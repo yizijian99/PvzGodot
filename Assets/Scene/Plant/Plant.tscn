@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpxt6rquy0qkc"]
+
+[ext_resource type="Script" path="res://Assets/Scr/Plant/BasePlant.cs" id="1_at4jc"]
+
+[node name="Plant" type="Node2D"]
+script = ExtResource("1_at4jc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

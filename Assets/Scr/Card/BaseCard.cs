@@ -45,6 +45,9 @@ public partial class BaseCard : TextureButton
 
     [Export]
     public int Cost { get; protected set; }
+    
+    [Export(PropertyHint.File, "*.tscn")]
+    public string EntityScenePath { get; protected set; }
 
     [Node("DisableMask")]
     protected ColorRect DisableMask;
