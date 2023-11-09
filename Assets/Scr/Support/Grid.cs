@@ -35,6 +35,7 @@ public partial class Grid : Control
         {
             parent = this;
         }
+
         parent.AddChild(entity);
 
         RemoteTransform2D.RemotePath = RemoteTransform2D.GetPathTo(entity);

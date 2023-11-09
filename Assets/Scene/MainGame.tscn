@@ -17,7 +17,7 @@ size = Vector2(660, 1)
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor", "gridContainer", "ground")]
+[node name="MainGameManager" type="Node" parent="." node_paths=PackedStringArray("sceneRoot", "camera2D", "startCameraMarker", "combatCameraMarker", "preparationCameraMarker", "cardBarMarker", "cardPoolMarker", "hud", "cardBar", "cardPool", "sunCounter", "letsRockButton", "reminder", "sunCollectorMarker", "plantCursor", "gridContainer", "ground", "plantPreview")]
 script = ExtResource("1_s5lx5")
 sceneRoot = NodePath("..")
 camera2D = NodePath("../Camera2D")
@@ -36,6 +36,7 @@ sunCollectorMarker = NodePath("../HUD/CardBar/SunCollectorMarker")
 plantCursor = NodePath("../HUD/PlantCursor")
 gridContainer = NodePath("../GridLayer/GridContainer")
 ground = NodePath("../Grond")
+plantPreview = NodePath("../Grond/PlantPreview")
 combatStageRemindTextures = Array[Texture]([ExtResource("2_3a34j"), ExtResource("3_emgty"), ExtResource("4_iggx3")])
 gridScenePath = "res://Assets/Scene/Support/Grid.tscn"
 
@@ -59,6 +60,9 @@ shape = SubResource("RectangleShape2D_nesm3")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Grond" type="Node2D" parent="."]
+
+[node name="PlantPreview" type="Sprite2D" parent="Grond"]
+modulate = Color(1, 1, 1, 0.498039)
 
 [node name="GridLayer" type="CanvasLayer" parent="."]
 layer = -10

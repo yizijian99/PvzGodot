@@ -68,6 +68,9 @@ public sealed partial class MainGameManager : Node
     private Node2D ground;
 
     [Export]
+    private Sprite2D plantPreview;
+
+    [Export]
     private Array<Texture> combatStageRemindTextures;
 
     [Export(PropertyHint.File, "*.tscn")]
@@ -294,16 +297,20 @@ public sealed partial class MainGameManager : Node
     {
         int count = 9 * 5;
         Vector2 gridSize = new(77, 90);
+        PackedScene gridPackedScene = ResourceLoader.Load<PackedScene>(gridScenePath);
         for (int i = 0; i < count; i++)
         {
-            Grid grid = ResourceLoader.Load<PackedScene>(gridScenePath)?.InstantiateOrNull<Grid>();
+            Grid grid = gridPackedScene?.InstantiateOrNull<Grid>();
             if (grid == null)
             {
                 GD.PushWarning($"load grid scene error. path: {gridScenePath}");
                 continue;
             }
+
             grid.CustomMinimumSize = gridSize;
             grid.GuiInput += @event => OnGridGuiInput(grid, @event);
+            grid.MouseEntered += () => PlantPreview(grid);
+            grid.MouseExited += () => PlantPreview(grid);
             gridContainer.AddChildDeferred(grid);
         }
     }
@@ -323,6 +330,19 @@ public sealed partial class MainGameManager : Node
                 SelectedCard.CoolDown();
                 SelectedCard = null;
             }
+        }
+    }
+
+    private void PlantPreview(Grid grid)
+    {
+        if (grid.Entity == null && SelectedCard != null)
+        {
+            plantPreview.Texture = SelectedCard.Texture;
+            plantPreview.GlobalPosition = grid.RemoteTransform2D.GlobalPosition;
+        }
+        else
+        {
+            plantPreview.Texture = null;
         }
     }
 }
