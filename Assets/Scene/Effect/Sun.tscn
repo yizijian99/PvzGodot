@@ -102,6 +102,7 @@ animations = [{
 radius = 40.0
 
 [node name="Sun" type="RigidBody2D"]
+z_index = 20
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0

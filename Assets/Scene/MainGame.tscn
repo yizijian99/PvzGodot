@@ -60,6 +60,7 @@ shape = SubResource("RectangleShape2D_nesm3")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Grond" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="PlantPreview" type="Sprite2D" parent="Grond"]
 modulate = Color(1, 1, 1, 0.498039)

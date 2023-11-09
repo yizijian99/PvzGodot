@@ -10,6 +10,7 @@ using Pvz.Assets.Scr.Card;
 using Pvz.Assets.Scr.Effect;
 using Pvz.Assets.Scr.HUD;
 using Pvz.Assets.Scr.Support;
+using Pvz.Assets.Scr.Zombies;
 
 namespace Pvz.Assets.Scr.Manager;
 
@@ -317,18 +318,34 @@ public sealed partial class MainGameManager : Node
 
     private void OnGridGuiInput(Grid grid, InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton
-            && mouseButton.Pressed
-            && mouseButton.ButtonIndex == MouseButton.Left)
+        if (@event is InputEventMouseButton mouseButton)
         {
-            if (SelectedCard == null || SelectedCard.Cost > SunCount) return;
-            string entityScenePath = selectedCard.EntityScenePath;
-            bool putted = grid.Place(entityScenePath, ground);
-            if (putted)
+            if (mouseButton.Pressed
+                && mouseButton.ButtonIndex == MouseButton.Left)
             {
-                SunCount -= SelectedCard.Cost;
-                SelectedCard.CoolDown();
-                SelectedCard = null;
+                if (SelectedCard == null || SelectedCard.Cost > SunCount) return;
+                string entityScenePath = selectedCard.EntityScenePath;
+                bool putted = grid.Place(entityScenePath, ground);
+                if (putted)
+                {
+                    SunCount -= SelectedCard.Cost;
+                    SelectedCard.CoolDown();
+                    SelectedCard = null;
+                    PlantPreview(grid);
+                }
+            }
+            else if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Right)
+            {
+                // 测试
+                Zombie zombie = ResourceLoader.Load<PackedScene>("res://Assets/Scene/Zombie/Zombie.tscn")
+                    ?.InstantiateOrNull<Zombie>();
+                if (zombie != null)
+                {
+                    zombie.GlobalPosition = grid.RemoteTransform2D.GlobalPosition;
+                    int i = new RandomNumberGenerator().RandiRange(0, 1);
+                    zombie.State = (Zombie.ZombieState)i;
+                    ground.AddChild(zombie);
+                }
             }
         }
     }
