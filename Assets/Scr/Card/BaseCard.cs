@@ -68,6 +68,10 @@ public partial class BaseCard : TextureButton
 
         Pressed += OnCardPressed;
         SignalBus.Instance.SunCountChanged += OnSunCountChanged;
+        if (string.IsNullOrEmpty(EntityScenePath))
+        {
+            Disabled = true;
+        }
     }
 
     public override void _Process(double delta)

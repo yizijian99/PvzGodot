@@ -341,7 +341,7 @@ public sealed partial class MainGameManager : Node
                     ?.InstantiateOrNull<Zombie>();
                 if (zombie != null)
                 {
-                    zombie.GlobalPosition = grid.RemoteTransform2D.GlobalPosition;
+                    zombie.GlobalPosition = grid.RemoteTransform2D.GlobalPosition + Vector2.Up * 20;
                     int i = new RandomNumberGenerator().RandiRange(0, 1);
                     zombie.State = (Zombie.ZombieState)i;
                     ground.AddChild(zombie);

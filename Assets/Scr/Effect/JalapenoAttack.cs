@@ -45,14 +45,14 @@ public partial class JalapenoAttack : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if (state == 3)
+        if (state < 0)
         {
             return;
         }
 
         if (state == 2)
         {
-            state++;
+            state = -1;
             CallDeferred(Node.MethodName.QueueFree);
         }
     }

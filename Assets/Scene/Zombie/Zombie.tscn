@@ -316,17 +316,18 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v26q"]
-size = Vector2(26, 110)
+size = Vector2(26, 89)
 
 [node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayer")]
 z_index = 10
 collision_mask = 0
 script = ExtResource("1_vg7ji")
 animationPlayer = NodePath("AnimationPlayer")
+stepSpeedScale = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ww3mc")
-animation = &"Move2"
+animation = &"Move1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -334,5 +335,5 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(13, 11)
+position = Vector2(13, 21.5)
 shape = SubResource("RectangleShape2D_4v26q")

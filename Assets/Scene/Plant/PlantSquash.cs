@@ -32,11 +32,15 @@ public partial class PlantSquash : BasePlant
             if (animatedSprite2D.Animation == AttackAnimation)
             {
                 QueueFree();
-                if (attackTarget != null)
-                {
-                    attackTarget.QueueFree();
-                    attackTarget = null;
-                }
+            }
+        };
+
+        animatedSprite2D.FrameChanged += () =>
+        {
+            if (animatedSprite2D.Animation == AttackAnimation && animatedSprite2D.Frame == 3 && attackTarget != null)
+            {
+                attackTarget.QueueFree();
+                attackTarget = null;
             }
         };
     }
