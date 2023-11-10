@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://cw2jwntmwna2q"]
+
+[ext_resource type="Texture2D" uid="uid://blr8u2ow5hquv" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_1.png" id="1_imqka"]
+[ext_resource type="Script" path="res://Assets/Scr/Effect/JalapenoAttack.cs" id="1_syt10"]
+[ext_resource type="Texture2D" uid="uid://qy11f6cb5m3a" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_2.png" id="2_mmugp"]
+[ext_resource type="Texture2D" uid="uid://dcg3t6gufrsgl" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_3.png" id="3_xji07"]
+[ext_resource type="Texture2D" uid="uid://d2wu6bfure5vy" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_4.png" id="4_o8guj"]
+[ext_resource type="Texture2D" uid="uid://c5xpdkrsk5ykc" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_5.png" id="5_rgv2k"]
+[ext_resource type="Texture2D" uid="uid://cqbfv0jp6fsyq" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_6.png" id="6_lse2w"]
+[ext_resource type="Texture2D" uid="uid://ci2b2oppgyd3i" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_7.png" id="7_d31ah"]
+[ext_resource type="Texture2D" uid="uid://nmhxt0ivjduo" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_8.png" id="8_ycvps"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ww3wc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_imqka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mmugp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xji07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o8guj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rgv2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lse2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d31ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ycvps")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="JalapenoAttack" type="Node2D" node_paths=PackedStringArray("left", "right")]
+z_index = 25
+script = ExtResource("1_syt10")
+left = NodePath("Left")
+right = NodePath("Right")
+
+[node name="Left" type="AnimatedSprite2D" parent="."]
+position = Vector2(-377, 0)
+sprite_frames = SubResource("SpriteFrames_ww3wc")
+autoplay = "default"
+flip_h = true
+
+[node name="Right" type="AnimatedSprite2D" parent="."]
+position = Vector2(377, 0)
+sprite_frames = SubResource("SpriteFrames_ww3wc")
+autoplay = "default"

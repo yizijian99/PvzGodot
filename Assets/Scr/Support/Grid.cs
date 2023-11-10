@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using GodotUtilities;
 
@@ -15,6 +16,11 @@ public partial class Grid : Control
     {
         base._Ready();
         WireNodes();
+    }
+
+    public override void _Process(double delta)
+    {
+        UpdateEntity();
     }
 
     public bool Place(string scenePath, Node parent = null)
@@ -41,5 +47,17 @@ public partial class Grid : Control
         RemoteTransform2D.RemotePath = RemoteTransform2D.GetPathTo(entity);
         Entity = entity;
         return true;
+    }
+
+    public void UpdateEntity()
+    {
+        try
+        {
+            Entity?.IsQueuedForDeletion();
+        }
+        catch (ObjectDisposedException e)
+        {
+            Entity = null;
+        }
     }
 }
