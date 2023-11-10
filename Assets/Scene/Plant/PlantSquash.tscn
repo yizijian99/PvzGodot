@@ -1,9 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://dluq5ormj75nv"]
+[gd_scene load_steps=26 format=3 uid="uid://dluq5ormj75nv"]
 
 [ext_resource type="PackedScene" uid="uid://bpxt6rquy0qkc" path="res://Assets/Scene/Plant/Plant.tscn" id="1_w4m6x"]
+[ext_resource type="Script" path="res://Assets/Scene/Plant/PlantSquash.cs" id="2_1jsgn"]
 [ext_resource type="Texture2D" uid="uid://brvswj53y76qk" path="res://Assets/Images/Plants/Squash/Squash_1.png" id="2_ki6bo"]
+[ext_resource type="Texture2D" uid="uid://jb4ao3117mu2" path="res://Assets/Images/Plants/Squash/SquashAttack_1.png" id="2_txnlu"]
 [ext_resource type="Texture2D" uid="uid://d0hti7ckd1xub" path="res://Assets/Images/Plants/Squash/Squash_2.png" id="3_a2npx"]
+[ext_resource type="Texture2D" uid="uid://b4tbm2v6pfoqk" path="res://Assets/Images/Plants/Squash/SquashAttack_2.png" id="3_mdeby"]
 [ext_resource type="Texture2D" uid="uid://ck106ojlp7ybi" path="res://Assets/Images/Plants/Squash/Squash_3.png" id="4_71cja"]
+[ext_resource type="Texture2D" uid="uid://bgxiuo2uil3gv" path="res://Assets/Images/Plants/Squash/SquashAttack_3.png" id="4_b1ho5"]
+[ext_resource type="Texture2D" uid="uid://cwrxhii6jgs25" path="res://Assets/Images/Plants/Squash/SquashAttack_4.png" id="5_fq7uh"]
 [ext_resource type="Texture2D" uid="uid://ba5jmqn3n2lid" path="res://Assets/Images/Plants/Squash/Squash_4.png" id="5_un0fp"]
 [ext_resource type="Texture2D" uid="uid://bsu1ywjptkgxv" path="res://Assets/Images/Plants/Squash/Squash_5.png" id="6_w0lgm"]
 [ext_resource type="Texture2D" uid="uid://dq1fudb5r0yns" path="res://Assets/Images/Plants/Squash/Squash_6.png" id="7_xckbn"]
@@ -18,9 +23,33 @@
 [ext_resource type="Texture2D" uid="uid://bh1wijritj6qq" path="res://Assets/Images/Plants/Squash/Squash_15.png" id="16_ubmw6"]
 [ext_resource type="Texture2D" uid="uid://ddwkv7q0byxwn" path="res://Assets/Images/Plants/Squash/Squash_16.png" id="17_alf7k"]
 [ext_resource type="Texture2D" uid="uid://ok1jbmdjl4ms" path="res://Assets/Images/Plants/Squash/Squash_17.png" id="18_7bwjl"]
+[ext_resource type="Script" path="res://Assets/Scr/Ability/TwoWayDetectAbility.cs" id="24_o4fhr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1lh54"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_txnlu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mdeby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b1ho5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fq7uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fq7uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fq7uh")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ki6bo")
@@ -78,10 +107,22 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlantSquash" instance=ExtResource("1_w4m6x")]
+[node name="PlantSquash" node_paths=PackedStringArray("animatedSprite2D") instance=ExtResource("1_w4m6x")]
+script = ExtResource("2_1jsgn")
+animatedSprite2D = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -75)
 sprite_frames = SubResource("SpriteFrames_1lh54")
 autoplay = "default"
-frame_progress = 0.459889
+
+[node name="TwoWayDetectAbility" type="Node2D" parent="." index="1" node_paths=PackedStringArray("Detector1", "Detector2")]
+script = ExtResource("24_o4fhr")
+Detector1 = NodePath("RayCast2D")
+Detector2 = NodePath("RayCast2D2")
+
+[node name="RayCast2D" type="RayCast2D" parent="TwoWayDetectAbility" index="0"]
+target_position = Vector2(70, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="TwoWayDetectAbility" index="1"]
+target_position = Vector2(-70, 0)
