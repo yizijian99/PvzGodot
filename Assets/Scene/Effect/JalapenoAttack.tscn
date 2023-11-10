@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw2jwntmwna2q"]
+[gd_scene load_steps=12 format=3 uid="uid://cw2jwntmwna2q"]
 
 [ext_resource type="Texture2D" uid="uid://blr8u2ow5hquv" path="res://Assets/Images/Effect/JalapenoAttack/JalapenoAttack_1.png" id="1_imqka"]
 [ext_resource type="Script" path="res://Assets/Scr/Effect/JalapenoAttack.cs" id="1_syt10"]
@@ -42,11 +42,15 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="JalapenoAttack" type="Node2D" node_paths=PackedStringArray("left", "right")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbp4y"]
+size = Vector2(1510, 30)
+
+[node name="JalapenoAttack" type="Node2D" node_paths=PackedStringArray("left", "right", "area2D")]
 z_index = 25
 script = ExtResource("1_syt10")
 left = NodePath("Left")
 right = NodePath("Right")
+area2D = NodePath("Area2D")
 
 [node name="Left" type="AnimatedSprite2D" parent="."]
 position = Vector2(-377, 0)
@@ -58,3 +62,10 @@ flip_h = true
 position = Vector2(377, 0)
 sprite_frames = SubResource("SpriteFrames_ww3wc")
 autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2, 23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_bbp4y")

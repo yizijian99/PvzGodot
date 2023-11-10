@@ -29,7 +29,7 @@ public partial class PlantJalapeno : BasePlant
         JalapenoAttack jalapenoAttack = ResourceLoader.Load<PackedScene>(jalapenoAttackScenePath)?.InstantiateOrNull<JalapenoAttack>();
         if (jalapenoAttack != null)
         {
-            jalapenoAttack.GlobalPosition = GlobalPosition;
+            jalapenoAttack.GlobalPosition = GlobalPosition + Vector2.Up * 10;
             GetParent().AddChildDeferred(jalapenoAttack);
         }
 

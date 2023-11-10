@@ -18,18 +18,25 @@ public partial class PlantSquash : BasePlant
 
     private bool isAttacking;
 
+    private Node2D attackTarget;
+
     public override void _Ready()
     {
         base._Ready();
         WireNodes();
 
-        detectAbility.Detected += zombie => { Attack(zombie); };
+        detectAbility.Detected += Attack;
 
         animatedSprite2D.AnimationFinished += () =>
         {
             if (animatedSprite2D.Animation == AttackAnimation)
             {
                 QueueFree();
+                if (attackTarget != null)
+                {
+                    attackTarget.QueueFree();
+                    attackTarget = null;
+                }
             }
         };
     }
@@ -58,6 +65,7 @@ public partial class PlantSquash : BasePlant
             {
                 GlobalPosition = new Vector2(GlobalPosition.X, globalPosition.Y);
                 animatedSprite2D.Play(AttackAnimation);
+                attackTarget = target;
             }));
         }));
     }
